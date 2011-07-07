@@ -7,8 +7,6 @@
         spl_autoload_register(function($class) {
                 $filename = str_replace('\\', '/', $class) . '.php';
 
-                echo $filename . '<br/>';
-
                 if (is_readable($filename)) {
                     require_once $filename;
                     return;
