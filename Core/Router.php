@@ -10,13 +10,23 @@
          */
         public static function route(Request $request)
         {
-            // Check App
-            $app = (is_readable(Panda::getInstance()->sys . $request->getApp()) . '/Config.php') ? $request->getApp() : Panda::getInstance()->defaultApp . '/Config.php';
-
-            //Load Config from App
+            $panda = Panda::getInstance();
             
-            echo '<pre>App:' . print_r($app, 1) . '</pre>';
+            // Check App
+            $app = (is_readable($panda->sys . $request->getApp() . '/Config.php')) ? $request->getApp() : $panda->defaultApp;
 
+            // Load Apps Settings
+            require_once $panda->sys . $app . '/Config.php';
+            $panda->import($config);
+            $panda->sysApp = $panda->sys . $app;
+
+            $request = \SplFixedArray::fromArray(explode('/', $request->getRequest()));
+            
+            echo '<pre><b>Panda</b> ' . print_r($panda, 1) . '</pre>';
+            echo '<pre><b>Request</b> ' . print_r($request, 1) . '</pre>';
+            
+
+            // Service Layers ? im confused with the order
             // Check Controller exists 
             // Check Method exists
             // Check any args and does the method take them
