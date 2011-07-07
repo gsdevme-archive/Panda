@@ -7,7 +7,7 @@
 
         public function doSomething()
         {
-            echo __METHOD__;
+            echo '<pre>' . print_r(__METHOD__, 1) . '</pre>';
         }
 
     }

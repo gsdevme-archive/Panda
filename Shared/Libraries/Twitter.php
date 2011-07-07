@@ -1,12 +1,15 @@
 <?php
 
-namespace Share/Libraries;
+    namespace Libraries;
 
-class Twitter
-{
-	
-public function dummyMethod()
-{
-	echo __METHOD__;
-}
-}
+    class Twitter
+    {
+
+        public function doSomething()
+        {
+            echo '<pre>' . print_r(__METHOD__, 1) .  'shared</pre>';
+        }
+
+    }
+
+    

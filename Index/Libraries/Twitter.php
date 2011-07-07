@@ -1,11 +1,11 @@
 <?php
 
-    namespace Index\Libraries;
+    namespace Libraries;
 
     class Twitter
     {
 
-        public function dummyMethod()
+        public function doSomething()
         {
             echo __METHOD__;
         }
