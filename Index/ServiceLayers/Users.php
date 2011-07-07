@@ -1,6 +1,6 @@
 <?php
 
-namespace Index/ServiceLayers;
+namespace Index\ServiceLayers;
 
 class Users
 {

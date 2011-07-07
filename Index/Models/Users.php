@@ -1,6 +1,6 @@
 <?php
 
-namespace Index/Models;
+namespace Index\Models;
 
 class Users
 {

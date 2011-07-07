@@ -1,12 +1,15 @@
 <?php
 
-namespace Index/Libraries;
+    namespace Index\Libraries;
 
-class Twitter
-{
-	
-public function dummyMethod()
-{
-	echo __METHOD__;
-}
-}
+    class Twitter
+    {
+
+        public function dummyMethod()
+        {
+            echo __METHOD__;
+        }
+
+    }
+
+    
