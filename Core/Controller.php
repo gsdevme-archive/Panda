@@ -16,9 +16,7 @@
 
         final protected function model($name)
         {
-            if (!isValue($this->_registry->$name)) {
-                
-            }
+            return true;
             return $this->_registry->$name;
         }
 
