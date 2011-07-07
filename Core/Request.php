@@ -5,18 +5,18 @@
     class Request
     {
 
-        private $_request, $_virtualHost;
+        private $_request, $_app;
 
         /**
-         * Parse and Find the Controller/Method/Args
+         * Parse and Find the App - Controller/Method/Args
          * @param string $request 
          */
-        public function __construct($request=null, $virtualHost=null)
+        public function __construct($request=null, $app=null)
         {
             if ($request === null) {
                 /*
                  * Command Line Detection
-                 * php -f index.php controller/method/args virtualhost
+                 * php -f index.php controller/method/args app
                  */
                 if ((defined('PHP_SAPI')) && (PHP_SAPI === 'cli')) {
                     if (isValue($_SERVER['argv'][1])) {
@@ -30,7 +30,7 @@
 
                 /*
                  * Http Detection
-                 * http://virtualhost/index.php/controller/method/args
+                 * http://app/index.php/controller/method/args
                  */
                 if (isValue($_SERVER['REQUEST_URI'])) {
                     $_SERVER['REQUEST_URI'] = substr(str_replace($_SERVER['SCRIPT_NAME'], null, $_SERVER['REQUEST_URI']), 1);
@@ -44,18 +44,18 @@
                          * Remove everything but A-Z, 0-9 and Uppercase each Word
                          * i.e. apps.facebook.com = AppsFacebookCom
                          */
-                        $virtualHost = str_replace(' ', null, ucwords(preg_replace("/[^A-Z0-9]+/i", ' ', $_SERVER['HTTP_HOST'])));
+                        $app = str_replace(' ', null, ucwords(preg_replace("/[^A-Z0-9]+/i", ' ', $_SERVER['HTTP_HOST'])));
 
                         // Check the first letter is a valid one
-                        if (ord(substr($virtualHost, 0, 1)) < 65) {
-                            $virtualHost = null;
+                        if (ord(substr($app, 0, 1)) < 65) {
+                            $app = null;
                         }
                     }
                 }
             }
 
             $this->_request = ifsetor($request, 'Index/Index');
-            $this->_virtualHost = ifsetor($virtualHost, 'Index');
+            $this->_app = ifsetor($app, 'Index');
         }
 
         /**
@@ -71,9 +71,9 @@
          * Common sense
          * @return string 
          */
-        public function getVirtualHost()
+        public function getApp()
         {
-            return $this->_virtualHost;
+            return $this->_app;
         }
 
     }
