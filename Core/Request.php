@@ -11,7 +11,7 @@
          * Parse and Find the Controller/Method/Args
          * @param string $request 
          */
-        public function __construct($request=null)
+        public function __construct($request=null, $virtualHost=null)
         {
             if ($request === null) {
                 /*
