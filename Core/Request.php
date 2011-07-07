@@ -39,12 +39,19 @@
                         $request = $_SERVER['REQUEST_URI'];
                     }
 
-                    if (isValue($_SERVER['HTTP_HOST'])) {
+                    $_SERVER['HTTP_HOST'] = '91.121.121.197:82';
+
+                    if ((isValue($_SERVER['HTTP_HOST'])) && (!filter_var($_SERVER['HTTP_HOST'], FILTER_VALIDATE_IP))) {
                         /*
                          * Remove everything but A-Z, 0-9 and Uppercase each Word
                          * i.e. apps.facebook.com = AppsFacebookCom
                          */
                         $virtualHost = str_replace(' ', null, ucwords(preg_replace("/[^A-Z0-9]+/i", ' ', $_SERVER['HTTP_HOST'])));
+
+                        // Check the first letter is a valid one
+                        if (ord(substr($virtualHost, 0, 1)) < 65) {
+                            $virtualHost = null;
+                        }
                     }
                 }
             }
