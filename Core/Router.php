@@ -25,6 +25,9 @@
 
             $request = \SplFixedArray::fromArray(($request->getRequest() !== null) ? explode('/', $request->getRequest()) : array($panda->defaultController, $panda->defaultMethod));
             
+            if($request->valid()){
+                $controller = new \ReflectionClass('Controllers\\'.$request->current());
+            }
             echo '<pre><b>Panda</b> ' . print_r($panda, 1) . '</pre>';
             echo '<pre><b>Request</b> ' . print_r($request, 1) . '</pre>';
             

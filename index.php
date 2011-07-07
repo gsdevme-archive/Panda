@@ -24,8 +24,8 @@
                     return;
                 }
 
-                if (is_readable($panda->appRootFile)) {
-                    require_once $panda->appRootFile;
+                if (is_readable($appRootFile)) {
+                    require_once $appRootFile;
                     return;
                 }
 
