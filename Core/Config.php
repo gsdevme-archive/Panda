@@ -1,5 +1,5 @@
 <?php
     $config = new stdClass;
-    
-    $config->debug = true;
-    $config->memory = memory_get_usage();
+
+    $config->memory = memory_get_usage();    
+    $config->defaultApp = 'Index';
