@@ -1,8 +1,10 @@
 <?php
 
-namespace Core;
+    namespace Core;
 
-class Panda extends RegistryAbstract
-{
+    class Panda extends RegistryAbstract
+    {
+        
+    }
+
     
-}

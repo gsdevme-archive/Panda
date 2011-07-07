@@ -1,8 +1,12 @@
 <?php
+
 //dummy model
-namespace Core;
 
-abstract class Model
-{
+    namespace Core;
 
-}
+    abstract class Model
+    {
+        
+    }
+
+    

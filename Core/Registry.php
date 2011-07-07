@@ -1,9 +1,10 @@
 <?php
 
-namespace Core;
+    namespace Core;
 
-class Registry extends RegistryAbstract
-{
+    class Registry extends RegistryAbstract
+    {
+        
+    }
+
     
-    
-}
