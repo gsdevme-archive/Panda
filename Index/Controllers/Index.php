@@ -7,7 +7,11 @@
 
         public function index()
         {
+<<<<<<< HEAD
             $this->model('Users');
+=======
+            echo '<b>INVOKED</b> ' .__METHOD__;
+>>>>>>> Added Debug Message
         }
 
     }
