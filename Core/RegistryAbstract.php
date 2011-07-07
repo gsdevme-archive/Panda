@@ -2,6 +2,8 @@
 
     namespace Core;
 
+use Core\Exceptions\RegistryException as Exception;
+
     abstract class RegistryAbstract
     {
 
