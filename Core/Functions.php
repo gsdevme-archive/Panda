@@ -1,5 +1,7 @@
 <?php
 
+    namespace Core;
+
     /**
      * Function which is "pass by reference" and calls isset() & empty()
      * @param mixed $value
