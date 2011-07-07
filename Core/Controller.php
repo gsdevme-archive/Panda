@@ -23,12 +23,12 @@ use \Core\Exceptions\Load as LoadException;
             return $this->_loader($name, 'models', $shared);
         }
 
-        final protected function library($name,$shared = false)
+        final protected function library($name, $shared = false)
         {
-             return $this->_loader($name, 'libraries', $shared);
+            return $this->_loader($name, 'libraries', $shared);
         }
 
-        final protected function serviceLayer($name,$shared = false)
+        final protected function serviceLayer($name, $shared = false)
         {
             return $this->_loader($name, 'serviceLayers', $shared);
         }
@@ -49,12 +49,12 @@ use \Core\Exceptions\Load as LoadException;
             if ($this->_registry->$regMethod($name)) {
                 return $this->_registry->$regMethod($name);
             } else {
-                $file = ($shared === false) ? $this->_panda->appRoot . $dir.'/': $this->_panda->root . 'Shared/'.$dir.'/';
+                $file = ($shared === false) ? $this->_panda->appRoot . $dir . '/' : $this->_panda->root . 'Shared/' . $dir . '/';
                 $file.=$name . '.php';
                 if (is_readable($file)) {
                     require_once $file;
-                    
-                    $class = $dir.'\\'. ucfirst($name);
+
+                    $class = $dir . '\\' . ucfirst($name);
 
                     $name .= ( $shared == true) ? '__shared' : '';
 
