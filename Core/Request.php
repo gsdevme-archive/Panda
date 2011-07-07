@@ -54,8 +54,8 @@
                 }
             }
 
-            $this->_request = ifsetor($request, 'Index/Index');
-            $this->_app = ifsetor($app, 'Index');
+            $this->_request = ifsetor($request, null);
+            $this->_app = ifsetor($app, Panda::getInstance()->defaultApp);
         }
 
         /**

@@ -21,7 +21,7 @@
             $panda->app = $app;
             $panda->sysApp = $panda->sys . $app;
 
-            $request = \SplFixedArray::fromArray(explode('/', $request->getRequest()));
+            $request = \SplFixedArray::fromArray(($request->getRequest() !== null) ? explode('/', $request->getRequest()) : array($panda->defaultController, $panda->defaultMethod));
             
             echo '<pre><b>Panda</b> ' . print_r($panda, 1) . '</pre>';
             echo '<pre><b>Request</b> ' . print_r($request, 1) . '</pre>';
