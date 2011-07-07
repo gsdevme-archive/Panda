@@ -15,7 +15,7 @@
                 throw new \Core\Exceptions\AutoloaderException('Panda Autoloader could not find ' . $name . ' Class. Check the Spelling of the Class and the Filename');
             }, true, true);
 
-        echo '<pre>' . print_r(new \Core\Request(), 1) . '</pre>';
+        Core\Router::route(new \Core\Request());
     } catch (Exception $e) {
         //temp
         die($e->getMessage());
