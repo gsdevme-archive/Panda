@@ -33,7 +33,7 @@
 
                 throw new \Core\Exceptions\AutoloaderException('Panda Autoloader could not find ' . $class . ' Class. Check the Spelling of the Class and the Filename');
             }, true, true);
-        Core\Router::route(new \Core\Request());
+        new Core\Router(new \Core\Request());
     } catch (Exception $e) {
         //temp
         die($e->getMessage());

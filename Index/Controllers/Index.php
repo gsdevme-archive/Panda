@@ -8,6 +8,7 @@
         public function index()
         {
             $this->model('Users');
+            echo '<b>INVOKED</b> ' .__METHOD__;
         }
 
     }
