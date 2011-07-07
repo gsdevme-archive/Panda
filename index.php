@@ -24,5 +24,3 @@
         //temp
         die($e->getMessage());
     }
-
-    echo (memory_get_usage() - Core\Panda::getInstance()->memory) / 1024 . ' kb';
