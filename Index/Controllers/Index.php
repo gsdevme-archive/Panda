@@ -7,8 +7,14 @@
 
         public function index()
         {
-            $this->model('Users');
-            echo '<b>INVOKED</b> ' .__METHOD__;
+            echo '<pre>' . print_r(__METHOD__, 1) . '</pre>';
+            
+            //1 flag means shared, if the param is missing it gets the app model
+            $this->model('Users',1)->doSomething();
+            
+            $reg = \Core\Registry::getInstance();
+            echo '<pre>' . print_r($reg, 1) . '</pre>';
+            
         }
 
     }
