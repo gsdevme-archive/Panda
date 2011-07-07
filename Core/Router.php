@@ -4,6 +4,9 @@
     
     use Core\Exceptions\RouterException as RouterException;
     use \ReflectionException as ReflectionException;
+    use \Exception as Exception;
+    use \ReflectionClass as ReflectionClass;
+    use \ReflectionMethod as ReflectionMethod;
 
     class Router
     {
@@ -28,6 +31,11 @@
                 $methodName = $this->_getMethod();
                 
                 $this->_method->invoke($this->_controller->newInstance());
+                
+                /* To Do List
+                 * Handle args
+                 * Double check code
+                 */
             }
         }
 
@@ -58,12 +66,12 @@
         private function _getController()
         {
             try {
-                $this->_controller = new \ReflectionClass('Controllers\\' . $this->_request->current());
+                $this->_controller = new ReflectionClass('Controllers\\' . ucfirst($this->_request->current()));
 
                 if ($this->_controller->isInstantiable()) {
-                    return $this->_request->current();
+                    return ucfirst($this->_request->current());
                 }
-            } catch (ReflectionException $e) {
+            } catch (Exception $e) {
                 
             }
 
@@ -83,7 +91,7 @@
             }
 
             try {
-                $this->_method = new \ReflectionMethod($this->_controller->name, $method);
+                $this->_method = new ReflectionMethod($this->_controller->name, $method);
 
                 if(($this->_method->isPublic()) && (!$this->_method->isConstructor())){
                     return $method;
