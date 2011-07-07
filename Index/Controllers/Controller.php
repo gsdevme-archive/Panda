@@ -2,14 +2,9 @@
 
     namespace Controllers;
 
-    abstract class Controller
+    abstract class Controller extends \Core\Controller
     {
-
-        public function index()
-        {
-            
-        }
-
+        
     }
 
     

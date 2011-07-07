@@ -1,8 +1,8 @@
 <?php
 
-namespace Index\Models;
+namespace Models;
 
 class Users
 {
-
+    
 }

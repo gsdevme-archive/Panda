@@ -1,12 +1,15 @@
 <?php
 
-namespace Index\ServiceLayers;
+    namespace ServiceLayers;
 
-class Users
-{
-	
-public function doSomething()
-{
-	echo __METHOD__;
-}
-}
+    class Users
+    {
+
+        public function doSomething()
+        {
+            echo __METHOD__;
+        }
+
+    }
+
+    

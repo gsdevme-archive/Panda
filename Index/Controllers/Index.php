@@ -7,7 +7,7 @@
 
         public function index()
         {
-            
+            $this->model('Users');
         }
 
     }
