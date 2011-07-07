@@ -18,8 +18,10 @@
             // Load Apps Settings
             require_once $panda->sys . $app . '/Config.php';
             $panda->import($config);
+            
+            //Align App Values into Panda
             $panda->app = $app;
-            $panda->sysApp = $panda->sys . $app;
+            $panda->sysApp = $panda->sys . $app . '/';
 
             $request = \SplFixedArray::fromArray(($request->getRequest() !== null) ? explode('/', $request->getRequest()) : array($panda->defaultController, $panda->defaultMethod));
             
