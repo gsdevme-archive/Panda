@@ -18,6 +18,7 @@
             // Load Apps Settings
             require_once $panda->sys . $app . '/Config.php';
             $panda->import($config);
+            $panda->app = $app;
             $panda->sysApp = $panda->sys . $app;
 
             $request = \SplFixedArray::fromArray(explode('/', $request->getRequest()));
