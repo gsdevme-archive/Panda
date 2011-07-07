@@ -13,15 +13,15 @@
             $panda = Panda::getInstance();
             
             // Check App
-            $app = (is_readable($panda->sys . $request->getApp() . '/Config.php')) ? $request->getApp() : $panda->defaultApp;
+            $app = (is_readable($panda->root . $request->getApp() . '/Config.php')) ? $request->getApp() : $panda->defaultApp;
 
             // Load Apps Settings
-            require_once $panda->sys . $app . '/Config.php';
+            require_once $panda->root . $app . '/Config.php';
             $panda->import($config);
             
             //Align App Values into Panda
-            $panda->app = $app;
-            $panda->sysApp = $panda->sys . $app . '/';
+            $panda->appName = $app;
+            $panda->appRoot = $panda->root . $app . '/';
 
             $request = \SplFixedArray::fromArray(($request->getRequest() !== null) ? explode('/', $request->getRequest()) : array($panda->defaultController, $panda->defaultMethod));
             
