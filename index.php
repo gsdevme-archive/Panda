@@ -13,7 +13,7 @@
 
     $panda = Core\Panda::getInstance()->import($config);
     $panda->root = $root;
-
+    echo '<pre>' . print_r($panda, 1) . '</pre>';
     try {
         spl_autoload_register(function($class) use ($panda) {
                 $file = str_replace('\\', '/', $class) . '.php';

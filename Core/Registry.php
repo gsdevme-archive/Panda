@@ -7,6 +7,7 @@
     class Registry extends RegistryAbstract
     {
 
+        protected static $_instance;
         private $_models;
         private $_libraries;
         private $_serviceLayers;
@@ -26,7 +27,7 @@
             if (isset($this->_models->$name) ) {
                 return $this->_models->$name;
             }
-            throw new Exception('Registry Exception - Class not found in models');
+            return false;
         }
 
     }

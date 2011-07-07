@@ -4,10 +4,14 @@
 
 use Core\Exceptions\RegistryException as Exception;
 
+    /**
+     * Each deriving class needs:
+     * protected static $_instance;
+     */
     abstract class RegistryAbstract
     {
 
-        protected static $_instance;
+        private static $_instance;
         private $_store;
 
         /**
@@ -68,5 +72,3 @@ use Core\Exceptions\RegistryException as Exception;
         }
 
     }
-
-    
