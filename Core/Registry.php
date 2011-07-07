@@ -21,33 +21,27 @@ use Core\Exceptions\RegistryException as Exception;
 
         public function models($name, $value = false)
         {
-            if (is_object($value)) {
-                $this->_models->$name = $value;
-            }
-            if (isset($this->_models->$name)) {
-                return $this->_models->$name;
-            }
-            return false;
+            return $this->_accessor($name, '_models', $value);
         }
 
         public function libraries($name, $value = false)
         {
-            if (is_object($value)) {
-                $this->_libraries->$name = $value;
-            }
-            if (isset($this->_libraries->$name)) {
-                return $this->_libraries->$name;
-            }
-            return false;
+            return $this->_accessor($name, '_libraries', $value);
+
         }
 
         public function serviceLayers($name, $value = false)
         {
+            return $this->_accessor($name, '_serviceLayers', $value);
+        }
+
+        private function _accessor($name, $store, $value = false)
+        {
             if (is_object($value)) {
-                $this->_serviceLayers->$name = $value;
+                $this->$store->$name = $value;
             }
-            if (isset($this->_serviceLayers->$name)) {
-                return $this->_serviceLayers->$name;
+            if (isset($this->$store->$name)) {
+                return $this->$store->$name;
             }
             return false;
         }
