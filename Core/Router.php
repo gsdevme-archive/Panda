@@ -1,12 +1,12 @@
 <?php
 
     namespace Core;
-    
-    use Core\Exceptions\RouterException as RouterException;
-    use \ReflectionException as ReflectionException;
-    use \Exception as Exception;
-    use \ReflectionClass as ReflectionClass;
-    use \ReflectionMethod as ReflectionMethod;
+
+use Core\Exceptions\RouterException as RouterException;
+use \ReflectionException as ReflectionException;
+use \Exception as Exception;
+use \ReflectionClass as ReflectionClass;
+use \ReflectionMethod as ReflectionMethod;
 
     class Router
     {
@@ -29,13 +29,12 @@
             if ($this->_request->valid()) {
                 $controllerName = $this->_getController();
                 $methodName = $this->_getMethod();
-                
-                $this->_method->invoke($this->_controller->newInstance());
-                
-                /* To Do List
-                 * Handle args
-                 * Double check code
-                 */
+
+                if ($this->_request->valid()) {                    
+                    return $this->_method->invokeArgs($this->_controller->newInstance(), array_slice($this->_request->toArray(), 2));
+                }
+
+                return $this->_method->invoke($this->_controller->newInstance());
             }
         }
 
@@ -86,14 +85,15 @@
         {
             if (($this->_request->next()) && ($this->_request->valid())) {
                 $method = $this->_request->current();
-            }else{
+                $this->_request->next();
+            } else {
                 $method = $this->_panda->defaultMethod;
             }
 
             try {
                 $this->_method = new ReflectionMethod($this->_controller->name, $method);
 
-                if(($this->_method->isPublic()) && (!$this->_method->isConstructor())){
+                if (($this->_method->isPublic()) && (!$this->_method->isConstructor())) {
                     return $method;
                 }
             } catch (ReflectionException $e) {
