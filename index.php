@@ -1,7 +1,8 @@
 <?php
-    ini_set('display_errors',true);
+
+    ini_set('display_errors', true);
     error_reporting(-1);
-    
+
     $root = realpath(dirname(__FILE__)) . '/';
     require_once $root . 'Core/Config.php';
     require_once $root . 'Core/Exceptions/ExceptionAbstract.php';
@@ -13,7 +14,7 @@
 
     $panda = Core\Panda::getInstance()->import($config);
     $panda->root = $root;
-    
+
     try {
         spl_autoload_register(function($class) use ($panda) {
                 $file = str_replace('\\', '/', $class) . '.php';
@@ -35,6 +36,32 @@
             }, true, true);
         new Core\Router(new \Core\Request());
     } catch (Exception $e) {
-        //temp
-        die($e->getMessage());
+        if ($panda->debug === false) {
+            switch ($e->getCode()) {
+                case 404:
+                    die('Load 404 File');
+                    break;
+                case 500:
+                    die('Load 500 File');
+                    break;
+                default:
+                    die('Load Unknown Error File');
+                    break;
+            }
+            break;
+        }
+        
+        echo '<h3 style="padding:0 5px;">'.$e->getMessage().'</h3>';
+
+        if (($trace = $e->getTrace())) {
+            echo '<table width="100%" border="1" cellpadding="5px"><tr><td>File</td><td>Line</td></tr>';
+
+            foreach ($trace as $error) {
+                if (isset($error['file'], $error['line'])) {
+                    echo '<tr><td>' . $error['file'] . '</td><td>' . $error['line'] . '</td></tr>';
+                }
+            }
+
+            echo '</table>';
+        }
     }
