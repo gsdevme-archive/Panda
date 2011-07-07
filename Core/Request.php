@@ -38,12 +38,14 @@
                     if (isValue($_SERVER['REQUEST_URI'])) {
                         $request = $_SERVER['REQUEST_URI'];
                     }
-                    
-                    /*
-                     * Remove everything but A-Z, 0-9 and Uppercase each Word
-                     * i.e. apps.facebook.com = AppsFacebookCom
-                     */
-                    $virtualHost = str_replace(' ', null, ucwords(preg_replace("/[^A-Z0-9]+/i", ' ', $_SERVER['HTTP_HOST'])));
+
+                    if (isValue($_SERVER['HTTP_HOST'])) {
+                        /*
+                         * Remove everything but A-Z, 0-9 and Uppercase each Word
+                         * i.e. apps.facebook.com = AppsFacebookCom
+                         */
+                        $virtualHost = str_replace(' ', null, ucwords(preg_replace("/[^A-Z0-9]+/i", ' ', $_SERVER['HTTP_HOST'])));
+                    }
                 }
             }
 
