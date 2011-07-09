@@ -25,16 +25,21 @@ use \ReflectionMethod as ReflectionMethod;
             $this->_panda->appRoot = $this->_panda->root . $this->_panda->appName . '/';
 
             $this->_request = \SplFixedArray::fromArray(($request->getRequest() !== null) ? explode('/', $request->getRequest()) : array($this->_panda->defaultController, $this->_panda->defaultMethod));
-
+            
             if ($this->_request->valid()) {
                 $controllerName = $this->_getController();
                 $methodName = $this->_getMethod();
+                
+                $this->_panda->controller = $controllerName;
+                $this->_panda->method = $methodName;
+                
+                $this->_request->next();
 
-                if ($this->_request->valid()) {                    
-                    return $this->_method->invokeArgs($this->_controller->newInstance(), array_slice($this->_request->toArray(), 2));
+                if ($this->_request->valid()) {                       
+                    return new ControllerFactory($this->_controller, $this->_method, array_slice($this->_request->toArray(), $this->_request->key()));
                 }
 
-                return $this->_method->invoke($this->_controller->newInstance());
+                return new ControllerFactory($this->_controller, $this->_method);
             }
         }
 
@@ -83,9 +88,10 @@ use \ReflectionMethod as ReflectionMethod;
          */
         private function _getMethod()
         {
-            if (($this->_request->next()) && ($this->_request->valid())) {
+            $this->_request->next();
+            
+            if ($this->_request->valid()) {
                 $method = $this->_request->current();
-                $this->_request->next();
             } else {
                 $method = $this->_panda->defaultMethod;
             }
@@ -100,7 +106,7 @@ use \ReflectionMethod as ReflectionMethod;
                 
             }
 
-            throw new RouterException('Panda failed to find the method with the name: ' . $method, 404, ifsetor($e, null));
+            throw new RouterException('Panda failed to find the method with the name: ' . $method . ' within ' . $this->_controller->name, 404, ifsetor($e, null));
         }
 
     }
