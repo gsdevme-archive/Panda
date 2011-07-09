@@ -35,6 +35,16 @@
                 if (isValue($_SERVER['REQUEST_URI'])) {
                     $_SERVER['REQUEST_URI'] = substr(str_replace($_SERVER['SCRIPT_NAME'], null, $_SERVER['REQUEST_URI']), 1);
 
+                    // Remove / Prefix
+                    if (substr($_SERVER['REQUEST_URI'], 0, 1) == '/') {
+                        $_SERVER['REQUEST_URI'] = substr($_SERVER['REQUEST_URI'], 1);
+                    }
+
+                    // Remove / Suffix
+                    if (substr($_SERVER['REQUEST_URI'], strlen($_SERVER['REQUEST_URI'])-1, 1) == '/') {
+                        $_SERVER['REQUEST_URI'] = substr($_SERVER['REQUEST_URI'], 0, strlen($_SERVER['REQUEST_URI'])-1);
+                    }                    
+                    
                     if (isValue($_SERVER['REQUEST_URI'])) {
                         $request = $_SERVER['REQUEST_URI'];
                     }
@@ -77,3 +87,5 @@
         }
 
     }
+
+    
