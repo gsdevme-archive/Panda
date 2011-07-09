@@ -21,8 +21,10 @@
                 if ((defined('PHP_SAPI')) && (PHP_SAPI === 'cli')) {
                     Panda::getInstance()->mode = 'CLI';
                     
-                    if (isValue($_SERVER['argv'][1])) {                                                
-                        $request = $_SERVER['argv'][1];
+                    if (isValue($_SERVER['argv'][1])) {
+                        $_SERVER['argv'][1] = $this->_clean($_SERVER['argv'][1]);
+                        
+                        $request = ifvalueor($_SERVER['argv'][1], null);
 
                         if (isValue($_SERVER['argv'][2])) {
                             $virtualhost = $_SERVER['argv'][2];
@@ -38,16 +40,7 @@
                     Panda::getInstance()->mode = 'HTTP';
                     
                     $_SERVER['REQUEST_URI'] = substr(str_replace($_SERVER['SCRIPT_NAME'], null, $_SERVER['REQUEST_URI']), 1);
-
-                    // Remove / Prefix
-                    if (substr($_SERVER['REQUEST_URI'], 0, 1) == '/') {
-                        $_SERVER['REQUEST_URI'] = substr($_SERVER['REQUEST_URI'], 1);
-                    }
-
-                    // Remove / Suffix
-                    if (substr($_SERVER['REQUEST_URI'], strlen($_SERVER['REQUEST_URI'])-1, 1) == '/') {
-                        $_SERVER['REQUEST_URI'] = substr($_SERVER['REQUEST_URI'], 0, strlen($_SERVER['REQUEST_URI'])-1);
-                    }                    
+                    $_SERVER['REQUEST_URI'] = $this->_clean($_SERVER['REQUEST_URI']);
                     
                     if (isValue($_SERVER['REQUEST_URI'])) {
                         $request = $_SERVER['REQUEST_URI'];
@@ -88,6 +81,21 @@
         public function getApp()
         {
             return $this->_app;
+        }
+        
+        private function _clean($value)
+        {
+            // Remove / Prefix
+            if (substr($value, 0, 1) == '/') {
+                $value = substr($value, 1);
+            }
+
+            // Remove / Suffix
+            if (substr($value, strlen($value) - 1, 1) == '/') {
+                $value = substr($value, 0, strlen($value) - 1);
+            }
+            
+            return $value;
         }
 
     }
