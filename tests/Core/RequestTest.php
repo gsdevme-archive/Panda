@@ -39,7 +39,7 @@ use PHPUnit_Framework_TestCase as PHPUnit;
 
         /**
          * Tests a standard URL request (mod_rewrite)
-         */        
+         */
         public function testStandardUrlRequestAgain()
         {
             $_SERVER['REQUEST_URI'] = '/users/bill/';
@@ -58,7 +58,7 @@ use PHPUnit_Framework_TestCase as PHPUnit;
             $request = new Request();
             $this->assertEquals('users/bill', $request->getRequest());
         }
-        
+
         /**
          * Tests what the app name will be if domain is panda.com
          */
@@ -70,7 +70,7 @@ use PHPUnit_Framework_TestCase as PHPUnit;
             $request = new Request();
             $this->assertEquals('PandaCom', $request->getApp());
             $this->assertEquals(null, $request->getRequest());
-        }        
+        }
 
         /**
          * Tests what the app name will be if domain is apps.facebook.com
@@ -85,7 +85,6 @@ use PHPUnit_Framework_TestCase as PHPUnit;
             $this->assertEquals(null, $request->getRequest());
         }
 
-
         /**
          * Tests app name with an invalid namespace name i.e. 55fish.com
          */
@@ -97,8 +96,7 @@ use PHPUnit_Framework_TestCase as PHPUnit;
             $request = new Request();
             $this->assertEquals(Panda::getInstance()->defaultApp, $request->getApp());
             $this->assertEquals(null, $request->getRequest());
-        } 
-        
+        }
 
         /**
          * Tests domain with foreign letters
@@ -111,8 +109,8 @@ use PHPUnit_Framework_TestCase as PHPUnit;
             $request = new Request();
             $this->assertEquals('DnCom', $request->getApp());
             $this->assertEquals(null, $request->getRequest());
-        }          
-        
+        }
+
         /**
          * Tests what the app name will be if visited by the IP address
          */
@@ -124,7 +122,15 @@ use PHPUnit_Framework_TestCase as PHPUnit;
             $request = new Request();
             $this->assertEquals(Panda::getInstance()->defaultApp, $request->getApp());
             $this->assertEquals(null, $request->getRequest());
-        }        
+        }
+
+        public function testAppURL()
+        {
+            $request = new Request('users/bill', 'FacebookCom');
+            $this->assertEquals('FacebookCom', $request->getApp());
+            $this->assertEquals('users/bill', $request->getRequest());
+        }
+
     }
 
     
