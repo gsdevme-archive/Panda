@@ -51,6 +51,7 @@ use \Core\Exceptions\Load as LoadException;
             } else {
                 $file = ($shared === false) ? $this->_panda->appRoot . $dir . '/' : $this->_panda->root . 'Shared/' . $dir . '/';
                 $file.=$name . '.php';
+                
                 if (is_readable($file)) {
                     require_once $file;
 
