@@ -25,17 +25,17 @@ use \ReflectionMethod as ReflectionMethod;
             $this->_panda->appRoot = $this->_panda->root . $this->_panda->appName . '/';
 
             $this->_request = \SplFixedArray::fromArray(($request->getRequest() !== null) ? explode('/', $request->getRequest()) : array($this->_panda->defaultController, $this->_panda->defaultMethod));
-            
+
             if ($this->_request->valid()) {
                 $controllerName = $this->_getController();
                 $methodName = $this->_getMethod();
-                
+
                 $this->_panda->controller = $controllerName;
                 $this->_panda->method = $methodName;
-                
+
                 $this->_request->next();
 
-                if ($this->_request->valid()) {                       
+                if ($this->_request->valid()) {
                     return new ControllerFactory($this->_controller, $this->_method, array_slice($this->_request->toArray(), $this->_request->key()));
                 }
 
@@ -72,7 +72,13 @@ use \ReflectionMethod as ReflectionMethod;
             try {
                 $this->_controller = new ReflectionClass('Controllers\\' . ucfirst($this->_request->current()));
 
+
+
                 if ($this->_controller->isInstantiable()) {
+                    if (($this->_panda->mode == 'HTTP') && (!$this->_controller->isSubclassOf('Controllers\\Controller'))) {
+                        throw new RouterException('This controller is for CLI use only, Controller: ' . ucfirst($this->_request->current()), 404, ifsetor($e, null));
+                    }
+
                     return ucfirst($this->_request->current());
                 }
             } catch (Exception $e) {
@@ -89,7 +95,7 @@ use \ReflectionMethod as ReflectionMethod;
         private function _getMethod()
         {
             $this->_request->next();
-            
+
             if ($this->_request->valid()) {
                 $method = $this->_request->current();
             } else {
