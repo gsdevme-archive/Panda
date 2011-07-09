@@ -28,8 +28,10 @@ use \ReflectionMethod as ReflectionMethod;
          * @return array 
          */
         private function _urldecode(array $args){
-            foreach($args as $arg){
-                $arg = urldecode($arg);
+            $count = count($args);
+            
+            for($i=0;$i<$count;++$i){
+                $args[$i] = urldecode($args[$i]);
             }
             
             return $args;
