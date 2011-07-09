@@ -36,32 +36,6 @@
             }, true, true);
         new Core\Router(new \Core\Request());
     } catch (Exception $e) {
-        if ($panda->debug === false) {
-            switch ($e->getCode()) {
-                case 404:
-                    die('Load 404 File');
-                    break;
-                case 500:
-                    die('Load 500 File');
-                    break;
-                default:
-                    die('Load Unknown Error File');
-                    break;
-            }
-            break;
-        }
-        
-        echo '<h3 style="padding:0 5px;">'.$e->getMessage().'</h3>';
-
-        if (($trace = $e->getTrace())) {
-            echo '<table width="100%" border="1" cellpadding="5px"><tr><td>File</td><td>Line</td></tr>';
-
-            foreach ($trace as $error) {
-                if (isset($error['file'], $error['line'])) {
-                    echo '<tr><td>' . $error['file'] . '</td><td>' . $error['line'] . '</td></tr>';
-                }
-            }
-
-            echo '</table>';
-        }
+        $errorReport = new \Core\ErrorReport($e);
+        die($errorReport->getOutput());
     }

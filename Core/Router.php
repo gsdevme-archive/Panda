@@ -74,7 +74,7 @@ use \ReflectionMethod as ReflectionMethod;
                 
             }
 
-            throw new RouterException('Panda failed the find the controller, this could simply just be a simple 404', 404, ifsetor($e, null));
+            throw new RouterException('Panda failed the find the controller, with the name ' . ucfirst($this->_request->current()), 404, ifsetor($e, null));
         }
 
         /**

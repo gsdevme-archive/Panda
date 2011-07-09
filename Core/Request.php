@@ -19,7 +19,9 @@
                  * php -f index.php controller/method/args app
                  */
                 if ((defined('PHP_SAPI')) && (PHP_SAPI === 'cli')) {
-                    if (isValue($_SERVER['argv'][1])) {
+                    Panda::getInstance()->mode = 'CLI';
+                    
+                    if (isValue($_SERVER['argv'][1])) {                                                
                         $request = $_SERVER['argv'][1];
 
                         if (isValue($_SERVER['argv'][2])) {
@@ -33,6 +35,8 @@
                  * http://app/index.php/controller/method/args
                  */
                 if (isValue($_SERVER['REQUEST_URI'])) {
+                    Panda::getInstance()->mode = 'HTTP';
+                    
                     $_SERVER['REQUEST_URI'] = substr(str_replace($_SERVER['SCRIPT_NAME'], null, $_SERVER['REQUEST_URI']), 1);
 
                     // Remove / Prefix
