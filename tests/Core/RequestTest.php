@@ -126,7 +126,9 @@ use PHPUnit_Framework_TestCase as PHPUnit;
 
         public function testAppURL()
         {
-            $request = new Request('users/bill', 'FacebookCom');
+            $_SERVER['argv'] = array('', 'users/bill/', 'FacebookCom');
+            
+            $request = new Request();
             $this->assertEquals('FacebookCom', $request->getApp());
             $this->assertEquals('users/bill', $request->getRequest());
         }

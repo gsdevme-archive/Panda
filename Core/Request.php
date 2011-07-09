@@ -27,7 +27,7 @@
                         $request = ifvalueor($_SERVER['argv'][1], null);
 
                         if (isValue($_SERVER['argv'][2])) {
-                            $virtualhost = $_SERVER['argv'][2];
+                            $app = $_SERVER['argv'][2];
                         }
                     }
                 }
