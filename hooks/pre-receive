@@ -5,7 +5,7 @@
 while read oldrev newrev refname
 do
 	$currentLocation = dirname $0
-	$testLocationTmp = $currentLocation "/../tmp/"
+	$testLocationTmp = $currentLocation "/../Temp/"
 	$testLocation = $currentLocation "/../"
 
     # Only run this script for the master branch. You can remove this 
