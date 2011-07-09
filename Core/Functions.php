@@ -25,4 +25,15 @@
         return (isset($value)) ? $value : $or;
     }
 
-    
+
+    /**
+     * Similar to ifsetor although with empty()
+     * 
+     * @param mixed $value
+     * @param mixed $or
+     * @return mixed 
+     */
+    function ifvalueor(&$value, $or)
+    {
+        return (!empty($value)) ? $value : $or;
+    }    
