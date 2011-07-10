@@ -74,8 +74,10 @@ use \Core\Exceptions\LoadException as Exception;
                     require_once $file;
 
                     $class = $dir . '\\' . ucfirst($name);
-
-                    $name .= ( $shared == true) ? '__shared' : '';
+			
+                    if($shared !== false){
+                       $name .= '__shared';
+		    }
 
                     return self::$_registry->$regMethod($name, new $class);
                 }
