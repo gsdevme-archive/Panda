@@ -2,7 +2,7 @@
 
 namespace Models;
 
-class Users
+class Users extends \Core\Model
 {
     
     public function doSomething()
