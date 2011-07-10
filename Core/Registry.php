@@ -12,12 +12,14 @@ use Core\Exceptions\RegistryException as Exception;
         private $_models;
         private $_libraries;
         private $_serviceLayers;
+        private $_views;
 
         public function __construct()
         {
             $this->_models = new \stdClass();
             $this->_libraries = new \stdClass();
             $this->_serviceLayers = new \stdClass();
+            $this->_views = new \stdClass();
         }
         /**
          * Add or get a model
@@ -52,7 +54,11 @@ use Core\Exceptions\RegistryException as Exception;
         {
             return $this->_accessor($name, '_serviceLayers', $value);
         }
-
+        
+        public function views($name,$value = false)
+        {
+            return $this->_accessor(sha1($name), '_views', $value);
+        }
         /**
          * Method to get or set items to the storage objects
          * @param string $name of the object

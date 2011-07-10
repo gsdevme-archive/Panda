@@ -7,6 +7,8 @@
     <body>
         <div>TODO write content
             <?php echo '<pre>'.print_r($message, 1).'</pre>';?>
+            
+            <?php $this->element('dummyElement');?>
         </div>
     </body>
 </html>

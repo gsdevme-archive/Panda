@@ -7,12 +7,12 @@
 
         public function index()
         {
-            /*
+            
             $this->view('dummy',array(
                 'message' => 'hello world',
-            ),1);
-            */
-
+            ))->render();
+            
+return;
             //1 flag means shared, if the param is missing it gets the app model
 
            // $this->library('Twitter', 1)->doSomething();
