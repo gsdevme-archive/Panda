@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title></title>
+    <title>Index</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <!--[if IE]><script src="excanvas.compressed.js"></script><![endif]-->
     <script src="RGraph.common.core.js" ></script>
@@ -13,8 +13,8 @@
 
   <body>
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr><td class="title"></td></tr>
-      <tr><td><div align="center"><p><a href="index.html">Back to Code Coverage report</a></p></div></td></tr>
+      <tr><td class="title">Index</td></tr>
+      <tr><td><div align="center"><p><a href="Index.html">Back to Code Coverage report</a></p></div></td></tr>
       <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
     </table>
 
@@ -27,7 +27,7 @@
             <h2>Class Coverage Distribution</h2>
             <canvas id="classCoverageDistribution" width="475" height="200"></canvas>
             <script>
-            var ccd = new RGraph.Bar('classCoverageDistribution', [1,0,0,0,2,1,0,0,0,1,0,6]);
+            var ccd = new RGraph.Bar('classCoverageDistribution', [0,0,0,0,2,0,0,0,0,0,0,1]);
             ccd.Set('chart.background.barcolor1', 'white');
             ccd.Set('chart.background.barcolor2', 'white');
             ccd.Set('chart.colors', ['blue']);
@@ -44,7 +44,7 @@
             <h2>Class Complexity</h2>
             <canvas id="classComplexity" width="475" height="200"></canvas>
             <script>
-            var cc = new RGraph.Scatter('classComplexity', [[0,1,"blue","AutoloaderException"],[100,1,"blue","ExceptionAbstract"],[100,1,"blue","LoadException"],[81.25,13,"blue","Factory"],[100,0,"blue","Model"],[100,7,"blue","Registry"],[46.666666666667,8,"blue","RegistryAbstract"],[100,16,"blue","Request"],[100,0,"blue","ServiceLayer"],[33.333333333333,1,"blue","Twitter"],[33.333333333333,1,"blue","Users"]]);
+            var cc = new RGraph.Scatter('classComplexity', [[33.333333333333,1,"blue","Twitter"],[33.333333333333,1,"blue","Users"],[100,0,"blue","ServiceLayer"]]);
             cc.Set('chart.xmax', 100);
             cc.Set('chart.background.barcolor1', 'white');
             cc.Set('chart.background.barcolor2', 'white');
@@ -60,8 +60,6 @@
           <td valign="top">
             <h2>Top Project Risks</h2>
             <ul>
-              <li><a href="Core_RegistryAbstract.php.html#11">RegistryAbstract</a> (17)</li>
-              <li><a href="Core_Factory.php.html#8">Factory</a> (14)</li>
 
             </ul>
           </td>
@@ -69,15 +67,8 @@
           <td valign="top">
             <h2>Least Tested Methods</h2>
             <ul>
-              <li><a href="Core_RegistryAbstract.php.html#21">RegistryAbstract::__construct</a> (0%)</li>
-              <li><a href="Core_RegistryAbstract.php.html#42">RegistryAbstract::import</a> (0%)</li>
-              <li><a href="Index_Libraries_Twitter.php.html#8">Twitter::doSomething</a> (0%)</li>
-              <li><a href="Core_Exceptions_AutoloaderException.php.html#8">AutoloaderException::__construct</a> (0%)</li>
-              <li><a href="Core_Factory.php.html#43">Factory::view</a> (0%)</li>
               <li><a href="Index_ServiceLayers_Users.php.html#8">Users::doSomething</a> (0%)</li>
-              <li><a href="Core_Factory.php.html#14">Factory::model</a> (75%)</li>
-              <li><a href="Core_Factory.php.html#34">Factory::serviceLayer</a> (75%)</li>
-              <li><a href="Core_Factory.php.html#51">Factory::_loader</a> (92%)</li>
+              <li><a href="Index_Libraries_Twitter.php.html#8">Twitter::doSomething</a> (0%)</li>
 
             </ul>
           </td>
