@@ -34,8 +34,10 @@ use PHPUnit_Framework_TestCase as PHPUnit;
             try {
                 $model = Factory::model('1234');
                  $this->fail('Failed to throw an exception');
-            } catch (Exception $e) {
-                $this->assertTrue($e instanceof LoadException,'Caught exception is not an instance of \Core\Exceptions\LoadException');
+            } catch (LoadException $e) {
+                
+            } catch (Exception $e){
+                $this->fail('Caught exception is not an instanceof \Core\Exceptions\LoadException');
             }
         }
 
