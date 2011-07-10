@@ -13,7 +13,11 @@
 
         public static function model($name, $shared = false)
         {
-            return self::_loader($name, 'models', $shared,'Model not found -> '.$name);
+            $model = self::_loader($name, 'models', $shared,'Model not found -> '.$name);
+            if($model instanceof Model){
+                return $model;
+            }
+            throw new Exception($name.' is not an instance of \Core\Model');
         }
 
         /**
@@ -29,11 +33,16 @@
 
         public static function serviceLayer($name, $shared = false)
         {
-            return self::_loader($name, 'serviceLayers', $shared,'Service layer not found -> '.$name);
+            $sl =  self::_loader($name, 'serviceLayers', $shared,'Service layer not found -> '.$name);
+            if($sl instanceof ServiceLayer){
+                return $sl;
+            }
+            throw new Exception($name.' is not an instance of \Core\ServiceLayer');
         }
 
         public static function view($name, array $args = null, $shared = false)
         {
+            //im thinking maybe do $view->render(); to place the view that was you can load a view, then manipulate in then render
             $view = new View;
             $view->load($name,$args,$shared);
             return $view;

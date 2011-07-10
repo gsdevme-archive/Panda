@@ -19,24 +19,46 @@ use PHPUnit_Framework_TestCase as PHPUnit;
             $this->_registry = Registry::getInstance();
         }
 
-        public function testModel()
+        public function testExistant()
         {
             try {
                 $model = Factory::model('users');
-                $this->assertTrue($model instanceof \Core\Model,'Model not an instance of \Core\Model');
+                $this->assertTrue($model instanceof \Core\Model, 'Model not an instance of \Core\Model');
+                
+                $library = Factory::library('twitter');
+                $this->assertTrue(is_object($library), 'Library is not an object');
+                
+                $sl = Factory::serviceLayer('users');
+                $this->assertTrue($sl instanceof \Core\ServiceLayer, 'Not an instance of service layer');
+                
             } catch (Exception $e) {
                 $this->fail($e->getMessage());
             }
         }
-
+        public function testShared()
+        {
+            
+        }
         public function testNonExistentModel()
         {
             try {
                 $model = Factory::model('1234');
-                 $this->fail('Failed to throw an exception');
+                $this->fail('Failed to throw an exception');
             } catch (LoadException $e) {
                 
-            } catch (Exception $e){
+            } catch (Exception $e) {
+                $this->fail('Caught exception is not an instanceof \Core\Exceptions\LoadException');
+            }
+        }
+
+        public function testNonExistentLibrary()
+        {
+            try {
+                $library = Factory::library('1234');
+                $this->fail('Failed to throw an exception');
+            } catch (LoadException $e) {
+                
+            } catch (Exception $e) {
                 $this->fail('Caught exception is not an instanceof \Core\Exceptions\LoadException');
             }
         }
