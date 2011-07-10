@@ -15,7 +15,14 @@ use Core\Exceptions\ViewException as Exception;
             $this->_panda = Panda::getInstance();
             $this->_registry = Registry::getInstance();
         }
-
+        
+        /**
+         * Load a view
+         * @param string $name name of the view
+         * @param array $args array of arguments
+         * @param bool $shared is this a shared view?
+         * @return type 
+         */
         public function load($name, array $args = null, $shared = false)
         {
             if ($shared) {
@@ -23,6 +30,7 @@ use Core\Exceptions\ViewException as Exception;
             } else {
                 $file = $this->_panda->appRoot . 'Views/' . $name . '.php';
             }
+            
             if (is_readable($file)) {
 
                 if (is_array($args)) {
