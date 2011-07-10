@@ -72,11 +72,9 @@ use \ReflectionMethod as ReflectionMethod;
             try {
                 $this->_controller = new ReflectionClass('Controllers\\' . ucfirst($this->_request->current()));
 
-
-
                 if ($this->_controller->isInstantiable()) {
-                    if (($this->_panda->mode == 'HTTP') && (!$this->_controller->isSubclassOf('Controllers\\Controller'))) {
-                        throw new RouterException('This controller is for CLI use only, Controller: ' . ucfirst($this->_request->current()), 404, ifsetor($e, null));
+                    if (($this->_panda->mode == 'HTTP') && ($this->_controller->getParentClass()->name != 'Controllers\Controller')) {
+                        throw new RouterException('This controller is for CLI use only, Controller: ' . ucfirst($this->_request->current()), 404);
                     }
 
                     return ucfirst($this->_request->current());
