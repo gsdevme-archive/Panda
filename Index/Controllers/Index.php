@@ -7,16 +7,14 @@
 
         public function index()
         {
-            
-            $this->view('dummy',array(
+            $this->view('dummy', array(
                 'message' => 'hello world',
             ))->render();
-            
-return;
-            //1 flag means shared, if the param is missing it gets the app model
 
-           // $this->library('Twitter', 1)->doSomething();
-            
+            return;
+            //1 flag means shared, if the param is missing it gets the app model
+            // $this->library('Twitter', 1)->doSomething();
+
             $this->serviceLayer('Users')->doSomething();
 
             echo '<pre>' . print_r(\Core\Registry::getInstance(), 1) . '</pre>';
