@@ -21,8 +21,11 @@ use \Exception as Exception;
         {
             if (is_object($e)) {
                 $HTMLOutput = '<div style="border:1px solid red;padding:5px 10px;margin:5px 0;"><h3>Panda Error</h3>';
-                $HTMLOutput .= '<h4 style="font-weight:400;">' . $e->getMessage() . '</h4>';                
-                $HTMLOutput .= '<h4 style="font-weight:400;">' . $e->getPrevious()->getMessage() . '</h4></div>';
+                $HTMLOutput .= '<h4 style="font-weight:400;"><b>' . get_class($e) . '</b>: ' . $e->getMessage() . '</h4>';
+
+                if (isset($e->getPrevious())) {
+                    $HTMLOutput .= '<h4 style="font-weight:400;"><b>' . get_class($e->getPrevious()) . '</b>: ' . $e->getPrevious()->getMessage() . '</h4></div>';
+                }
 
                 $HTMLOutput .= $this->_getTrace($e);
                 return $HTMLOutput;
@@ -32,7 +35,12 @@ use \Exception as Exception;
         private function _CLIOutput($e)
         {
             $CLIOutput = "\n#--- Panda Error -------------------------#\n";
-            $CLIOutput .= "- " . $e->getMessage() . " \n";
+            $CLIOutput .= "- " . get_class($e) . ": " . $e->getMessage() . " \n";
+
+            if (isset($e->getPrevious())) {
+                $CLIOutput .= "- " . get_class($e->getPrevious()) . ": " . $e->getPrevious()->getMessage() . " \n";
+            }
+            
             $CLIOutput .= "#-----------------------------------------#\n";
 
             return $CLIOutput;
