@@ -2,7 +2,7 @@
 
     namespace Controllers;
 
-    abstract class CLIController extends \Core\Controller
+    abstract class CLIController extends Controller
     {
         
     }
