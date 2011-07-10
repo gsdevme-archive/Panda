@@ -7,6 +7,11 @@
 
         public function index()
         {
+            $this->view('dummy',array(
+                'message' => 'hello world',
+            ),1);
+            return;
+            
             echo '<pre>' . print_r(func_get_args(), 1) . '</pre>';
 
             echo '<pre>' . print_r(\Core\Panda::getInstance(), 1) . '</pre>';

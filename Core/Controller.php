@@ -9,6 +9,7 @@ use \Core\Exceptions\Load as LoadException;
 
         private $_registry;
         private $_panda;
+        private $_view;
 
         abstract public function index();
 
@@ -16,6 +17,7 @@ use \Core\Exceptions\Load as LoadException;
         {
             $this->_registry = Registry::getInstance();
             $this->_panda = Panda::getInstance();
+            $this->_view = new View;
         }
 
         final protected function model($name, $shared = false)
@@ -32,7 +34,10 @@ use \Core\Exceptions\Load as LoadException;
         {
             return $this->_loader($name, 'serviceLayers', $shared);
         }
-
+        final protected function view($name,array $args = null,$shared = false)
+        {
+            $this->_view->load($name,$args,$shared);
+        }
         /**
          * Slightly difficult to read but saves a fuck-ton of code
          * @param type $name
