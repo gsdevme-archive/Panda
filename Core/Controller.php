@@ -8,8 +8,6 @@ use Core\Factory as Factory;
     abstract class Controller
     {
 
-        abstract public function index();
-
         /**
          * Load a model
          * @param string $name name of the model
@@ -18,8 +16,9 @@ use Core\Factory as Factory;
          */
         final protected function model($name, $shared = false)
         {
-            return Factory::model($name,  $shared);
+            return Factory::model($name, $shared);
         }
+
         /**
          * Load a library
          * @param string $name name of the library
@@ -33,12 +32,26 @@ use Core\Factory as Factory;
 
         final protected function serviceLayer($name, $shared = false)
         {
-            return Factory::serviceLayer($name,$shared);
+            return Factory::serviceLayer($name, $shared);
         }
-        final protected function view($name,array $args = null,$shared = false)
+
+        final protected function view($name, array $args = null, $shared = false)
         {
-            return Factory::view($name,$args,$shared);
+            return Factory::view($name, $args, $shared);
         }
+
+        /**
+         * Used to re-route the MVC
+         * @param string $controller
+         * @param string $method
+         * @param array $args
+         * @return null 
+         */
+        final protected function route($controller, $method='index', array $args=null)
+        {
+            return \Core\ControllerFactory::route($controller, $method, $args);
+        }
+
     }
 
     
