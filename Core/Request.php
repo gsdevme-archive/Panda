@@ -11,52 +11,50 @@
          * Parse and Find the App - Controller/Method/Args
          * @param string $request 
          */
-        public function __construct($request=null, $app=null)
+        public function __construct()
         {
-            if ($request === null) {
-                /*
-                 * Command Line Detection
-                 * php -f index.php controller/method/args app
-                 */
-                if ((defined('PHP_SAPI')) && (PHP_SAPI === 'cli')) {
-                    Panda::getInstance()->mode = 'CLI';
-                    
-                    if (isValue($_SERVER['argv'][1])) {
-                        $_SERVER['argv'][1] = $this->_clean($_SERVER['argv'][1]);
-                        
-                        $request = ifvalueor($_SERVER['argv'][1], null);
+            /*
+             * Command Line Detection
+             * php -f index.php controller/method/args app
+             */
+            if ((defined('PHP_SAPI')) && (PHP_SAPI === 'cli')) {
+                Panda::getInstance()->mode = 'CLI';
 
-                        if (isValue($_SERVER['argv'][2])) {
-                            $app = $_SERVER['argv'][2];
-                        }
+                if (isValue($_SERVER['argv'][1])) {
+                    $_SERVER['argv'][1] = $this->_clean($_SERVER['argv'][1]);
+
+                    $request = ifvalueor($_SERVER['argv'][1], null);
+
+                    if (isValue($_SERVER['argv'][2])) {
+                        $app = $_SERVER['argv'][2];
                     }
                 }
+            }
 
-                /*
-                 * Http Detection
-                 * http://app/index.php/controller/method/args
-                 */
+            /*
+             * Http Detection
+             * http://app/index.php/controller/method/args
+             */
+            if (isValue($_SERVER['REQUEST_URI'])) {
+                Panda::getInstance()->mode = 'HTTP';
+
+                $_SERVER['REQUEST_URI'] = substr(str_replace($_SERVER['SCRIPT_NAME'], null, $_SERVER['REQUEST_URI']), 1);
+                $_SERVER['REQUEST_URI'] = $this->_clean($_SERVER['REQUEST_URI']);
+
                 if (isValue($_SERVER['REQUEST_URI'])) {
-                    Panda::getInstance()->mode = 'HTTP';
-                    
-                    $_SERVER['REQUEST_URI'] = substr(str_replace($_SERVER['SCRIPT_NAME'], null, $_SERVER['REQUEST_URI']), 1);
-                    $_SERVER['REQUEST_URI'] = $this->_clean($_SERVER['REQUEST_URI']);
-                    
-                    if (isValue($_SERVER['REQUEST_URI'])) {
-                        $request = $_SERVER['REQUEST_URI'];
-                    }
+                    $request = $_SERVER['REQUEST_URI'];
+                }
 
-                    if ((isValue($_SERVER['HTTP_HOST'])) && (!filter_var($_SERVER['HTTP_HOST'], FILTER_VALIDATE_IP))) {
-                        /*
-                         * Remove everything but A-Z, 0-9 and Uppercase each Word
-                         * i.e. apps.facebook.com = AppsFacebookCom
-                         */
-                        $app = str_replace(' ', null, ucwords(preg_replace("/[^A-Z0-9]+/i", ' ', $_SERVER['HTTP_HOST'])));
+                if ((isValue($_SERVER['HTTP_HOST'])) && (!filter_var($_SERVER['HTTP_HOST'], FILTER_VALIDATE_IP))) {
+                    /*
+                     * Remove everything but A-Z, 0-9 and Uppercase each Word
+                     * i.e. apps.facebook.com = AppsFacebookCom
+                     */
+                    $app = str_replace(' ', null, ucwords(preg_replace("/[^A-Z0-9]+/i", ' ', $_SERVER['HTTP_HOST'])));
 
-                        // Check the first letter is a valid one
-                        if (ord(substr($app, 0, 1)) < 65) {
-                            $app = null;
-                        }
+                    // Check the first letter is a valid one
+                    if (ord(substr($app, 0, 1)) < 65) {
+                        $app = null;
                     }
                 }
             }
@@ -82,7 +80,7 @@
         {
             return $this->_app;
         }
-        
+
         private function _clean($value)
         {
             // Remove / Prefix
@@ -94,7 +92,7 @@
             if (substr($value, strlen($value) - 1, 1) == '/') {
                 $value = substr($value, 0, strlen($value) - 1);
             }
-            
+
             return $value;
         }
 
