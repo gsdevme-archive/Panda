@@ -41,6 +41,8 @@ use \ReflectionMethod as ReflectionMethod;
 
                 return new ControllerFactory($this->_controller, $this->_method);
             }
+            
+            throw new RouterException('Unknown Error', 500);
         }
 
         /**
@@ -51,8 +53,11 @@ use \ReflectionMethod as ReflectionMethod;
         {
             if (is_readable($this->_panda->root . $app . '/Config.php')) {
                 require_once $this->_panda->root . $app . '/Config.php';
-                $this->_panda->import($config);
-
+                
+                if(isValue($config)){
+                    $this->_panda->import($config);
+                }
+                
                 return $app;
             }
 
