@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Core/Exceptions</title>
+    <title>Index/Views</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <!--[if IE]><script src="excanvas.compressed.js"></script><![endif]-->
     <script src="RGraph.common.core.js" ></script>
@@ -13,8 +13,8 @@
 
   <body>
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr><td class="title">Core/Exceptions</td></tr>
-      <tr><td><div align="center"><p><a href="Core_Exceptions.html">Back to Code Coverage report</a></p></div></td></tr>
+      <tr><td class="title">Index/Views</td></tr>
+      <tr><td><div align="center"><p><a href="Index_Views.html">Back to Code Coverage report</a></p></div></td></tr>
       <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
     </table>
 
@@ -27,7 +27,7 @@
             <h2>Class Coverage Distribution</h2>
             <canvas id="classCoverageDistribution" width="475" height="200"></canvas>
             <script>
-            var ccd = new RGraph.Bar('classCoverageDistribution', [1,0,0,0,0,0,0,0,0,0,0,3]);
+            var ccd = new RGraph.Bar('classCoverageDistribution', [0,0,0,0,0,0,0,0,0,0,0,0]);
             ccd.Set('chart.background.barcolor1', 'white');
             ccd.Set('chart.background.barcolor2', 'white');
             ccd.Set('chart.colors', ['blue']);
@@ -44,7 +44,7 @@
             <h2>Class Complexity</h2>
             <canvas id="classComplexity" width="475" height="200"></canvas>
             <script>
-            var cc = new RGraph.Scatter('classComplexity', [[0,1,"blue","AutoloaderException"],[100,1,"blue","ExceptionAbstract"],[100,1,"blue","LoadException"],[100,1,"blue","RouterException"]]);
+            var cc = new RGraph.Scatter('classComplexity', []);
             cc.Set('chart.xmax', 100);
             cc.Set('chart.background.barcolor1', 'white');
             cc.Set('chart.background.barcolor2', 'white');
@@ -67,7 +67,6 @@
           <td valign="top">
             <h2>Least Tested Methods</h2>
             <ul>
-              <li><a href="Core_Exceptions_AutoloaderException.php.html#8">AutoloaderException::__construct</a> (0%)</li>
 
             </ul>
           </td>

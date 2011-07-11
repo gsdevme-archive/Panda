@@ -20,7 +20,7 @@
           <table cellpadding="1" border="0" width="100%">
             <tr>
               <td class="headerItem" width="20%">Current file:</td>
-              <td class="headerValue" width="80%"><a href="index.html">/Users/gav/github/Panda</a>/<a href="Index.html">Index</a>/<a href="Index_ServiceLayers.html">ServiceLayers</a>/<a href="Index_ServiceLayers_ServiceLayer.php.html">ServiceLayer.php</a></td>
+              <td class="headerValue" width="80%"><a href="index.html">/Users/gav/github/Panda</a>/<a href="Core.html">Core</a>/<a href="Core_Exceptions.html">Exceptions</a>/<a href="Core_Exceptions_RouterException.php.html">RouterException.php</a></td>
             </tr>
             <tr>
               <td class="legendItem" width="20%">Legend:</td>
@@ -67,12 +67,12 @@
           <td class="coverBar" align="center" width="100">
             <table border="0" cellspacing="0" cellpadding="1">
               <tr>
-                <td class="coverBarOutline"><img src="snow.png" width="100" height="10" alt="&nbsp;"><img src="snow.png" width="0" height="10" alt="&nbsp;"></td>
+                <td class="coverBarOutline"><img src="chameleon.png" width="100" height="10" alt="100.00%"><img src="snow.png" width="0" height="10" alt="100.00%"></td>
               </tr>
             </table>
           </td>
-          <td class="coverPerNone">&nbsp;</td>
-          <td class="coverNumNone">&nbsp;</td>
+          <td class="coverPerHi">100.00%</td>
+          <td class="coverNumHi">1 / 1</td>
           <td class="crap"><acronym title="Change Risk Anti-Patterns (CRAP) Index">CRAP</acronym></td>
           <td class="coverBar" align="center" width="100">
             <table border="0" cellspacing="0" cellpadding="1">
@@ -82,14 +82,14 @@
             </table>
           </td>
           <td class="coverPerHi">100.00%</td>
-          <td class="coverNumHi">1 / 1</td>
+          <td class="coverNumHi">3 / 3</td>
         </tr>
 
         <tr>
           <td class="tableHead" colspan="11">&nbsp;</td>
         </tr>
         <tr>
-          <td class="coverItem"><b><a href="#5">ServiceLayer</a></b></td>
+          <td class="coverItem"><b><a href="#5">RouterException</a></b></td>
           <td class="coverBar" align="center" width="100">
             <table border="0" cellspacing="0" cellpadding="1">
               <tr>
@@ -102,12 +102,12 @@
           <td class="coverBar" align="center" width="100">
             <table border="0" cellspacing="0" cellpadding="1">
               <tr>
-                <td class="coverBarOutline"><img src="snow.png" width="100" height="10" alt="&nbsp;"><img src="snow.png" width="0" height="10" alt="&nbsp;"></td>
+                <td class="coverBarOutline"><img src="chameleon.png" width="100" height="10" alt="100.00%"><img src="snow.png" width="0" height="10" alt="100.00%"></td>
               </tr>
             </table>
           </td>
-          <td class="coverPerNone">&nbsp;</td>
-          <td class="coverNumNone">&nbsp;</td>
+          <td class="coverPerHi">100.00%</td>
+          <td class="coverNumHi">1 / 1</td>
           <td class="crap"></td>
           <td class="coverBar" align="center" width="100">
             <table border="0" cellspacing="0" cellpadding="1">
@@ -117,7 +117,30 @@
             </table>
           </td>
           <td class="coverPerHi">100.00%</td>
+          <td class="coverNumHi">3 / 3</td>
+        </tr>
+
+        <tr>
+          <td class="coverFile" colspan="4">&nbsp;<a href="#8">__construct($message, $code=null, \Exception $previous=null)</a></td>
+          <td class="coverBar" align="center" width="100">
+            <table border="0" cellspacing="0" cellpadding="1">
+              <tr>
+                <td class="coverBarOutline"><img src="chameleon.png" width="100" height="10" alt="100.00%"><img src="snow.png" width="0" height="10" alt="100.00%"></td>
+              </tr>
+            </table>
+          </td>
+          <td class="coverPerHi">100.00%</td>
           <td class="coverNumHi">1 / 1</td>
+          <td class="crap">1</td>
+          <td class="coverBar" align="center" width="100">
+            <table border="0" cellspacing="0" cellpadding="1">
+              <tr>
+                <td class="coverBarOutline"><img src="chameleon.png" width="100" height="10" alt="100.00%"><img src="snow.png" width="0" height="10" alt="100.00%"></td>
+              </tr>
+            </table>
+          </td>
+          <td class="coverPerHi">100.00%</td>
+          <td class="coverNumHi">2 / 2</td>
         </tr>
 
 
@@ -133,13 +156,18 @@
       <tr>
         <td>
 <pre class="source">
-<span class="lineNum" id="container1"><a name="1"></a><a href="#1" id="line1">       1</a> </span>                : &lt;?php                                                     
-<span class="lineNum" id="container2"><a name="2"></a><a href="#2" id="line2">       2</a> </span>                :                                                           
-<span class="lineNum" id="container3"><a name="3"></a><a href="#3" id="line3">       3</a> </span>                :     namespace ServiceLayers;                              
-<span class="lineNum" id="container4"><a name="4"></a><a href="#4" id="line4">       4</a> </span>                :                                                           
-<span class="lineNum" id="container5"><a name="5"></a><a href="#5" id="line5">       5</a> </span>                :     abstract class ServiceLayer extends \Core\ServiceLayer
-<span class="lineNum" id="container6"><a name="6"></a><a href="#6" id="line6">       6</a> </span><span class="lineCov">              1 :     {                                                     </span>
-<span class="lineNum" id="container7"><a name="7"></a><a href="#7" id="line7">       7</a> </span>                :                                                           
+<span class="lineNum" id="container1"><a name="1"></a><a href="#1" id="line1">       1</a> </span>                : &lt;?php                                                                               
+<span class="lineNum" id="container2"><a name="2"></a><a href="#2" id="line2">       2</a> </span>                :                                                                                     
+<span class="lineNum" id="container3"><a name="3"></a><a href="#3" id="line3">       3</a> </span>                :     namespace Core\Exceptions;                                                      
+<span class="lineNum" id="container4"><a name="4"></a><a href="#4" id="line4">       4</a> </span>                :                                                                                     
+<span class="lineNum" id="container5"><a name="5"></a><a href="#5" id="line5">       5</a> </span>                :     class RouterException extends ExceptionAbstract                                 
+<span class="lineNum" id="container6"><a name="6"></a><a href="#6" id="line6">       6</a> </span><span class="lineCov">              1 :     {                                                                               </span>
+<span class="lineNum" id="container7"><a name="7"></a><a href="#7" id="line7">       7</a> </span>                :                                                                                     
+<span class="lineNum" id="container8"><a name="8"></a><a href="#8" id="line8">       8</a> </span>                :         public function __construct($message, $code=null, \Exception $previous=null)
+<span class="lineNum" id="container9"><a name="9"></a><a href="#9" id="line9">       9</a> </span>                :         {                                                                           
+<span class="lineNum" id="container10"><a name="10"></a><a href="#10" id="line10">      10</a> </span><span class="lineCov">              2 :             parent::__construct($message, $code, $previous);                        </span>
+<span class="lineNum" id="container11"><a name="11"></a><a href="#11" id="line11">      11</a> </span><span class="lineCov">              2 :         }                                                                           </span>
+<span class="lineNum" id="container12"><a name="12"></a><a href="#12" id="line12">      12</a> </span>                :                                                                                     
 
 </pre>
         </td>
@@ -160,7 +188,17 @@
       YAHOO.phpunit.container.panelsData = {
         "panel6": {
           "header": "1 test covers line 6",
-          "body": "<ul><li class=\"testPassed\">FactoryTest::testExistant</li></ul>",
+          "body": "<ul><li class=\"testPassed\">RouterTest::testRouterFailures</li></ul>",
+          "footer": ""
+        },
+        "panel10": {
+          "header": "2 tests cover line 10",
+          "body": "<ul><li class=\"testPassed\">RouterTest::testRouterFailures</li><li class=\"testPassed\">RouterTest::testRouterCLILockedOut</li></ul>",
+          "footer": ""
+        },
+        "panel11": {
+          "header": "2 tests cover line 11",
+          "body": "<ul><li class=\"testPassed\">RouterTest::testRouterFailures</li><li class=\"testPassed\">RouterTest::testRouterCLILockedOut</li></ul>",
           "footer": ""
         },
       "dummy": ""

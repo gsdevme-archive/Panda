@@ -1,4 +1,4 @@
-#!/usr/bin/env php
+#!/Applications/MAMP/bin/php5.3/bin/php
 <?php
 /* PHPUnit
  *
