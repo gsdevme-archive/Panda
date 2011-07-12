@@ -26,23 +26,19 @@ use \ReflectionMethod as ReflectionMethod;
 
             $this->_request = \SplFixedArray::fromArray(($request->getRequest() !== null) ? explode('/', $request->getRequest()) : array($this->_panda->defaultController, $this->_panda->defaultMethod));
 
+            $controllerName = $this->_getController();
+            $methodName = $this->_getMethod();
+
+            $this->_panda->controller = $controllerName;
+            $this->_panda->method = $methodName;
+
+            $this->_request->next();
+
             if ($this->_request->valid()) {
-                $controllerName = $this->_getController();
-                $methodName = $this->_getMethod();
-
-                $this->_panda->controller = $controllerName;
-                $this->_panda->method = $methodName;
-
-                $this->_request->next();
-
-                if ($this->_request->valid()) {
-                    return new ControllerFactory($this->_controller, $this->_method, array_slice($this->_request->toArray(), $this->_request->key()));
-                }
-
-                return new ControllerFactory($this->_controller, $this->_method);
+                return new ControllerFactory($this->_controller, $this->_method, array_slice($this->_request->toArray(), $this->_request->key()));
             }
-            
-            throw new RouterException('Unknown Error', 500);
+
+            return new ControllerFactory($this->_controller, $this->_method);
         }
 
         /**
@@ -53,11 +49,11 @@ use \ReflectionMethod as ReflectionMethod;
         {
             if (is_readable($this->_panda->root . $app . '/Config.php')) {
                 require_once $this->_panda->root . $app . '/Config.php';
-                
-                if(isValue($config)){
+
+                if (isValue($config)) {
                     $this->_panda->import($config);
                 }
-                
+
                 return $app;
             }
 
