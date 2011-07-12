@@ -27,7 +27,7 @@ use Core\Exceptions\ViewException as Exception;
          */
         public function load($name, array $args = null, $shared = false)
         {
-            if ($shared === true) {
+            if ($shared === false) {
                 $file = $this->_panda->root . '/Shared/Views/' . $name . '.php';
             } else {
                 $file = $this->_panda->appRoot . 'Views/' . $name . '.php';
