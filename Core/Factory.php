@@ -42,19 +42,6 @@ use \Core\Exceptions\LoadException as Exception;
             throw new Exception($name . ' is not an instance of \Core\ServiceLayer');
         }
 
-        public static function view($name, array $args = null, $shared = false)
-        {
-            self::_init();
-            //im thinking maybe do $view->render(); to place the view that was you can load a view, then manipulate in then render
-            if (self::$_registry->views($name)) {
-                return self::$_registry->views($name);
-            } else {
-                $view = new View;
-                $view->load($name, $args, $shared);
-                return self::$_registry->views($name, $view);
-            }
-        }
-
         private static function _loader($name, $type, $shared = false, $exception = 'Factory error')
         {
             self::_init();
