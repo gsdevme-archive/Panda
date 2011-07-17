@@ -19,6 +19,7 @@
             $this->view('index')->args($dataTwo);
             
             $this->render();
+            // $this->render(true); sending true caches the view
         }
 
     }

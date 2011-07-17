@@ -46,7 +46,7 @@ use Core\Exceptions\ViewException as ViewException;
             // Checksum
             $this->_currentView = sprintf('%u', crc32($file));
 
-            if (!isset($this->_views[$this->_currentView])) {                     
+            if (!isset($this->_views[$this->_currentView])) {
                 if (is_readable($file)) {
                     $this->_views[$this->_currentView] = ( object ) array('file' => $file, 'args' => $args, 'name' => $name);
                     return self::$_instance;
@@ -54,7 +54,7 @@ use Core\Exceptions\ViewException as ViewException;
 
                 throw new ViewException('Failed to load view, could not find ' . $view->name, 404, null);
             }
-            
+
             return self::$_instance;
         }
 
@@ -62,9 +62,29 @@ use Core\Exceptions\ViewException as ViewException;
          * Render all views 
          * @return type 
          */
-        public function render()
+        public function render($cache=false)
         {
             if (!empty($this->_views)) {
+                if ($cache === true) {
+                    $checksum = sprintf('%u', crc32(serialize($this->_views)));
+                    $cacheFile = Panda::getInstance()->appRoot . 'Cache/' . $checksum . '.html';
+
+                    if (is_readable($cacheFile)) {
+                        require $cacheFile;
+                        return true;
+                    }
+                }
+                
+                if($cache === true){
+                    $appRoot = Panda::getInstance()->appRoot;
+                    
+                    ob_start(function($buffer) use ($appRoot, $checksum, $cacheFile){
+                        $file = new \SplFileObject($cacheFile, 'w');
+                        $file->fwrite($buffer);
+                        return $buffer;
+                    });
+                }
+
                 foreach ($this->_views as $view) {
                     new View($view->file, $view->args);
                 }
@@ -81,7 +101,7 @@ use Core\Exceptions\ViewException as ViewException;
          * @param type $value 
          */
         private function _args($property, $value)
-        {            
+        {
             if (isset($this->_views[$this->_currentView])) {
                 $this->_views[$this->_currentView]->args[$property] = $value;
             }
@@ -106,7 +126,7 @@ use Core\Exceptions\ViewException as ViewException;
          * @return type 
          */
         public function __call($method, $args)
-        {            
+        {
             if (($method === 'args') && (isset($args[0]))) {
                 if ((!is_array($args[0])) && (isset($args[1]))) {
                     return $this->_args($args[0], $args[1]);
