@@ -64,7 +64,7 @@ use Core\Exceptions\ViewException as ViewException;
          */
         public function render($cache=false)
         {
-            if (!empty($this->_views)) {
+            if (!empty($this->_views)) {                
                 if ($cache === true) {
                     $checksum = sprintf('%u', crc32(serialize($this->_views)));
                     $cacheFile = Panda::getInstance()->appRoot . 'Cache/' . $checksum . '.html';
