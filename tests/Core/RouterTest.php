@@ -120,6 +120,9 @@
             }
         }
 
+        /**
+         * Test what happens then the defaullt app doesnt exist and nor does the given one
+         */
         public function testDefaultAppNoneExists()
         {
             try {
@@ -132,6 +135,24 @@
                 
             }
         }
+        
+
+        /**
+         * Test what happens when the default method doesnt exist
+         */
+        public function testMethodNoneExists()
+        {
+            try {
+                $_SERVER['REQUEST_URI'] = null;
+                $_SERVER['argv'] = array('index.php', 'Index/Foo', 'Index');
+                \Core\Panda::getInstance()->defaultMethod = 'Foo';
+                $router = new Core\Router(new Core\Request());
+                $this->fail('Controller didnt throw an exception i.e. we failed...');
+            } catch (Exception $e) {
+                
+            }
+        }
+        
 
         /**
          * This should fail as dummy controller is CLI only
