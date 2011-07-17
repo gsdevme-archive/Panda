@@ -2,7 +2,7 @@
 
     use PHPUnit_Framework_TestCase as PHPUnit;
 
-    class RouterTest extends PHPUnit
+    class ControllerFactoryTest extends PHPUnit
     {
 
         public function __construct()
@@ -14,4 +14,7 @@
             $_SERVER['SCRIPT_NAME'] = 'index.php';
         }
 
+        public function test(){
+            
+        }
     }

@@ -10,7 +10,7 @@ use PHPUnit_Framework_TestCase as PHPUnit;
 
         public function testLoad()
         {
-            $v = new View;
+
             
         }
 
