@@ -16,6 +16,7 @@
 
         public function setUp()
         {
+            
         }
 
         /**
@@ -34,6 +35,7 @@
                 $this->fail($e);
             }
         }
+
         /**
          * Lets test if we can load a controller without a method
          */
@@ -77,7 +79,7 @@
                 $_SERVER['REQUEST_URI'] = 'index.php';
                 $router = new Core\Router(new Core\Request());
 
-                if (!class_exists('Controllers\Index' , false)) {
+                if (!class_exists('Controllers\Index', false)) {
                     throw new Exception('Didnt load a controller');
                 }
             } catch (Exception $e) {
@@ -94,12 +96,12 @@
                 $_SERVER['argv'] = array('index.php', 'Index/Index', 'Bob');
                 $_SERVER['REQUEST_URI'] = 'index.php';
                 $router = new Core\Router(new Core\Request());
-                
+
                 $this->fail('Controller didnt throw an exception i.e. we failed...');
             } catch (Exception $e) {
                 
             }
-            
+
             //Reset
             $_SERVER['argv'] = array();
         }
@@ -118,6 +120,19 @@
             }
         }
 
+        public function testDefaultAppNoneExists()
+        {
+            try {
+                $_SERVER['REQUEST_URI'] = null;
+                $_SERVER['argv'] = array('index.php', 'Index/Index', 'Bob');
+                \Core\Panda::getInstance()->defaultApp = 'Foobar';
+                $router = new Core\Router(new Core\Request());
+                $this->fail('Controller didnt throw an exception i.e. we failed...');
+            } catch (Exception $e) {
+                
+            }
+        }
+
         /**
          * This should fail as dummy controller is CLI only
          */
@@ -125,12 +140,12 @@
         {
             try {
                 $_SERVER['REQUEST_URI'] = '';
-                
+
                 $_SERVER['argv'] = array('index.php', 'Dummy/Index', 'Index');
-                $request = new Core\Request();                
-                
+                $request = new Core\Request();
+
                 \Core\Panda::getInstance()->mode = 'HTTP';
-                
+
                 $router = new Core\Router($request);
                 $this->fail('Controller didnt throw an exception i.e. we failed...');
             } catch (Exception $e) {
