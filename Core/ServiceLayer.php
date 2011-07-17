@@ -9,6 +9,7 @@
         {
             return Factory::model($name, $shared);
         }
+
         /**
          * Load a library
          * @param string $name name of the library
