@@ -37,7 +37,11 @@ use Core\Factory as Factory;
 
         final protected function view($name, array $args = null, $shared = false)
         {
-            return Factory::view($name, $args, $shared);
+            return ViewFactory::getInstance()->addView($name, $args, $shared);
+        }
+        
+        final protected function render(){
+            return ViewFactory::getInstance()->render();
         }
 
         /**
