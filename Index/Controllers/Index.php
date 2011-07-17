@@ -18,8 +18,8 @@
             $dataTwo['foobar'] = 'Yes this also works';            
             $this->view('index')->args($dataTwo);
             
-            $this->render();
-            // $this->render(true); sending true caches the view
+            $this->render(true);
+            // $this->render(); sending within true will make the view NOT cache
         }
 
     }
