@@ -13,7 +13,10 @@
             $this->view('index', $data);
 
             $this->view('index')->args('test', 'hello does this work ?');
-            $this->view('index')->args(array('foobar' => 'yes this also works'));
+            
+            $dataTwo = array();
+            $dataTwo['foobar'] = 'Yes this also works';            
+            $this->view('index')->args($dataTwo);
             
             $this->render();
         }
