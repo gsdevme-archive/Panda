@@ -7,14 +7,14 @@ use \Exception as Exception;
     class ErrorReport
     {
 
-        private $mode, $CLIOutput, $HTMLOutput;
+        private $_mode, $CLIOutput, $HTMLOutput;
 
         public function __construct(Exception $e)
         {
-            $this->mode = Panda::getInstance()->mode;
+            $this->_mode = Panda::getInstance()->mode;
 
-            $this->HTMLOutput = $this->_HTMLOutput($e);
-            $this->CLIOutput = $this->_CLIOutput($e);
+            $this->_HTMLOutput = $this->_HTMLOutput($e);
+            $this->_CLIOutput = $this->_CLIOutput($e);
         }
 
         private function _HTMLOutput($e)
@@ -40,7 +40,7 @@ use \Exception as Exception;
             if ($e->getPrevious() instanceof Exception) {
                 $CLIOutput .= "- " . get_class($e->getPrevious()) . ": " . $e->getPrevious()->getMessage() . " \n";
             }
-            
+
             $CLIOutput .= "#-----------------------------------------#\n";
 
             return $CLIOutput;
@@ -65,14 +65,16 @@ use \Exception as Exception;
 
         public function getOutput()
         {
-            switch ($this->mode) {
-                case 'CLI':
-                    return $this->CLIOutput;
-                case 'HTTP':
-                    return $this->HTMLOutput;
-                case 'Email':
-                    break;
+            if (Panda::getInstance()->debug === true) {
+                switch ($this->_mode) {
+                    case 'CLI':
+                        return $this->_CLIOutput;
+                    case 'HTTP':
+                        return $this->_HTMLOutput;
+                }
             }
+            
+            die('An Error has occurred');
         }
 
     }
