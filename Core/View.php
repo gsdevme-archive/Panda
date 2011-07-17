@@ -7,6 +7,11 @@
 
         private $_args;
 
+        /**
+         * View class is set with the file and arguments it requires
+         * @param string $file
+         * @param array $args 
+         */
         public function __construct($file, array $args=null)
         {
             if ($args !== null) {
