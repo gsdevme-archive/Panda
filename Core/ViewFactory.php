@@ -64,7 +64,7 @@ use Core\Exceptions\ViewException as ViewException;
          */
         public function render($cache=false, $xssfilter=true)
         {
-            if (!empty($this->_views)) { 
+            if (!empty($this->_views)) {
                 // Try and load a cache file
                 if ($cache === true) {
                     $checksum = sprintf('%u', crc32(serialize($this->_views)));
@@ -75,16 +75,16 @@ use Core\Exceptions\ViewException as ViewException;
                         return true;
                     }
                 }
-                
+
                 // Create a cache filer
-                if($cache === true){
+                if ($cache === true) {
                     $appRoot = Panda::getInstance()->appRoot;
-                    
-                    ob_start(function($buffer) use ($appRoot, $checksum, $cacheFile){
-                        $file = new \SplFileObject($cacheFile, 'w');
-                        $file->fwrite($buffer);
-                        return $buffer;
-                    });
+
+                    ob_start(function($buffer) use ($appRoot, $checksum, $cacheFile) {
+                            $file = new \SplFileObject($cacheFile, 'w');
+                            $file->fwrite($buffer);
+                            return $buffer;
+                        });
                 }
 
                 // Load each view
@@ -95,7 +95,7 @@ use Core\Exceptions\ViewException as ViewException;
                 return true;
             }
 
-            throw new ViewException('No views where found, make sure you use $this->view() before $this->render()');
+            throw new ViewException('No views where found, make sure you use $this->view() before $this->render()', 404);
         }
 
         /**
@@ -105,9 +105,7 @@ use Core\Exceptions\ViewException as ViewException;
          */
         private function _args($property, $value)
         {
-            if (isset($this->_views[$this->_currentView])) {
-                $this->_views[$this->_currentView]->args[$property] = $value;
-            }
+            return $this->_views[$this->_currentView]->args[$property] = $value;
         }
 
         /**
@@ -117,9 +115,7 @@ use Core\Exceptions\ViewException as ViewException;
          */
         private function _argsArray(array $args)
         {
-            if (isset($this->_views[$this->_currentView])) {
-                $this->_views[$this->_currentView]->args = array_merge($this->_views[$this->_currentView]->args, $args);
-            }
+            return $this->_views[$this->_currentView]->args = array_merge($this->_views[$this->_currentView]->args, $args);
         }
 
         /**
@@ -137,6 +133,8 @@ use Core\Exceptions\ViewException as ViewException;
 
                 return $this->_argsArray($args[0]);
             }
+
+            throw new ViewException('Failed to call method ' . $method . ' it does not exist', 500);
         }
 
     }
