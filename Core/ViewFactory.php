@@ -3,6 +3,8 @@
     namespace Core;
 
 use Core\Exceptions\ViewException as ViewException;
+use Core\ThirdParty\MinifyHTML as MinifyHTML;
+use \SplFileObject as SplFileObject;
 
     class ViewFactory
     {
@@ -79,10 +81,11 @@ use Core\Exceptions\ViewException as ViewException;
                 // Create a cache filer
                 if ($cache === true) {
                     $appRoot = Panda::getInstance()->appRoot;
-
                     ob_start(function($buffer) use ($appRoot, $checksum, $cacheFile) {
-                            $file = new \SplFileObject($cacheFile, 'w');
-                            $file->fwrite($buffer);
+                            $file = new SplFileObject($cacheFile, 'w');
+                            $minify = new MinifyHTML($buffer);
+                            
+                            $file->fwrite($minify->process());
                             return $buffer;
                         });
                 }
