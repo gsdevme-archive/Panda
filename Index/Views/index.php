@@ -29,6 +29,8 @@
 
             <h3>Object sent</h3>
             <?php echo '<pre>' . print_r($arrayOfObjects, 1) . '</pre>'; ?>
+            
+            <?php echo $this->helper('Test')->doSomething(); ?>
         </div>
 
 
