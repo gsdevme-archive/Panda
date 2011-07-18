@@ -40,8 +40,8 @@ use Core\Factory as Factory;
             return ViewFactory::getInstance()->addView($name, $args, $shared);
         }
         
-        final protected function render($cache=false){
-            return ViewFactory::getInstance()->render($cache);
+        final protected function render($cache=false, $xssfilter=true){
+            return ViewFactory::getInstance()->render($cache, $xssfilter);
         }
 
         /**
