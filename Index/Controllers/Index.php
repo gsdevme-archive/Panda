@@ -33,7 +33,7 @@
             $dataTwo['foobar'] = 'Yes this also works';
             $this->view('index')->args($dataTwo);
 
-            $this->render();
+            $this->render(true);
         }
 
         public function redirect()
