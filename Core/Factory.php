@@ -42,6 +42,11 @@ use \Core\Exceptions\LoadException as Exception;
             throw new Exception($name . ' is not an instance of \Core\ServiceLayer');
         }
 
+        public static function helper($name, $shared = false)
+        {
+            return self::_loader($name, 'helpers', $shared, 'Helper not found -> ' . $name);
+        }
+
         private static function _loader($name, $type, $shared = false, $exception = 'Factory error')
         {
             self::_init();
@@ -61,10 +66,10 @@ use \Core\Exceptions\LoadException as Exception;
                     require_once $file;
 
                     $class = $dir . '\\' . ucfirst($name);
-			
-                    if($shared !== false){
-                       $name .= '__shared';
-		    }
+
+                    if ($shared !== false) {
+                        $name .= '__shared';
+                    }
 
                     return self::$_registry->$regMethod($name, new $class);
                 }
@@ -81,3 +86,5 @@ use \Core\Exceptions\LoadException as Exception;
         }
 
     }
+
+    
