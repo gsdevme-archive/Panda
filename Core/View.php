@@ -12,10 +12,27 @@
          * @param string $file
          * @param array $args 
          */
-        public function __construct($file, array $args=null)
+        public function __construct($file, array $args=null, $xssfilter=true)
         {
+
             if ($args !== null) {
+                if ($xssfilter === true) {
+                    // Check if they have set a charset, if not default to UTF-8
+                    $charset = (isset(Panda::getInstance()->defaultCharset)) ? Panda::getInstance()->defaultCharset : 'UTF-8';
+
+                    $recursiveFilter = function(&$value, $key, $recursiveFilter) use ($charset) {
+                            if (is_array($value)) {
+                                array_walk($value, $recursiveFilter, $recursiveFilter);
+                            } else {
+                                $value = htmlspecialchars(htmlentities(trim(($value)), ENT_QUOTES, $charset, false), ENT_QUOTES, $charset, false);
+                            }
+                        };
+
+                    array_walk($args, $recursiveFilter, $recursiveFilter);
+                }
+
                 $this->_args = $args;
+
                 extract($this->_args);
             }
 
@@ -36,8 +53,8 @@
             }
 
             if (is_readable($file)) {
-                if (is_array($this->_args)) {                    
-                    extract($this->_args);
+                if (is_array($this->_args)) {
+                    //extract($this->_args);
                 }
                 require $file;
             } else {
