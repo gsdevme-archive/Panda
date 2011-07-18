@@ -2,6 +2,8 @@
 
     ini_set('display_errors', true);
     error_reporting(-1);
+    define('SYS_MEMORY_USE', memory_get_usage());
+    define('SYS_TIME_AT_RUNTIME', microtime(true));
 
     $root = realpath(dirname(__FILE__)) . '/';
     require_once $root . 'Core/Config.php';
@@ -39,3 +41,6 @@
         $errorReport = new \Core\ErrorReport($e);
         die($errorReport->getOutput());
     }
+
+    echo '<h2>Memory: ' . round(((memory_get_usage() - SYS_MEMORY_USE) / 1024),3) . 'Kb</h2>';
+    echo '<h2>Time: ' . round(((microtime(true) - SYS_TIME_AT_RUNTIME)*1000),5) . ' ms</h2><br/>';
