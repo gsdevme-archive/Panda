@@ -62,9 +62,10 @@ use Core\Exceptions\ViewException as ViewException;
          * Render all views 
          * @return type 
          */
-        public function render($cache=false)
+        public function render($cache=false, $xssfilter=true)
         {
-            if (!empty($this->_views)) {                
+            if (!empty($this->_views)) { 
+                // Try and load a cache file
                 if ($cache === true) {
                     $checksum = sprintf('%u', crc32(serialize($this->_views)));
                     $cacheFile = Panda::getInstance()->appRoot . 'Cache/' . $checksum . '.html';
@@ -75,6 +76,7 @@ use Core\Exceptions\ViewException as ViewException;
                     }
                 }
                 
+                // Create a cache filer
                 if($cache === true){
                     $appRoot = Panda::getInstance()->appRoot;
                     
@@ -85,8 +87,9 @@ use Core\Exceptions\ViewException as ViewException;
                     });
                 }
 
+                // Load each view
                 foreach ($this->_views as $view) {
-                    new View($view->file, $view->args);
+                    new View($view->file, $view->args, $xssfilter);
                 }
 
                 return true;
