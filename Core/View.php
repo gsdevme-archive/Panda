@@ -21,10 +21,22 @@
                     $charset = (isset(Panda::getInstance()->defaultCharset)) ? Panda::getInstance()->defaultCharset : 'UTF-8';
 
                     $recursiveFilter = function(&$value, $key, $recursiveFilter) use ($charset) {
-                            if (is_array($value)) {
-                                array_walk($value, $recursiveFilter, $recursiveFilter);
-                            } else {
-                                $value = htmlspecialchars(htmlentities(trim(($value)), ENT_QUOTES, $charset, false), ENT_QUOTES, $charset, false);
+                            switch (gettype($value)) {
+                                case "object":
+                                    array_walk($value, $recursiveFilter, $recursiveFilter);
+                                    break;
+                                case "array":
+                                    array_walk($value, $recursiveFilter, $recursiveFilter);
+                                    break;
+                                case "string":
+                                    $value = ( string ) htmlspecialchars(htmlentities(trim(($value)), ENT_QUOTES, $charset, false), ENT_QUOTES, $charset, false);
+                                    break;
+                                case "bool":
+                                    $value = ( bool ) $value;
+                                    break;
+                                default:
+                                    // Do nothing, as we dont know whats going on
+                                    break;
                             }
                         };
 
