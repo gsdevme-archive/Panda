@@ -12,12 +12,14 @@ use Core\Exceptions\RegistryException as Exception;
         private $_models;
         private $_libraries;
         private $_serviceLayers;
+        private $_helpers;
 
         public function __construct()
         {
             $this->_models = new \stdClass();
             $this->_libraries = new \stdClass();
             $this->_serviceLayers = new \stdClass();
+            $this->_helpers = new \stdClass();
         }
         /**
          * Add or get a model
@@ -51,6 +53,17 @@ use Core\Exceptions\RegistryException as Exception;
         public function serviceLayers($name, $value = false)
         {
             return $this->_accessor($name, '_serviceLayers', $value);
+        }
+        
+        /**
+         * Adds or gets a helper
+         * @param string $name
+         * @param object $value
+         * @return object 
+         */
+        public function helpers($name, $value = false)
+        {
+            return $this->_accessor($name, '_helpers', $value);
         }
         /**
          * Method to get or set items to the storage objects
