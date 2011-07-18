@@ -24,8 +24,12 @@
             $dataTwo['foobar'] = 'Yes this also works';            
             $this->view('index')->args($dataTwo);
             
-            $this->render();
-            // $this->render(); sending within true will make the view NOT cache
+            // Cache View
+            $this->render(true);
+        }
+        
+        public function redirect(){
+            return $this->route('Index', 'Index');
         }
 
     }
