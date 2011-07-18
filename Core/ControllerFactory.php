@@ -39,14 +39,12 @@ use Core\Exceptions\RouterException as RouterException;
                 $class = new ReflectionClass('Controllers\\' . ucfirst($controller));
                 $method = new ReflectionMethod($class->name, $method);
 
-                if ($class->isInstantiable()) {
-                    if ((Panda::getInstance()->mode == 'HTTP') && ($class->getParentClass()->name != 'Controllers\Controller')) {
-                        throw new RouterException('This controller is for CLI use only, Controller: ' . ucfirst($controller), 404);
-                    }
+                if ((Panda::getInstance()->mode == 'HTTP') && ($class->getParentClass()->name != 'Controllers\Controller')) {
+                    throw new RouterException('This controller is for CLI use only, Controller: ' . ucfirst($controller), 404);
+                }
 
-                    if (($method->isPublic()) && (!$method->isConstructor())) {
-                        return new self($class, $method, $args);
-                    }
+                if (($method->isPublic()) && (!$method->isConstructor())) {
+                    return new self($class, $method, $args);
                 }
             } catch (ReflectionException $e) {
                 

@@ -10,8 +10,6 @@ use Core\Exceptions\RegistryException as Exception;
      */
     abstract class RegistryAbstract
     {
-
-        private static $_instance;
         private $_store;
 
         /**
