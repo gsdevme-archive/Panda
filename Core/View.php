@@ -23,8 +23,6 @@
                     $recursiveFilter = function(&$value, $key, $recursiveFilter) use ($charset) {
                             switch (gettype($value)) {
                                 case "object":
-                                    array_walk($value, $recursiveFilter, $recursiveFilter);
-                                    break;
                                 case "array":
                                     array_walk($value, $recursiveFilter, $recursiveFilter);
                                     break;
