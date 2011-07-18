@@ -11,12 +11,13 @@
          * View class is set with the file and arguments it requires
          * @param string $file
          * @param array $args 
+         * @param bool $xssFilter
          */
-        public function __construct($file, array $args=null, $xssfilter=true)
+        public function __construct($file, array $args=null, $xssFilter=true)
         {
 
             if ($args !== null) {
-                if ($xssfilter === true) {
+                if ($xssFilter === true) {
                     // Check if they have set a charset, if not default to UTF-8
                     $charset = (isset(Panda::getInstance()->defaultCharset)) ? Panda::getInstance()->defaultCharset : 'UTF-8';
 
@@ -70,6 +71,16 @@
             } else {
                 throw new Exception('Element not found - ' . $file);
             }
+        }
+
+        /**
+         * Load a helper
+         * @param type $name
+         * @param type $helper 
+         */
+        public function helper($name, $shared=false)
+        {
+            return Factory::helper($name, $shared);
         }
 
     }
