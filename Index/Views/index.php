@@ -27,7 +27,8 @@
                     <?php endforeach; ?>
                 <?php endif; ?>
 
-            <p>Object sent: <?php echo '<pre>' . print_r($arrayOfObjects, 1) . '</pre>'; ?></p>
+            <h3>Object sent</h3>
+            <?php echo '<pre>' . print_r($arrayOfObjects, 1) . '</pre>'; ?>
         </div>
 
 

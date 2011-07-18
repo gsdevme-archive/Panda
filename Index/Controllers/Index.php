@@ -22,9 +22,9 @@
 
             $arrayOfObjects = array(
                 new \stdClass,
-                ( object ) array('name' => 'bill'),
-                ( object ) array('name' => ( object ) array('name' => 'bill')),
-                ( object ) array('name' => array('bill')),
+                ( object ) array('name' => '<i>bill</i>'),
+                ( object ) array('name' => ( object ) array('name' => '<b>bill</b>')),
+                ( object ) array('name' => array('<a>bill</a>')),
             );
 
             $this->view('index')->args('arrayOfObjects', $arrayOfObjects);
