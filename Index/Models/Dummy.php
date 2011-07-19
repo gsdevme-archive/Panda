@@ -10,6 +10,8 @@
 
         public function doSomething()
         {
+            $this->db;
+            
             return 'Model Dummy called with the method doSomething';
         }
 
