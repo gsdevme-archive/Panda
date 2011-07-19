@@ -12,6 +12,7 @@ use Core\Exceptions\RegistryException as Exception;
         private $_libraries;
         private $_serviceLayers;
         private $_helpers;
+        private $_modules;
 
         public function __construct()
         {
@@ -19,6 +20,7 @@ use Core\Exceptions\RegistryException as Exception;
             $this->_libraries = new \stdClass();
             $this->_serviceLayers = new \stdClass();
             $this->_helpers = new \stdClass();
+            $this->_modules = new \stdClass();
         }
 
         /**
@@ -63,6 +65,18 @@ use Core\Exceptions\RegistryException as Exception;
         public function helpers($name, $value = false)
         {
             return $this->_accessor($name, '_helpers', $value);
+        }
+
+        /**
+         * Adds or gets a modules
+         * @param string $name
+         * @param object $value
+         * @return object 
+         */
+        public function modules($name, $value = false)
+        {
+            die(__METHOD__);
+            return $this->_accessor($name, '_modules', $value);
         }
 
         /**
