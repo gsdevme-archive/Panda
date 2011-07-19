@@ -2,7 +2,7 @@
 
     namespace Core;
 
-use \Core\Exceptions\LoadException as Exception;
+use \Core\Exceptions\FactoryException as FactoryException;
 
     /**
      * Static factory
@@ -13,12 +13,21 @@ use \Core\Exceptions\LoadException as Exception;
         private static $_registry;
         private static $_panda;
 
+        /**
+         * load a model
+         * @param type $name
+         * @param type $shared
+         * @return Model 
+         */
         public static function model($name, $shared = false)
         {
-            $model = self::_loader($name, 'models', $shared, 'Model not found -> ' . $name);
+            $model = self::_loader(ucfirst($name), 'models', $shared);
+
+            // Check if its parent is a Model
             if ($model instanceof Model) {
                 return $model;
             }
+
             throw new Exception($name . ' is not an instance of \Core\Model');
         }
 
@@ -30,59 +39,71 @@ use \Core\Exceptions\LoadException as Exception;
          */
         public static function library($name, $shared = false)
         {
-            return self::_loader($name, 'libraries', $shared, 'Library not found -> ' . $name);
+            return self::_loader(ucfirst($name), 'libraries', $shared);
         }
 
+        /**
+         * load a service layer
+         * @param type $name
+         * @param type $shared
+         * @return ServiceLayer 
+         */
         public static function serviceLayer($name, $shared = false)
         {
-            $sl = self::_loader($name, 'serviceLayers', $shared, 'Service layer not found -> ' . $name);
+            $sl = self::_loader(ucfirst($name), 'serviceLayers', $shared);
+
+            // Check if its parent is a ServiceLayer
             if ($sl instanceof ServiceLayer) {
                 return $sl;
             }
+
             throw new Exception($name . ' is not an instance of \Core\ServiceLayer');
         }
 
+        /**
+         * load a helper
+         * @param type $name
+         * @param type $shared
+         * @return type 
+         */
         public static function helper($name, $shared = false)
         {
-            return self::_loader($name, 'helpers', $shared, 'Helper not found -> ' . $name);
+            return self::_loader(ucfirst($name), 'helpers', $shared);
         }
 
-        private static function _loader($name, $type, $shared = false, $exception = 'Factory error')
+        /**
+         *
+         * @param string $name
+         * @param type $namespace
+         * @param type $shared
+         * @param type $exception
+         * @return type 
+         */
+        private static function _loader($name, $namespace, $shared = false)
         {
-            self::_init();
-            $name = ucfirst($name);
+            $regMethod = ucfirst($namespace);
 
-            //type is going to be something like model or library
-            $regMethod = $type;
-            $dir = ucfirst($type);
+            // Lets check if its already loaded
+            if (($return = Registry::getInstance()->$regMethod($name)) !== false) {
+                return $return;
+            }
 
-            if (self::$_registry->$regMethod($name)) {
-                return self::$_registry->$regMethod($name);
-            } else {
-                $file = ($shared === false) ? self::$_panda->appRoot . $dir . '/' : self::$_panda->root . 'Shared/' . $dir . '/';
-                $file.=$name . '.php';
+            // File Location, shared/non-shared
+            $file = ($shared === false) ? Panda::getInstance()->appRoot . $namespace . '/' . $name . '.php' : Panda::getInstance()->root . 'Shared/' . $namespace . '/' . $name . '.php';
 
-                if (is_readable($file)) {
-                    require_once $file;
+            if (is_readable($file)) {
+                require_once $file;
 
-                    $class = $dir . '\\' . ucfirst($name);
+                $class = $namespace . '\\' . $name;
 
-                    if ($shared !== false) {
-                        $name .= '__shared';
-                    }
-
-                    return self::$_registry->$regMethod($name, new $class);
+                if ($shared !== false) {
+                    $name .= '__shared';
                 }
-            }
-            throw new Exception($exception);
-        }
 
-        private static function _init()
-        {
-            if (!self::$_panda instanceof RegistryAbstract) {
-                self::$_registry = Registry::getInstance();
-                self::$_panda = Panda::getInstance();
+                return Registry::getInstance()->$regMethod($name, new $class);
             }
+
+            throw new FactoryException('Panda could not load the ' . substr($namespace, 0, -1) . ' with the name ' . $name, 500, null);
         }
 
     }
