@@ -11,27 +11,68 @@
 
     <body>
         <div id="container">
-            <h3>Loaded Within the View</h3>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            <h1>Panda Test Application</h1>
+            <hr/>
 
-            <p>Extra Information Sent: <b><?php echo $test; ?></b></p>
+            <table>
+                <tr>
+                    <th>Type</th>
+                    <th>Class</th>
+                    <th>Application</th>
+                    <th>Response</th>
+                </tr>
 
-            <p>Extra Information Sent As an Array: <b><?php echo $foobar; ?></b></p>
+                <tr>
+                    <td>Service Layer</td>
+                    <td>Controllers\Dummy</td>
+                    <td>Index</td>
+                    <td><?php echo $serviceLayer; ?></td>
+                </tr>
 
-            <?php $this->element('dummyElement'); ?>            
+                <tr>
+                    <td>Model</td>
+                    <td>Models\Dummy</td>
+                    <td>Index</td>
+                    <td><?php echo $model; ?></td>
+                </tr>
 
-            <h3>Data passed from the Controller</h3>
-            <?php if (isset($list)): ?>
-                    <?php foreach ($list as $item): ?>
-                        <li><?php echo $item; ?></li>
-                    <?php endforeach; ?>
-                <?php endif; ?>
+                <tr>
+                    <td>Library</td>
+                    <td>Libraries\Dummy</td>
+                    <td>Index</td>
+                    <td><?php echo $library; ?></td>
+                </tr>
 
-            <h3>Object sent</h3>
-            <?php echo '<pre>' . print_r($arrayOfObjects, 1) . '</pre>'; ?>
-            
-            <?php echo $this->helper('Test')->doSomething(); ?>
-            <?php echo $this->helper('Test')->doSomething(); ?>
+                <tr>
+                    <td>Helper</td>
+                    <td>Helpers\Dummy</td>
+                    <td>Index</td>
+                    <td><?php echo $this->helper('Dummy')->doSomething(); ?></td>
+                </tr>
+
+            </table>
+
+            <table>
+                <tr>
+                    <th>Type</th>
+                    <th>Class</th>
+                    <th>Application</th>
+                    <th>Response</th>
+                </tr>                
+                
+                <tr>
+                    <td>Model</td>
+                    <td>Models\Share</td>
+                    <td>Shared</td>
+                    <td><?php echo $modelShared; ?></td>
+                </tr>                
+                <tr>
+                    <td>Library</td>
+                    <td>Libraries\Share</td>
+                    <td>Shared</td>
+                    <td><?php echo $libraryShared; ?></td>
+                </tr>                
+            </table>
         </div>
 
 
@@ -52,19 +93,43 @@
                 background:#FFF;
             }
 
-            p,li{
-                font-size:13px;
-                line-height:16px;
-            }
-
-            li{
-                list-style-position: inside;
-                margin:0 10px;
-            }
-
             h3{
                 font-size:16px;
                 line-height:21px;
+            }
+
+            table{
+                width:100%;
+                margin:0 0 5px 0;
+                border-bottom:1px solid #dedede;
+                padding:0 0 5px 0;
+            }
+
+            table tr th{
+                font-size:16px;
+                line-height:32px;
+                border-bottom:1px solid #dedede;
+                text-indent: 5px;
+            }
+
+            table tr td{
+                font-size:13px;
+                line-height:26px;
+                margin:0;
+                text-indent: 5px;
+            }
+
+            table tr td:nth-child(3n), table tr td:nth-child(1n){
+                width:15%;
+            }
+
+            table tr td:nth-child(4n){
+                width:60%;
+                font-style:italic;
+            }
+
+            table tr:nth-child(even){
+                background:#FAFAFA;
             }
         </style>        
     </body>
