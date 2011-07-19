@@ -2,7 +2,7 @@
 
     namespace Core;
 
-use \Core\Exceptions\FactoryException as FactoryException;
+use Core\Exceptions\FactoryException as FactoryException;
 
     /**
      * Static factory
@@ -21,14 +21,14 @@ use \Core\Exceptions\FactoryException as FactoryException;
          */
         public static function model($name, $shared = false)
         {
-            $model = self::_loader(ucfirst($name), 'models', $shared);
+            $model = self::_loader(ucfirst($name), 'Models', $shared);
 
             // Check if its parent is a Model
             if ($model instanceof Model) {
                 return $model;
             }
 
-            throw new Exception($name . ' is not an instance of \Core\Model');
+            throw new FactoryException($name . ' is not an instance of \Core\Model');
         }
 
         /**
@@ -39,7 +39,7 @@ use \Core\Exceptions\FactoryException as FactoryException;
          */
         public static function library($name, $shared = false)
         {
-            return self::_loader(ucfirst($name), 'libraries', $shared);
+            return self::_loader(ucfirst($name), 'Libraries', $shared);
         }
 
         /**
@@ -50,14 +50,14 @@ use \Core\Exceptions\FactoryException as FactoryException;
          */
         public static function serviceLayer($name, $shared = false)
         {
-            $sl = self::_loader(ucfirst($name), 'serviceLayers', $shared);
+            $sl = self::_loader(ucfirst($name), 'ServiceLayers', $shared);
 
             // Check if its parent is a ServiceLayer
             if ($sl instanceof ServiceLayer) {
                 return $sl;
             }
 
-            throw new Exception($name . ' is not an instance of \Core\ServiceLayer');
+            throw new FactoryException($name . ' is not an instance of \Core\ServiceLayer');
         }
 
         /**
@@ -68,7 +68,7 @@ use \Core\Exceptions\FactoryException as FactoryException;
          */
         public static function helper($name, $shared = false)
         {
-            return self::_loader(ucfirst($name), 'helpers', $shared);
+            return self::_loader(ucfirst($name), 'Helpers', $shared);
         }
 
         /**
@@ -81,29 +81,25 @@ use \Core\Exceptions\FactoryException as FactoryException;
          */
         private static function _loader($name, $namespace, $shared = false)
         {
-            $regMethod = ucfirst($namespace);
-
+            $regMethod = $namespace;            
+            $instance = ($shared === true) ? $name . '__shared' : $name;
+            
             // Lets check if its already loaded
-            if (($return = Registry::getInstance()->$regMethod($name)) !== false) {
+            if (($return = Registry::getInstance()->$regMethod($instance)) !== false) {
                 return $return;
             }
 
             // File Location, shared/non-shared
-            $file = ($shared === false) ? Panda::getInstance()->appRoot . $namespace . '/' . $name . '.php' : Panda::getInstance()->root . 'Shared/' . $namespace . '/' . $name . '.php';
+            $file = ($shared === true) ? Panda::getInstance()->root . 'Shared/' . $namespace . '/' . $name . '.php' : Panda::getInstance()->appRoot . $namespace . '/' . $name . '.php' ;
 
             if (is_readable($file)) {
                 require_once $file;
-
                 $class = $namespace . '\\' . $name;
 
-                if ($shared !== false) {
-                    $name .= '__shared';
-                }
-
-                return Registry::getInstance()->$regMethod($name, new $class);
+                return Registry::getInstance()->$regMethod($instance, new $class);
             }
 
-            throw new FactoryException('Panda could not load the ' . substr($namespace, 0, -1) . ' with the name ' . $name, 500, null);
+            throw new FactoryException('Panda could not load the class ' . $namespace . '\\' . $name, 500, null);
         }
 
     }
