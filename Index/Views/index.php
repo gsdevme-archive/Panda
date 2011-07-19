@@ -24,7 +24,7 @@
 
                 <tr>
                     <td>Service Layer</td>
-                    <td>Controllers\Dummy</td>
+                    <td>ServiceLayers\Dummy</td>
                     <td>Index</td>
                     <td><?php echo $serviceLayer; ?></td>
                 </tr>
