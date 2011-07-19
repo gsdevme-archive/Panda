@@ -8,7 +8,6 @@ use Core\Exceptions\RegistryException as Exception;
     {
 
         protected static $_instance;
-        
         private $_models;
         private $_libraries;
         private $_serviceLayers;
@@ -21,6 +20,7 @@ use Core\Exceptions\RegistryException as Exception;
             $this->_serviceLayers = new \stdClass();
             $this->_helpers = new \stdClass();
         }
+
         /**
          * Add or get a model
          * @param string $name name of model
@@ -31,7 +31,7 @@ use Core\Exceptions\RegistryException as Exception;
         {
             return $this->_accessor($name, '_models', $value);
         }
-        
+
         /**
          * Add or get a library
          * @param string $name name of library
@@ -41,9 +41,8 @@ use Core\Exceptions\RegistryException as Exception;
         public function libraries($name, $value = false)
         {
             return $this->_accessor($name, '_libraries', $value);
-
         }
-        
+
         /**
          * Add or get a service layer
          * @param string $name name of service layer
@@ -54,7 +53,7 @@ use Core\Exceptions\RegistryException as Exception;
         {
             return $this->_accessor($name, '_serviceLayers', $value);
         }
-        
+
         /**
          * Adds or gets a helper
          * @param string $name
@@ -65,6 +64,7 @@ use Core\Exceptions\RegistryException as Exception;
         {
             return $this->_accessor($name, '_helpers', $value);
         }
+
         /**
          * Method to get or set items to the storage objects
          * @param string $name of the object
@@ -77,10 +77,12 @@ use Core\Exceptions\RegistryException as Exception;
             if (is_object($value)) {
                 $this->$store->$name = $value;
             }
+            
             if (isset($this->$store->$name)) {
                 return $this->$store->$name;
             }
-            return false;
+            
+            return ( bool ) false;
         }
 
     }
