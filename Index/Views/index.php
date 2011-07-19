@@ -31,6 +31,7 @@
             <?php echo '<pre>' . print_r($arrayOfObjects, 1) . '</pre>'; ?>
             
             <?php echo $this->helper('Test')->doSomething(); ?>
+            <?php echo $this->helper('Test')->doSomething(); ?>
         </div>
 
 
