@@ -14,6 +14,7 @@
 
     $panda = Core\Panda::getInstance()->import($config);
     $panda->root = $root;
+    $panda->thirdParty = $root . 'Etc/ThirdParty/';
 
     try {
         spl_autoload_register(function($class) use ($panda) {
