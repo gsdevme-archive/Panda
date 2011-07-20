@@ -11,6 +11,7 @@
         public function doSomething()
         {
             $this->db;
+            $this->cache;
             
             return 'Model Dummy called with the method doSomething';
         }
