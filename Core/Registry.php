@@ -75,7 +75,6 @@ use Core\Exceptions\RegistryException as Exception;
          */
         public function modules($name, $value = false)
         {
-            die(__METHOD__);
             return $this->_accessor($name, '_modules', $value);
         }
 
