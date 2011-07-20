@@ -1,9 +1,30 @@
 <?php
+
     namespace Etc\Modules;
-    
-    class Db{
-        public function __construct(){
-    echo '<pre>' . print_r(__CLASS__, 1) . '</pre>';
+
+    class Db implements iDb
+    {
+
+        private static $_instance;
+
+        private function __construct()
+        {
+            
         }
+
+        public static function getInstance()
+        {
+            if (!self::$_instance instanceof self) {
+                self::$_instance = new self;
+            }
+
+            return self::$_instance;
+        }
+        
+        public function query(){
+            
+        }
+
     }
+
     
