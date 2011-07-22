@@ -10,6 +10,7 @@ use Core\Exceptions\RegistryException as Exception;
      */
     abstract class RegistryAbstract
     {
+
         private $_store;
 
         /**
@@ -67,6 +68,16 @@ use Core\Exceptions\RegistryException as Exception;
         public function __get($name)
         {
             return ifsetor($this->_store->$name, null);
+        }
+
+        /**
+         * magic method for isset()
+         * @param string $name
+         * @return bool 
+         */
+        public function __isset($name)
+        {
+            return ( bool ) (isset($this->_store->$name));
         }
 
     }
