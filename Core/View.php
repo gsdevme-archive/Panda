@@ -65,7 +65,7 @@
 
             if (is_readable($file)) {
                 if (is_array($this->_args)) {
-                    //extract($this->_args);
+                    extract($this->_args);
                 }
                 require $file;
             } else {
