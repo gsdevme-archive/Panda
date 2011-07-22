@@ -26,21 +26,21 @@
                     <td>Service Layer</td>
                     <td>ServiceLayers\Dummy</td>
                     <td>Index</td>
-                    <td><?php echo $serviceLayer; ?></td>
+                    <td><?php echo $this->helper('Panda', true)->ifsetor($serviceLayer, '<b>Failed, no response</b>'); ?></td>
                 </tr>
 
                 <tr>
                     <td>Model</td>
                     <td>Models\Dummy</td>
                     <td>Index</td>
-                    <td><?php echo $model; ?></td>
+                    <td><?php echo $this->helper('Panda', true)->ifsetor($model, '<b>Failed, no response</b>'); ?></td>
                 </tr>
 
                 <tr>
                     <td>Library</td>
                     <td>Libraries\Dummy</td>
                     <td>Index</td>
-                    <td><?php echo $library; ?></td>
+                    <td><?php echo $this->helper('Panda', true)->ifsetor($library, '<b>Failed, no response</b>'); ?></td>
                 </tr>
 
                 <tr>
@@ -64,13 +64,13 @@
                     <td>Model</td>
                     <td>Models\Share</td>
                     <td>Shared</td>
-                    <td><?php echo $modelShared; ?></td>
+                    <td><?php echo $this->helper('Panda', true)->ifsetor($modelShared, '<b>Failed, no response</b>'); ?></td>
                 </tr>                
                 <tr>
                     <td>Library</td>
                     <td>Libraries\Share</td>
                     <td>Shared</td>
-                    <td><?php echo $libraryShared; ?></td>
+                    <td><?php echo $this->helper('Panda', true)->ifsetor($libraryShared, '<b>Failed, no response</b>'); ?></td>
                 </tr>                
             </table>
         </div>
