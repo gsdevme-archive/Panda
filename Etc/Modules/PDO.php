@@ -84,6 +84,11 @@ use \SplFixedArray as SplFixedArray;
                     if ($e->getCode() === '23000') {
                         return ( bool ) false;
                     }
+                    
+                    // No data, could be from a SP
+                    if($e->getCode() === '02000'){
+                        return null;
+                    }
 
                     throw new ModuleException('Looks like your query syntax is wrong, Query: ' . $query, 500, $e);
                 }
