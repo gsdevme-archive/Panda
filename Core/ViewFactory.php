@@ -130,7 +130,7 @@ use \SplFileObject as SplFileObject;
         public function __call($method, $args)
         {
             if (($method === 'args') && (isset($args[0]))) {
-                if ((!is_array($args[0])) && (isset($args[1]))) {
+                if (!is_array($args[0])) {
                     return $this->_args($args[0], $args[1]);
                 }
 
