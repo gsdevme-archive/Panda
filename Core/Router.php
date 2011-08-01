@@ -24,8 +24,12 @@ use \ReflectionMethod as ReflectionMethod;
             $this->_panda->appName = $this->_getApp($request->getApp());
             $this->_panda->appRoot = $this->_panda->root . $this->_panda->appName . '/';
 
-            $this->_request = \SplFixedArray::fromArray(($request->getRequest() !== null) ? explode('/', $request->getRequest()) : array($this->_panda->defaultController, $this->_panda->defaultMethod));
-
+            if ((isset($this->_panda->rewrites)) && (($rewrite = preg_replace($this->_panda->rewrites['pattern'], $this->_panda->rewrites['replacement'], $request->getRequest())))) {
+                $this->_request = \SplFixedArray::fromArray(explode('/', $rewrite));
+            } else {
+                $this->_request = \SplFixedArray::fromArray(($request->getRequest() !== null) ? explode('/', $request->getRequest()) : array($this->_panda->defaultController, $this->_panda->defaultMethod));
+            }
+            
             $controllerName = $this->_getController();
             $methodName = $this->_getMethod();
 
