@@ -3,6 +3,8 @@
     namespace Core;
 
 use Core\Exceptions\FactoryException as FactoryException;
+use \ReflectionClass as ReflectionClass;
+use \ReflectionException as ReflectionException;
 
     /**
      * Static factory
@@ -81,25 +83,36 @@ use Core\Exceptions\FactoryException as FactoryException;
          */
         private static function _loader($name, $namespace, $shared = false)
         {
-            $regMethod = $namespace;            
+            $regMethod = $namespace;
             $instance = ($shared === true) ? $name . '__shared' : $name;
-            
+
             // Lets check if its already loaded
             if (($return = Registry::getInstance()->$regMethod($instance)) !== false) {
                 return $return;
             }
 
             // File Location, shared/non-shared
-            $file = ($shared === true) ? Panda::getInstance()->root . 'Shared/' . $namespace . '/' . $name . '.php' : Panda::getInstance()->appRoot . $namespace . '/' . $name . '.php' ;
+            $file = ($shared === true) ? Panda::getInstance()->root . 'Shared/' . $namespace . '/' . $name . '.php' : Panda::getInstance()->appRoot . $namespace . '/' . $name . '.php';
 
             if (is_readable($file)) {
                 require_once $file;
                 $class = $namespace . '\\' . $name;
-
-                return Registry::getInstance()->$regMethod($instance, new $class);
+                
+                try {
+                    $class = new ReflectionClass($class);
+                    
+                    if($class->isInstantiable()){
+                        return Registry::getInstance()->$regMethod($instance, $class->newInstance());
+                    }
+                    
+                    $class = $class->name;                    
+                    return Registry::getInstance()->$regMethod($instance, $class::getInstance());                    
+                } catch (ReflectionException $e) {
+                    
+                }                
             }
 
-            throw new FactoryException('Panda could not load the class ' . $namespace . '\\' . $name, 500, null);
+            throw new FactoryException('Panda could not load the class ' . $namespace . '\\' . $name, 500, ifsetor($e, null));
         }
 
     }
