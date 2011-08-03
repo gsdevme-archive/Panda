@@ -10,8 +10,19 @@ use \Exception as Exception;
         private $_mode, $CLIOutput, $HTMLOutput;
 
         public function __construct(Exception $e)
-        {
+        {            
             $this->_mode = Panda::getInstance()->mode;
+
+            if (Panda::getInstance()->debug === false) {                
+                switch ($e->getCode()) {
+                    case 404:
+                        echo '404 - Not Found';
+                        exit;
+                    default:
+                        echo '500 - Server Error';
+                        exit;
+                }
+            }
 
             $this->_HTMLOutput = $this->_HTMLOutput($e);
             $this->_CLIOutput = $this->_CLIOutput($e);
@@ -65,16 +76,12 @@ use \Exception as Exception;
 
         public function getOutput()
         {
-            if (Panda::getInstance()->debug === true) {
-                switch ($this->_mode) {
-                    case 'CLI':
-                        return $this->_CLIOutput;
-                    case 'HTTP':
-                        return $this->_HTMLOutput;
-                }
+            switch ($this->_mode) {
+                case 'CLI':
+                    return $this->_CLIOutput;
+                case 'HTTP':
+                    return $this->_HTMLOutput;
             }
-            
-            die('An Error has occurred');
         }
 
     }
