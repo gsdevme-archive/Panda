@@ -10,10 +10,20 @@
 
         public function doSomething()
         {
-            $this->db;
-            $this->cache;
-            
             return 'Model Dummy called with the method doSomething';
+        }
+
+        public function testDbConnection()
+        {
+            try {
+                $this->db->query('SHOW TABLES');
+                
+                return 'Yeah, you have a database called Test';
+            } catch (\Exception $e) {
+                
+            }
+            
+            return null;
         }
 
     }
