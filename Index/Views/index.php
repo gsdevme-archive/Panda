@@ -37,6 +37,13 @@
                 </tr>
 
                 <tr>
+                    <td>Model - DB Test</td>
+                    <td>Models\Dummy</td>
+                    <td>Index</td>
+                    <td><?php echo $this->helper('Panda', true)->ifsetor($dbTest, '<b>Failed, no response or you have no Test Database</b>'); ?></td>
+                </tr>
+
+                <tr>
                     <td>Library</td>
                     <td>Libraries\Dummy</td>
                     <td>Index</td>
