@@ -58,7 +58,7 @@
                     }
                 }
             }
-
+            
             $this->_request = ifsetor($request, null);
             $this->_app = ifsetor($app, Panda::getInstance()->defaultApp);
         }
