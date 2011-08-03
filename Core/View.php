@@ -1,6 +1,8 @@
 <?php
 
     namespace Core;
+    
+    use \Exception as Exception;
 
     class View
     {
