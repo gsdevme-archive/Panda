@@ -16,6 +16,10 @@
     $panda->root = $root;
     $panda->thirdParty = $root . 'Etc/ThirdParty/';
 
+    set_error_handler(function($errno, $errstr, $errfile, $errline ) {
+            throw new \ErrorException($errstr, 0, $errno, $errfile, $errline);
+        });
+
     try {
         spl_autoload_register(function($class) use ($panda) {
                 $file = str_replace('\\', '/', $class) . '.php';
@@ -38,5 +42,6 @@
         new Core\Router(new \Core\Request());
     } catch (Exception $e) {
         $errorReport = new \Core\ErrorReport($e);
-        die($errorReport->getOutput());
+        echo $errorReport->getOutput();
+        exit;
     }
