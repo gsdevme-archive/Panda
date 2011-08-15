@@ -11,7 +11,7 @@
 
     <body>
         <div id="container">
-            <h1>Panda Test Application</h1>
+            <h1><a href="/">Panda Test Application</a></h1>
             <hr/>
 
             <table>
@@ -41,6 +41,13 @@
                     <td>Models\Dummy</td>
                     <td>Index</td>
                     <td><?php echo $this->helper('Panda', true)->ifsetor($dbTest, '<b>Failed, no response or you have no Test Database</b>'); ?></td>
+                </tr>
+
+                <tr>
+                    <td>Model - Session Test</td>
+                    <td>Models\Dummy</td>
+                    <td>Index</td>
+                    <td><?php echo $this->helper('Panda', true)->ifsetor($sessionTest, '<b>Failed, hmm we failed to create a session</b>'); ?></td>
                 </tr>
 
                 <tr>
@@ -100,9 +107,11 @@
                 background:#FFF;
             }
 
-            h3{
-                font-size:16px;
-                line-height:21px;
+            h1 a{
+                font-size:32px;
+                line-height:36px;
+                color:#000;
+                text-decoration: none;
             }
 
             table{
