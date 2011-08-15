@@ -18,9 +18,14 @@ use \SplFixedArray as SplFixedArray;
         {
             $panda = Panda::getInstance();
 
-            if (isset($panda->dbHost, $panda->dbUser, $panda->dbPass, $panda->dbInitCmd)) {
+            if (isset($panda->dbHost, $panda->dbUser, $panda->dbPass)) {
                 try {
-                    $this->_pdo = new PDO($panda->dbHost, $panda->dbUser, $panda->dbPass, array(PDO::MYSQL_ATTR_INIT_COMMAND => $panda->dbInitCmd));
+                    if(isset($panda->dbInitCmd)){
+                        $this->_pdo = new PDO($panda->dbHost, $panda->dbUser, $panda->dbPass, array(PDO::MYSQL_ATTR_INIT_COMMAND => $panda->dbInitCmd));
+                    }else{
+                        $this->_pdo = new PDO($panda->dbHost, $panda->dbUser, $panda->dbPass);
+                    }
+                    
                     $this->_pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     return;
                 } catch (PDOException $e) {
