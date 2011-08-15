@@ -69,7 +69,7 @@ use \SplFileObject as SplFileObject;
                 // Try and load a cache file
                 if ($cache === true) {
                     $checksum = sprintf('%u', crc32(serialize($this->_views)));
-                    $cacheFile = Panda::getInstance()->appRoot . 'Cache/' . $checksum . '.html';
+                    $cacheFile = Panda::getInstance()->appRoot . 'ViewCache/' . $checksum . '.html';
 
                     if (is_readable($cacheFile)) {
                         require $cacheFile;
