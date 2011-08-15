@@ -9,11 +9,8 @@
     {
 
         public function doSomething()
-        {
-            $libraryReturn = $this->library('Dummy')->doSomething();
-            $modelReturn = $this->model('Dummy')->doSomething();
-            
-            return 'Loaded Dummy Library and Model';
+        {            
+            return 'ServiceLayer dummy was called';
         }
 
     }

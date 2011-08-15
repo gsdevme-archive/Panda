@@ -26,6 +26,13 @@
             return null;
         }
 
+        public function testSession()
+        {
+            $this->session->foobar = 'SomeData';
+            
+            return $this->session->foobar;
+        }
+
     }
 
     
