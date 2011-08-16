@@ -4,9 +4,6 @@
 
     interface iCache
     {
-
-        public static function getInstance();
-
         public function set($key, $data, $time);
 
         public function get($key, $callback=null);
