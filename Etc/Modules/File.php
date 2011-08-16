@@ -12,29 +12,19 @@ use \FilesystemIterator as FilesystemIterator;
     class File implements iCache
     {
 
-        private static $_instance;
         private $_path;
 
         /**
          * Checks if the value is writeable
          * @param string $path 
          */
-        private function __construct()
+        public function __construct()
         {
             if (!is_writable(Panda::getInstance()->appRoot . 'Cache/')) {
                 throw new ModuleException('Cache path is not writeable');
             }
 
             $this->_path = Panda::getInstance()->appRoot . 'Cache/';
-        }
-
-        public static function getInstance()
-        {
-            if (!self::$_instance instanceof self) {
-                self::$_instance = new self;
-            }
-
-            return self::$_instance;
         }
 
         /**
@@ -72,7 +62,6 @@ use \FilesystemIterator as FilesystemIterator;
                 if ($file->current() >= time()) {
                     $file->next();
 
-
                     try {
                         return unserialize($file->current());
                     } catch (ErrorException $e) {
@@ -80,8 +69,8 @@ use \FilesystemIterator as FilesystemIterator;
                     }
                 }
             } catch (RuntimeException $e) {
-                if (($callback !== null) && (is_object($callback))) {
-                    return $callback($key);
+                if ($callback !== null) {
+                    return call_user_func_array($callback, array($key));
                 }
             }
 
