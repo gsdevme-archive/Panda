@@ -53,11 +53,11 @@ use \FilesystemIterator as FilesystemIterator;
          * @param closure $callback
          * @return mixed
          */
-        public function get($key, $callback=null)
+        public function get($key, $callback=null, array $args=null)
         {
             try {
-                $key = crc32($key);
-                $file = new \SplFileObject($this->_path . $key . '.cache', 'r');
+                $crc32key = crc32($key);
+                $file = new \SplFileObject($this->_path . $crc32key . '.cache', 'r');
 
                 if ($file->current() >= time()) {
                     $file->next();
@@ -70,7 +70,13 @@ use \FilesystemIterator as FilesystemIterator;
                 }
             } catch (RuntimeException $e) {
                 if ($callback !== null) {
-                    return call_user_func_array($callback, array($key));
+                    if ($args !== null) {
+                        array_unshift($args, $key);
+                    } else {
+                        $args = array($key);
+                    }
+
+                    return call_user_func_array($callback, $args);
                 }
             }
 

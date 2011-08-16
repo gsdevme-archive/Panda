@@ -19,17 +19,23 @@ use \Core\Exceptions\ModuleException as ModuleException;
             return apc_store(( string ) crc32($key), $data, $time);
         }
 
-        public function get($key, $callback=null)
+        public function get($key, $callback=null, array $args=null)
         {
-            $key = crc32($key);
-            $data = apc_fetch($key, $bool);
+            $crc32Key = crc32($key);
+            $data = apc_fetch($crc32Key, $bool);
 
             if ($bool) {
                 return $data;
             }
 
             if ($callback !== null) {
-                return call_user_func_array($callback, array($key));
+                if($args !== null){
+                    array_unshift($args, $key);
+                }else{
+                    $args = array($key);
+                }
+                
+                return call_user_func_array($callback, $args);
             }
 
             return null;

@@ -6,7 +6,7 @@
     {
         public function set($key, $data, $time);
 
-        public function get($key, $callback=null);
+        public function get($key, $callback=null, array $args=null);
         
         public function delete($key);
         
