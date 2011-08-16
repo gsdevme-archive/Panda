@@ -88,11 +88,11 @@ use \SplFixedArray as SplFixedArray;
                 } catch (PDOException $e) {
                     switch($e->getCode()){
                         // This is a Integrity constraint violation, so we return false
-                        case 23000:
+                        case '23000':
                             return ( bool ) false;
                             
                         // No data, could be from a SP                           
-                        case 02000:
+                        case '02000':
                             return null;
                     }
 
