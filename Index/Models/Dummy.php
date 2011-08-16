@@ -28,7 +28,7 @@
 
         public function testSession()
         {
-            $this->session->foobar = 'SomeData';
+            $this->session->foobar = 'SomeData was saved into a session';
             
             return $this->session->foobar;
         }
