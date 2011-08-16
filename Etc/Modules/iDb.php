@@ -2,7 +2,7 @@
 
     namespace Etc\Modules;
 
-interface iDb
+    interface iDb
     {
         public static function getInstance();
 
