@@ -19,3 +19,17 @@ Configurations
     /* To enable sessions to be stored within the Application folder 
        uncomment this line and create a folder /AppName/Sessions */
     //$config->sessionClass = 'SessionHandler';
+
+    /* Example of Rewrites */
+    $config->rewrites = array(
+        'pattern' => array(
+            '/^profile\/(.*?)/i',
+            '/^news\/(.*?)\/([0-9]{1,11}$)/i',
+            '/^topic\/(.*?)\/([0-9]{1,11}$)/i',
+        ),
+        'replacement' => array(
+            'profile/index/$1',
+            'news/article/$1/$2',
+            'news/topic/$1/$2',
+        ),
+    );
