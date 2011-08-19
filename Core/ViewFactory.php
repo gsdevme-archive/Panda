@@ -53,7 +53,7 @@ use \SplFileObject as SplFileObject;
                     return self::$_instance;
                 }
 
-                throw new ViewException('Failed to load view, could not find ' . $view->name, 404, null);
+                throw new ViewException('Failed to load view, could not find ' . $name, 404, null);
             }
 
             return self::$_instance;
