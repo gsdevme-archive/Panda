@@ -22,19 +22,19 @@ use \Core\Exceptions\ModuleException as ModuleException;
         public function get($key, $callback=null, array $args=null)
         {
             $crc32Key = crc32($key);
-            $data = apc_fetch($crc32Key, $bool);
+            $data = apc_fetch(( string ) $crc32Key, $bool);
 
             if ($bool) {
                 return $data;
             }
 
             if ($callback !== null) {
-                if($args !== null){
+                if ($args !== null) {
                     array_unshift($args, $key);
-                }else{
+                } else {
                     $args = array($key);
                 }
-                
+
                 return call_user_func_array($callback, $args);
             }
 
@@ -43,7 +43,7 @@ use \Core\Exceptions\ModuleException as ModuleException;
 
         public function delete($key)
         {
-            return ( bool ) apc_delete(crc32($key));
+            return ( bool ) apc_delete(( string ) crc32($key));
         }
 
         public function flush()
