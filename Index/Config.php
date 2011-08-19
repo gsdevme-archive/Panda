@@ -5,7 +5,7 @@
     $config->defaultController = 'Index';
     $config->defaultMethod = 'Index';
     
-    $config->dbHost = 'mysql:host=127.0.0.1;dbname=test;port=3306';
+    $config->dbHost = 'mysql:host=127.0.0.1;port=3306';
     $config->dbUser = 'root';
     $config->dbPass = 'root';
     $config->dbInitCmd = 'SET NAMES \'UTF8\'';

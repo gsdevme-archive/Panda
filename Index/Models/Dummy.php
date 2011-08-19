@@ -16,20 +16,28 @@
         public function testDbConnection()
         {
             try {
-                $this->db->query('SHOW TABLES');
-                
-                return 'Yeah, you have a database called Test';
+                $data = $this->db->query('show databases');
+
+                if (is_array($data)) {
+                    $databaseString = null;
+
+                    foreach ($data as $database) {
+                        $databaseString .= $database->Database . ', ';
+                    }
+
+                    return 'Databases: ' . $databaseString;
+                }
             } catch (\Exception $e) {
-                
+
             }
-            
+
             return null;
         }
 
         public function testSession()
         {
             $this->session->foobar = 'SomeData was saved into a session';
-            
+
             return $this->session->foobar;
         }
 
