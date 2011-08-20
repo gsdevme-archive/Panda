@@ -77,7 +77,7 @@ use \SplFixedArray as SplFixedArray;
                             return null;
                         }
 
-                        if (preg_match('/^INSERT/', $query)) {
+                        if (preg_match('/^INSERT/i', $query)) {
                             return ( int ) $this->lastInsertId();
                         }
 
