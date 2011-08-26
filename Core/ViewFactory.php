@@ -66,25 +66,30 @@ use \SplFileObject as SplFileObject;
         public function render($cache=false, $xssfilter=true)
         {
             if (!empty($this->_views)) {
-                // Try and load a cache file
+                // Try and load a cache file and check the etag
                 if ($cache === true) {
                     $checksum = sprintf('%u', crc32(serialize($this->_views)));
+                    header('ETag: ' . $checksum);
+
+                    if ((isset($_SERVER['HTTP_IF_NONE_MATCH'])) && ($_SERVER['HTTP_IF_NONE_MATCH'] == $checksum)) {
+                        header("HTTP/1.1 304 Not Modified");
+                        exit;
+                    }
+
                     $cacheFile = Panda::getInstance()->appRoot . 'ViewCache/' . $checksum . '.html';
 
                     if (is_readable($cacheFile)) {
                         require $cacheFile;
                         return true;
                     }
-                }
 
-                // Create a cache filer
-                if ($cache === true) {
+                    // Lets create a cache and etag them
                     $appRoot = Panda::getInstance()->appRoot;
-                    
+
                     ob_start(function($buffer) use ($appRoot, $checksum, $cacheFile) {
                             $file = new SplFileObject($cacheFile, 'w');
                             $minify = new Minify($buffer);
-                            
+
                             $file->fwrite($minify->process());
                             return $buffer;
                         });
