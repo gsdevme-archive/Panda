@@ -1,8 +1,5 @@
 <?php
 
-    ini_set('display_errors', true);
-    error_reporting(-1);
-
     $root = realpath(dirname(__FILE__)) . '/';
     require_once $root . 'Core/Config.php';
     require_once $root . 'Core/Exceptions/ExceptionAbstract.php';
