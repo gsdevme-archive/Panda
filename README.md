@@ -33,3 +33,16 @@ Configurations
             'news/topic/$1/$2',
         ),
     );
+    
+    
+VirtualHosts
+---------------------
+
+    /*
+        To use Virtuahosts you need to copy the /index/ and rename it to your domain name i.e.
+        
+        Facebook.com => FacebookCom
+        Gsdev.me => GsdevMe
+        Foobar.com => FoobarCom
+        Foobar.co.uk => FoobarCoUk
+    */
