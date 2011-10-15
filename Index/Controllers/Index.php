@@ -35,6 +35,14 @@
         {
             return $this->route('Index', 'Index');
         }
+        
+        public function user($username, $password){
+            if($this->validation('User')->username($username)){
+                die('Yes valid user');
+            }
+            
+            die('Nope, not a valid user');
+        }        
 
     }
 
