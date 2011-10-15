@@ -28,17 +28,6 @@
         }
 
         /**
-         * Loads/gets a validation
-         * @param string $name
-         * @param bool $shared
-         * @return object 
-         */
-        final protected function validation($name, $shared = false)
-        {
-            return Factory::validation($name);
-        }
-
-        /**
          * Loads/gets a service layer
          * @param string $name
          * @param bool $shared
@@ -60,15 +49,14 @@
         {
             return ViewFactory::getInstance()->addView($name, $args, $shared);
         }
-
+        
         /**
          * Renders all views
          * @param bool $cache
          * @param bool $xssfilter
          * @return bool 
          */
-        final protected function render($cache=false, $xssfilter=true)
-        {
+        final protected function render($cache=false, $xssfilter=true){
             return ViewFactory::getInstance()->render($cache, $xssfilter);
         }
 
