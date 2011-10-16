@@ -19,9 +19,6 @@
             // Lets call a method from a Model which trys a SQL Query
             $this->view('index')->args('dbTest', $this->model('Dummy')->testDbConnection());
 
-            // Lets call a method from a Model which trys to set some data to a Session
-            $this->view('index')->args('sessionTest', $this->model('Dummy')->testSession());
-
             // Lets call a method from our shared dummy model
             $this->view('index')->args('modelShared', $this->model('Share', true)->doSomething());
             
@@ -42,7 +39,7 @@
             }
             
             die('Nope, not a valid user');
-        }        
+        }
 
     }
 
