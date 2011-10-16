@@ -28,7 +28,7 @@
                     return 'Databases: ' . $databaseString;
                 }
             } catch (\Exception $e) {
-
+                
             }
 
             return null;

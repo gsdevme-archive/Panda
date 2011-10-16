@@ -46,7 +46,7 @@ use \ReflectionMethod as ReflectionMethod;
                     return $this->_registry->modules($name, $class::getInstance());
                 }
             } catch (Exception $e) {
-
+                
             }
 
             throw new ModuleException('Panda failed to load module ' . ucfirst($name), 500, ifsetor($e, null));

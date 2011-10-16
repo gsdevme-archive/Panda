@@ -17,10 +17,6 @@ use \SplFixedArray as SplFixedArray;
         private function __construct()
         {
             $panda = Panda::getInstance();
-            
-            if(!defined(PDO::MYSQL_ATTR_INIT_COMMAND)){
-                throw new ModuleException('It looks like you dont have PDO installed, either that or no PHP5-MYSQL', 500, null);
-            }
 
             if (isset($panda->dbHost, $panda->dbUser, $panda->dbPass)) {
                 try {
