@@ -145,4 +145,14 @@ use \SplFileObject as SplFileObject;
             throw new ViewException('Failed to call method ' . $method . ' it does not exist', 500);
         }
 
+        /**
+         * Checks if an argument is set within the current view
+         * @param string $name
+         * @return bool 
+         */
+        public function __isset($name)
+        {
+            return ( bool ) isset($this->_views[$this->_currentView]->args[$name]);
+        }
+
     }
