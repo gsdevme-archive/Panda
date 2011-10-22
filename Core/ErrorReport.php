@@ -16,14 +16,14 @@ use \Exception as Exception;
             if (Panda::getInstance()->debug === false) {                
                 switch ($e->getCode()) {
                     case 404:
-                        echo '<h1>404 - Not Found</h1>';
+                        include Panda::getInstance()->appRoot . 'Errors/404.html';
                         exit;
                     default:
-                        echo '<h1>500 - Internal Server Error</h1>';
+                        include Panda::getInstance()->appRoot . 'Errors/500.html';
                         exit;
                 }
             }
-
+            
             $this->_HTMLOutput = $this->_HTMLOutput($e);
             $this->_CLIOutput = $this->_CLIOutput($e);
         }
