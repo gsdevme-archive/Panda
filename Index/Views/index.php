@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8"/>		
+        <!-- We use a special global function within Views (ifsetor()) -->
+        <meta charset="<?php echo ifsetor($charset, 'utf-8'); ?>"/>		
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-        <title>Awesome Website</title>
-        <meta name="keywords" content="">
-        <meta name="description" content="">
+        <title><?php echo ifsetor($title, 'Title'); ?></title>
+        <meta name="keywords" content="<?php echo (isset($keywords)) ? $keywords : 'keywords'; ?>">
+        <meta name="description" content="<?php echo (isset($description)) ? $description : 'description'; ?>">
     </head>
 
     <body>
@@ -26,35 +27,35 @@
                     <td>Service Layer</td>
                     <td>ServiceLayers\Dummy</td>
                     <td>Index</td>
-                    <td><?php echo $this->helper('Panda', true)->ifsetor($serviceLayer, '<b>Failed, no response</b>'); ?></td>
+                    <td><?php echo ifsetor($serviceLayer, '<b>Failed, no response</b>'); ?></td>
                 </tr>
 
                 <tr>
                     <td>Model</td>
                     <td>Models\Dummy</td>
                     <td>Index</td>
-                    <td><?php echo $this->helper('Panda', true)->ifsetor($model, '<b>Failed, no response</b>'); ?></td>
+                    <td><?php echo ifsetor($model, '<b>Failed, no response</b>'); ?></td>
                 </tr>
 
                 <tr>
                     <td>Model - DB Test</td>
                     <td>Models\Dummy</td>
                     <td>Index</td>
-                    <td><?php echo $this->helper('Panda', true)->ifsetor($dbTest, '<b>Failed, no response or you have no Test Database</b>'); ?></td>
+                    <td><?php echo ifsetor($dbTest, '<b>Failed, no response or you have no Test Database</b>'); ?></td>
                 </tr>
 
                 <tr>
                     <td>Model - Session Test</td>
                     <td>Models\Dummy</td>
                     <td>Index</td>
-                    <td><?php echo $this->helper('Panda', true)->ifsetor($sessionTest, '<b>Failed, hmm we failed to create a session</b>'); ?></td>
+                    <td><?php echo ifsetor($sessionTest, '<b>Failed, hmm we failed to create a session</b>'); ?></td>
                 </tr>
 
                 <tr>
                     <td>Library</td>
                     <td>Libraries\Dummy</td>
                     <td>Index</td>
-                    <td><?php echo $this->helper('Panda', true)->ifsetor($library, '<b>Failed, no response</b>'); ?></td>
+                    <td><?php echo ifsetor($library, '<b>Failed, no response</b>'); ?></td>
                 </tr>
 
                 <tr>
@@ -78,13 +79,13 @@
                     <td>Model</td>
                     <td>Models\Share</td>
                     <td>Shared</td>
-                    <td><?php echo $this->helper('Panda', true)->ifsetor($modelShared, '<b>Failed, no response</b>'); ?></td>
+                    <td><?php echo ifsetor($modelShared, '<b>Failed, no response</b>'); ?></td>
                 </tr>                
                 <tr>
                     <td>Library</td>
                     <td>Libraries\Share</td>
                     <td>Shared</td>
-                    <td><?php echo $this->helper('Panda', true)->ifsetor($libraryShared, '<b>Failed, no response</b>'); ?></td>
+                    <td><?php echo ifsetor($libraryShared, '<b>Failed, no response</b>'); ?></td>
                 </tr>                
             </table>
         </div>
