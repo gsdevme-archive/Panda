@@ -1,6 +1,7 @@
 <?php
 
     $root = realpath(dirname(__FILE__)) . '/';
+    require_once $root . 'functions.php';
     require_once $root . 'Core/Config.php';
     require_once $root . 'Core/Exceptions/ExceptionAbstract.php';
     require_once $root . 'Core/Exceptions/AutoloaderException.php';
