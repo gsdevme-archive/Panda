@@ -7,6 +7,17 @@
 
         public function index()
         {
+
+            // Some basic page Data, perhaps place within your Controller class ?
+            $data = array(
+                'title' => 'MyAmazingPage',
+                'descrption' => 'This test page is amazing !',
+                'charset' => 'utf-8'
+            );
+
+            // Add our data
+            $this->view('index', $data);
+
             // Lets call a method from our dummy serviceLayer
             $this->view('index')->args('serviceLayer', $this->serviceLayer('Dummy')->doSomething());
 
@@ -21,7 +32,7 @@
 
             // Lets call a method from our shared dummy model
             $this->view('index')->args('modelShared', $this->model('Share', true)->doSomething());
-            
+
             // Lets call a method from our shared dummy library
             $this->view('index')->args('libraryShared', $this->library('Share', true)->doSomething());
 
@@ -32,12 +43,13 @@
         {
             return $this->route('Index', 'Index');
         }
-        
-        public function user($username, $password){
-            if($this->validation('User')->username($username)){
+
+        public function user($username, $password)
+        {
+            if ($this->validation('User')->username($username)) {
                 die('Yes valid user');
             }
-            
+
             die('Nope, not a valid user');
         }
 
