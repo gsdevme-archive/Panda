@@ -45,6 +45,12 @@ use \SplFixedArray as SplFixedArray;
             return self::$_instance;
         }
 
+        /**
+         * method to run any kind of query, SELECT, INSERT etc.
+         * 
+         * It will always return an array of data apart from UPDATE, INSERT
+         * @return mixed 
+         */
         public function query()
         {
             $args = SplFixedArray::fromArray(func_get_args());
