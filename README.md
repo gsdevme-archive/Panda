@@ -1,7 +1,7 @@
 Panda MVC Framework, PHP 5.3.3+
 =============
 
-!(http://img.image-storage.co.uk/3432404672/4ec2e1bfeac42.png)
+![Screen shot 1](http://img.image-storage.co.uk/3432404672/4ec2e1bfeac42.png)
 
 Configurations
 ---------------------
