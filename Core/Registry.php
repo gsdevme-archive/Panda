@@ -8,14 +8,13 @@ use Core\Exceptions\RegistryException as Exception;
     {
 
         protected static $_instance;
-        private $_models, $_libraries, $_serviceLayers, $_validations, $_helpers, $_modules;
+        private $_models, $_libraries, $_serviceLayers, $_helpers, $_modules;
 
         public function __construct()
         {
             $this->_models = new \stdClass();
             $this->_libraries = new \stdClass();
             $this->_serviceLayers = new \stdClass();
-            $this->_validations = new \stdClass();
             $this->_helpers = new \stdClass();
             $this->_modules = new \stdClass();
         }
