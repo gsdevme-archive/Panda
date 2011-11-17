@@ -43,17 +43,7 @@ use \ReflectionException as ReflectionException;
         {
             return self::_loader(ucfirst($name), 'Libraries', $shared);
         }
-        
-        /**
-         * Load a Validation
-         * @param string $name name of the valdation
-         * @param bool $shared is this a shared valdation?
-         * @return object
-         */
-        public static function validation($name, $shared = false)
-        {
-            return self::_loader(ucfirst($name), 'Validations', $shared);
-        }
+
 
         /**
          * load a service layer
