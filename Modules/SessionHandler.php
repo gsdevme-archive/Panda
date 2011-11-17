@@ -1,6 +1,6 @@
 <?php
 
-    namespace Etc\Modules;
+    namespace Modules;
 
 use \GlobIterator as GlobIterator;
 use \SplFileObject as SplFileObject;

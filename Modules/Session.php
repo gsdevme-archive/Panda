@@ -1,6 +1,6 @@
 <?php
 
-    namespace Etc\Modules;
+    namespace Modules;
 
 use \Core\Panda as Panda;
 

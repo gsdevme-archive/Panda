@@ -12,8 +12,8 @@
 
     $panda = Core\Panda::getInstance()->import($config);
     $panda->root = $root;
-    $panda->thirdParty = $root . 'Etc/ThirdParty/';
-    
+    $panda->thirdParty = $root . 'Core/ThirdParty/';
+
     $panda->memoryUsage = memory_get_usage() / 1024;
     $panda->microtime = microtime(true);
 
@@ -44,12 +44,14 @@
 
                 throw new \Core\Exceptions\AutoloaderException('Panda Autoloader could not find ' . $class . ' Class. Check the Spelling of the Class and the Filename');
             }, true, true);
-            
+
         new Core\Router(new \Core\Request());
     } catch (Exception $e) {
         if (ob_get_status() != false) {
             // Remove anything from the buffer
-            ob_end_clean();
+            if (ob_get_length() > 0) {
+                ob_end_clean();
+            }
         }
 
         $errorReport = new \Core\ErrorReport($e);
