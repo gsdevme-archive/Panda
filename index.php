@@ -13,6 +13,9 @@
     $panda = Core\Panda::getInstance()->import($config);
     $panda->root = $root;
     $panda->thirdParty = $root . 'Etc/ThirdParty/';
+    
+    $panda->memoryUsage = memory_get_usage() / 1024;
+    $panda->microtime = microtime(true);
 
     //Remove to help with memory
     unset($config);
@@ -44,7 +47,7 @@
             
         new Core\Router(new \Core\Request());
     } catch (Exception $e) {
-        if (ob_get_status() !== false) {
+        if (ob_get_status() != false) {
             // Remove anything from the buffer
             ob_end_clean();
         }
