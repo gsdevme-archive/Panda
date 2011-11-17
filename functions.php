@@ -18,7 +18,7 @@
      * @param mixed $or
      * @return mixed 
      */
-    function ifsetor(&$value, $or)
+    function ifsetor(&$value, $or=null)
     {
         return (isset($value)) ? $value : $or;
     }
