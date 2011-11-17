@@ -73,7 +73,7 @@ use \SplFileObject as SplFileObject;
 
                     if ((isset($_SERVER['HTTP_IF_NONE_MATCH'])) && ($_SERVER['HTTP_IF_NONE_MATCH'] == $checksum)) {
                         header("HTTP/1.1 304 Not Modified");
-                        exit;
+                        return true;
                     }
 
                     $cacheFile = Panda::getInstance()->appRoot . 'ViewCache/' . $checksum . '.html';
