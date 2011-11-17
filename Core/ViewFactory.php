@@ -92,8 +92,11 @@ use \SplFileObject as SplFileObject;
 
                             $file->fwrite($minify->process());
                             return $buffer;
-                        });
+                        },0,true);
                 }
+                
+                // Start buffering to help with error catching
+                ob_start();
 
                 // Load each view
                 foreach ($this->_views as $view) {
