@@ -11,7 +11,7 @@
          * @param bool $shared
          * @return object 
          */
-        final protected function model($name, $shared = false)
+        protected function model($name, $shared = false)
         {
             return Factory::model($name, $shared);
         }
@@ -22,20 +22,9 @@
          * @param bool $shared
          * @return object 
          */
-        final protected function library($name, $shared = false)
+        protected function library($name, $shared = false)
         {
             return Factory::library($name, $shared);
-        }
-
-        /**
-         * Loads/gets a validation
-         * @param string $name
-         * @param bool $shared
-         * @return object 
-         */
-        final protected function validation($name, $shared = false)
-        {
-            return Factory::validation($name);
         }
 
         /**
@@ -44,7 +33,7 @@
          * @param bool $shared
          * @return object 
          */
-        final protected function serviceLayer($name, $shared = false)
+        protected function serviceLayer($name, $shared = false)
         {
             return Factory::serviceLayer($name, $shared);
         }
@@ -56,7 +45,7 @@
          * @param bool $shared
          * @return object 
          */
-        final protected function view($name, array $args = null, $shared = false)
+        protected function view($name, array $args = null, $shared = false)
         {
             return ViewFactory::getInstance()->addView($name, $args, $shared);
         }
@@ -67,7 +56,7 @@
          * @param bool $xssfilter
          * @return bool 
          */
-        final protected function render($cache=false, $xssfilter=true)
+        protected function render($cache=false, $xssfilter=true)
         {
             return ViewFactory::getInstance()->render($cache, $xssfilter);
         }
@@ -79,7 +68,7 @@
          * @param array $args
          * @return null 
          */
-        final protected function route($controller, $method='index', array $args=null)
+        protected function route($controller, $method='index', array $args=null)
         {
             return ControllerFactory::route($controller, $method, $args);
         }
