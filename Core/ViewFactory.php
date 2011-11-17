@@ -73,14 +73,17 @@ use \SplFileObject as SplFileObject;
 
                     if ((isset($_SERVER['HTTP_IF_NONE_MATCH'])) && ($_SERVER['HTTP_IF_NONE_MATCH'] == $checksum)) {
                         header("HTTP/1.1 304 Not Modified");
-                        return true;
+                        return;
                     }
 
                     $cacheFile = Panda::getInstance()->appRoot . 'ViewCache/' . $checksum . '.html';
 
                     if (is_readable($cacheFile)) {
+                        // We still need a ob_start
+                        ob_start();
+                        
                         require $cacheFile;
-                        return true;
+                        return;
                     }
 
                     // Lets create a cache and etag them
@@ -92,11 +95,12 @@ use \SplFileObject as SplFileObject;
 
                             $file->fwrite($minify->process());
                             return $buffer;
-                        },0,true);
+                        }, 0, true);
+                }else{
+                    // even if we are not creating a cache file lets start 
+                    ob_start();
                 }
-                
-                // Start buffering to help with error catching
-                ob_start();
+
 
                 // Load each view
                 foreach ($this->_views as $view) {
