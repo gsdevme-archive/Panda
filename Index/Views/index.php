@@ -35,19 +35,12 @@
                     <td>Index</td>
                     <td><?php echo ifsetor($model, '<b>Failed, no response</b>'); ?></td>
                 </tr>
-
+                
                 <tr>
                     <td>Model - DB Test</td>
                     <td>Models\Dummy</td>
                     <td>Index</td>
                     <td><?php echo ifsetor($dbTest, '<b>Failed, no response or you have no Test Database</b>'); ?></td>
-                </tr>
-
-                <tr>
-                    <td>Model - Session Test</td>
-                    <td>Models\Dummy</td>
-                    <td>Index</td>
-                    <td><?php echo ifsetor($sessionTest, '<b>Failed, hmm we failed to create a session</b>'); ?></td>
                 </tr>
 
                 <tr>
