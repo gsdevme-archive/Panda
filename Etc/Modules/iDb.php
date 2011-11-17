@@ -1,6 +1,6 @@
 <?php
 
-    namespace Modules;
+    namespace Etc\Modules;
 
     interface iDb
     {

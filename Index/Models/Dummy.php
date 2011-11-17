@@ -9,7 +9,7 @@
     {
 
         public function doSomething()
-        {            
+        {
             return 'Model Dummy called with the method doSomething';
         }
 

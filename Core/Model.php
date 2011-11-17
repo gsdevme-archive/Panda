@@ -10,6 +10,13 @@ use \ReflectionMethod as ReflectionMethod;
     abstract class Model
     {
 
+        private $_registry;
+
+        public function __construct()
+        {
+            $this->_registry = Registry::getInstance();
+        }
+
         /**
          *
          * @param type $name
@@ -20,21 +27,26 @@ use \ReflectionMethod as ReflectionMethod;
             return $this->modules($name);
         }
 
-        final protected function modules($name)
+        public function modules($name)
         {
+            if (($module = $this->_registry->modules($name))) {
+                return $module;
+            }
+
             try {
-                $class = '\Modules\\' . ucfirst($name);                
+                $class = '\Etc\Modules\\' . ucfirst($name);
                 $class = new ReflectionClass($class);
 
                 if ($class->isInstantiable()) {
-                    return $class->newInstance();
+                    return $this->_registry->modules($name, $class->newInstance());
                 }
 
                 if ($class->hasMethod('getInstance')) {
                     $class = $class->name;
-                    return $class::getInstance();
+                    return $this->_registry->modules($name, $class::getInstance());
                 }
             } catch (Exception $e) {
+                
             }
 
             throw new ModuleException('Panda failed to load module ' . ucfirst($name), 500, ifsetor($e, null));

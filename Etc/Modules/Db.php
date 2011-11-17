@@ -1,6 +1,6 @@
 <?php
 
-    namespace Modules;
+    namespace Etc\Modules;
 
 use \PDOException as PDOException;
 use \PDO as PDO;

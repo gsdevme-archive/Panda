@@ -8,7 +8,7 @@ use Core\Exceptions\RegistryException as Exception;
     {
 
         protected static $_instance;
-        private $_models, $_libraries, $_serviceLayers, $_helpers;
+        private $_models, $_libraries, $_serviceLayers, $_helpers, $_modules;
 
         public function __construct()
         {
@@ -16,6 +16,7 @@ use Core\Exceptions\RegistryException as Exception;
             $this->_libraries = new \stdClass();
             $this->_serviceLayers = new \stdClass();
             $this->_helpers = new \stdClass();
+            $this->_modules = new \stdClass();
         }
 
         /**
@@ -41,6 +42,17 @@ use Core\Exceptions\RegistryException as Exception;
         }
 
         /**
+         * Add or get a validation
+         * @param string $name name of validation
+         * @param object $value optional validation object
+         * @return object
+         */
+        public function validations($name, $value = false)
+        {
+            return $this->_accessor($name, '_validations', $value);
+        }
+
+        /**
          * Add or get a service layer
          * @param string $name name of service layer
          * @param object $value optional service layer object
@@ -60,6 +72,17 @@ use Core\Exceptions\RegistryException as Exception;
         public function helpers($name, $value = false)
         {
             return $this->_accessor($name, '_helpers', $value);
+        }
+
+        /**
+         * Adds or gets a modules
+         * @param string $name
+         * @param object $value
+         * @return object 
+         */
+        public function modules($name, $value = false)
+        {
+            return $this->_accessor($name, '_modules', $value);
         }
 
         /**

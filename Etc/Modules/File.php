@@ -1,6 +1,6 @@
 <?php
 
-    namespace Modules;
+    namespace Etc\Modules;
 
 use \RuntimeException as RuntimeException;
 use \Core\Panda as Panda;
@@ -12,29 +12,19 @@ use \FilesystemIterator as FilesystemIterator;
     class File implements iCache
     {
 
-        private static $_instance;
         private $_path;
 
         /**
          * Checks if the value is writeable
          * @param string $path 
          */
-        private function __construct()
+        public function __construct()
         {
             if (!is_writable(Panda::getInstance()->appRoot . 'Cache/')) {
                 throw new ModuleException('Cache path is not writeable');
             }
 
             $this->_path = Panda::getInstance()->appRoot . 'Cache/';
-        }
-
-        public static function getInstance()
-        {
-            if (self::$_instance instanceof self) {
-                self::$_instance = new self;
-            }
-
-            return self::$_instance;
         }
 
         /**

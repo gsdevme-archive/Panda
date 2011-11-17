@@ -1,28 +1,17 @@
 <?php
 
-    namespace Modules;
+    namespace Etc\Modules;
 
 use \Core\Exceptions\ModuleException as ModuleException;
 
     class APC implements iCache
     {
 
-        private static $_instance;
-
-        private function __construct()
+        public function __construct()
         {
             if (!function_exists('apc_fetch')) {
                 throw new ModuleException('Could not find the APC on your system, "apt-get install php5-apc"');
             }
-        }
-
-        public static function getInstance()
-        {
-            if (self::$_instance instanceof self) {
-                self::$_instance = new self;
-            }
-
-            return self::$_instance;
         }
 
         public function set($key, $data, $time)
