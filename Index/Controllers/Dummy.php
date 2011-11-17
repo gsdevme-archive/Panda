@@ -10,7 +10,7 @@
 
         public function index()
         {
-            $this->view('dummy');    
+            $this->view('dummyView');    
         }
 
     }
