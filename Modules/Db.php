@@ -20,12 +20,12 @@ use \SplFixedArray as SplFixedArray;
 
             if (isset($panda->dbHost, $panda->dbUser, $panda->dbPass)) {
                 try {
-                    if(isset($panda->dbInitCmd)){
+                    if (isset($panda->dbInitCmd)) {
                         $this->_pdo = new PDO($panda->dbHost, $panda->dbUser, $panda->dbPass, array(PDO::MYSQL_ATTR_INIT_COMMAND => $panda->dbInitCmd));
-                    }else{
+                    } else {
                         $this->_pdo = new PDO($panda->dbHost, $panda->dbUser, $panda->dbPass);
                     }
-                    
+
                     $this->_pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     return;
                 } catch (PDOException $e) {
@@ -92,11 +92,11 @@ use \SplFixedArray as SplFixedArray;
 
                     throw new ModuleException('Query failed, Query: ' . $stmt->queryString, 500, $e);
                 } catch (PDOException $e) {
-                    switch($e->getCode()){
+                    switch ($e->getCode()) {
                         // This is a Integrity constraint violation, so we return false
                         case '23000':
                             return ( bool ) false;
-                            
+
                         // No data, could be from a SP                           
                         case '02000':
                             return null;
@@ -110,75 +110,14 @@ use \SplFixedArray as SplFixedArray;
         }
 
         /**
-         * returns last insert id
+         *
+         * @param type $method
+         * @param type $args
          * @return type 
          */
-        public function lastInsertId()
+        public function __call($method, $args)
         {
-            return $this->_pdo->lastInsertId();
-        }
-
-        /**
-         * Start transaction
-         * @return bool 
-         */
-        public function beginTransaction()
-        {
-            return ( bool ) $this->_pdo->beginTransaction();
-        }
-
-        /**
-         * Rolls back the DB
-         * @return bool 
-         */
-        public function rollBack()
-        {
-            return ( bool ) $this->_pdo->rollBack();
-        }
-
-        /**
-         * Commits the DB
-         * @return bool
-         */
-        public function commit()
-        {
-            return ( bool ) $this->_pdo->commit();
-        }
-
-        /**
-         * returns bool depending of the transaction state
-         * @return bool 
-         */
-        public function inTransaction()
-        {
-            return ( bool ) $this->_pdo->inTransaction();
-        }
-
-        /**
-         * Returns ErrorInfo
-         * @return mixed 
-         */
-        public function errorInfo()
-        {
-            return $this->_pdo->errorInfo();
-        }
-
-        /**
-         * Returns ErrorCode
-         * @return mixed
-         */
-        public function errorCode()
-        {
-            return $this->_pdo->errorCode();
-        }
-
-        /**
-         * Returns setAttribute
-         * @return mixed 
-         */
-        public function setAttribute()
-        {
-            return call_user_func_array(array($this->_pdo, 'setAttribute'), func_get_args());
+            return call_user_func_array(array($this->_pdo, $method), $args);
         }
 
         /**
