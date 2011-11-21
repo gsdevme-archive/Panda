@@ -13,3 +13,5 @@
     /* To enable sessions to be stored within the Application folder 
     uncomment this line and create a folder /AppName/Sessions */
     //$config->sessionClass = 'SessionHandler';
+    
+    define('URL', 'http://' . $_SERVER['HTTP_HOST'] . '/');
