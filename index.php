@@ -8,7 +8,6 @@
     require_once $root . 'Core/Functions.php';
     require_once $root . 'Core/RegistryAbstract.php';
     require_once $root . 'Core/Panda.php';
-    require_once $root . 'Core/Registry.php';
 
     $panda = Core\Panda::getInstance()->import($config);
     $panda->root = $root;
