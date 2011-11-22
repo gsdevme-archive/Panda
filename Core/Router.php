@@ -11,7 +11,7 @@ use \ReflectionMethod as ReflectionMethod;
     class Router
     {
 
-        private $_panda, $_request, $_controller, $_method, $_args;
+        private $_panda, $_request, $_controller=null, $_method, $_args;
 
         /**
          * @param Request $request 
@@ -72,10 +72,10 @@ use \ReflectionMethod as ReflectionMethod;
          * Gets the controller and returns the name
          * @return string 
          */
-        private function _getController()
-        {
+        private function _getController($folder=null)
+        {                        
             try {
-                $this->_controller = new ReflectionClass('Controllers\\' . ucfirst($this->_request->current()));
+                $this->_controller = new ReflectionClass('Controllers\\' . $folder . ucfirst($this->_request->current()));
 
                 if ($this->_controller->isInstantiable()) {
                     if (($this->_panda->mode == 'HTTP') && ($this->_controller->getParentClass()->name != 'Controllers\Controller')) {
@@ -84,8 +84,13 @@ use \ReflectionMethod as ReflectionMethod;
 
                     return ucfirst($this->_request->current());
                 }
-            } catch (Exception $e) {
-                
+            } catch (Exception $e) {                
+                if(is_dir($this->_panda->appRoot . 'Controllers/' . str_replace('\\', '/', $folder) . $this->_request->current())){
+                    $folder .= ucfirst($this->_request->current()) . '\\';
+                    $this->_request->next();
+                    
+                    return $this->_getController($folder);
+                }
             }
 
             throw new RouterException('Panda failed the find the controller, with the name ' . ucfirst($this->_request->current()), 404, ifsetor($e, null));
