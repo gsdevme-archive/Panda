@@ -12,9 +12,6 @@ use \ReflectionException as ReflectionException;
     class Factory
     {
 
-        private static $_registry;
-        private static $_panda;
-
         /**
          * load a model
          * @param type $name
@@ -43,7 +40,6 @@ use \ReflectionException as ReflectionException;
         {
             return self::_loader(ucfirst($name), 'Libraries', $shared);
         }
-
 
         /**
          * load a service layer
@@ -84,11 +80,12 @@ use \ReflectionException as ReflectionException;
          */
         private static function _loader($name, $namespace, $shared = false)
         {
+            $registryStore = ( bool ) ((isset(Panda::getInstance()->appRegistry)) && (Panda::getInstance()->appRegistry !== true));
             $regMethod = $namespace;
             $instance = ($shared === true) ? $name . '__shared' : $name;
 
             // Lets check if its already loaded
-            if (($return = Registry::getInstance()->$regMethod($instance)) !== false) {
+            if (($registryStore) && (($return = Registry::getInstance()->$regMethod($instance)) !== false)) {
                 return $return;
             }
 
@@ -98,22 +95,40 @@ use \ReflectionException as ReflectionException;
             if (is_readable($file)) {
                 require_once $file;
                 $class = $namespace . '\\' . $name;
-                
+
                 try {
                     $class = new ReflectionClass($class);
-                    
-                    if($class->isInstantiable()){
-                        return Registry::getInstance()->$regMethod($instance, $class->newInstance());
+
+                    if ($class->isInstantiable()) {
+                        $object = $class->newInstance();
+                    } else {
+                        $class = $class->name;
+                        $object = $class::getInstance();
                     }
-                    
-                    $class = $class->name;                    
-                    return Registry::getInstance()->$regMethod($instance, $class::getInstance());                    
+
+                    if ($registryStore) {
+                        return self::_registryStore($regMethod, $instance, $object);
+                    }
+
+                    return $object;
                 } catch (ReflectionException $e) {
                     
-                }                
+                }
             }
 
             throw new FactoryException('Panda could not load the class ' . $namespace . '\\' . $name, 500, ifsetor($e, null));
+        }
+
+        /**
+         * Method adds instances to the registry
+         * @param string $method
+         * @param string $instance
+         * @param object $object
+         * @return object 
+         */
+        private static function _registryStore($method, $instance, $object)
+        {
+            return Registry::getInstance()->$method($instance, $object);
         }
 
     }
