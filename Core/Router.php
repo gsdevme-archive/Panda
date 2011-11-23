@@ -11,7 +11,7 @@ use \ReflectionMethod as ReflectionMethod;
     class Router
     {
 
-        private $_panda, $_request, $_controller=null, $_method, $_args;
+        private $_panda, $_request, $_controller = null, $_method, $_args;
 
         /**
          * @param Request $request 
@@ -29,7 +29,7 @@ use \ReflectionMethod as ReflectionMethod;
             } else {
                 $this->_request = \SplFixedArray::fromArray(($request->getRequest() !== null) ? explode('/', $request->getRequest()) : array($this->_panda->defaultController, $this->_panda->defaultMethod));
             }
-            
+
             $controllerName = $this->_getController();
             $methodName = $this->_getMethod();
 
@@ -73,22 +73,26 @@ use \ReflectionMethod as ReflectionMethod;
          * @return string 
          */
         private function _getController($folder=null)
-        {                        
+        {
             try {
-                $this->_controller = new ReflectionClass('Controllers\\' . $folder . ucfirst($this->_request->current()));
+                if ($this->_request->valid()) {
+                    $this->_controller = new ReflectionClass('Controllers\\' . $folder . ucfirst($this->_request->current()));
+                } else {
+                    $this->_controller = new ReflectionClass('Controllers\\' . $folder . ucfirst($this->_panda->defaultController));
+                }
 
                 if ($this->_controller->isInstantiable()) {
-                    if (($this->_panda->mode == 'HTTP') && ($this->_controller->getParentClass()->name != 'Controllers\Controller')) {
+                    if (($this->_panda->mode == 'HTTP') && ($this->_controller->getParentClass()->name == 'Controllers\CLIController')) {
                         throw new RouterException('This controller is for CLI use only, Controller: ' . ucfirst($this->_request->current()), 404);
                     }
 
-                    return ucfirst($this->_request->current());
+                    return ucfirst($this->_controller->name);
                 }
-            } catch (Exception $e) {                
-                if(is_dir($this->_panda->appRoot . 'Controllers/' . str_replace('\\', '/', $folder) . $this->_request->current())){
+            } catch (Exception $e) {
+                if (is_dir($this->_panda->appRoot . 'Controllers/' . str_replace('\\', '/', $folder) . $this->_request->current())) {
                     $folder .= ucfirst($this->_request->current()) . '\\';
+
                     $this->_request->next();
-                    
                     return $this->_getController($folder);
                 }
             }
