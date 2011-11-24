@@ -4,7 +4,7 @@
 
 use \PDOException as PDOException;
 use \PDO as PDO;
-use \Core\Panda as Panda;
+use \Core\Panda\Panda as Panda;
 use \Core\Exceptions\ModuleException as ModuleException;
 use \SplFixedArray as SplFixedArray;
 

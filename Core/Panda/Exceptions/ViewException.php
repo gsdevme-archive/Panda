@@ -1,8 +1,8 @@
 <?php
 
-    namespace Core\Exceptions;
+    namespace Core\Panda\Exceptions;
 
-    class LoadException extends ExceptionAbstract
+    class ViewException extends ExceptionAbstract
     {
 
         public function __construct($message, $code=null, \Exception $previous=null)

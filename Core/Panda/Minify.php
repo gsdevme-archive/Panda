@@ -1,6 +1,6 @@
 <?php
 
-    namespace Core;
+    namespace Core\Panda;
 
     require_once Panda::getInstance()->thirdParty . 'MinifyHTML.php';
 

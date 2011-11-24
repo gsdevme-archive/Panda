@@ -1,6 +1,6 @@
 <?php
 
-    namespace Core;
+    namespace Core\Panda;
 
     /**
      * Function which is "pass by reference" and calls isset() & empty()

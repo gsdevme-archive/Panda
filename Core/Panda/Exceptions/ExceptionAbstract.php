@@ -1,8 +1,8 @@
 <?php
 
-    namespace Core\Exceptions;
+    namespace Core\Panda\Exceptions;
 
-    class AutoloaderException extends ExceptionAbstract
+    class ExceptionAbstract extends \Exception
     {
 
         public function __construct($message, $code=null, \Exception $previous=null)

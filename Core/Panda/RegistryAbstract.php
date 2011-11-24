@@ -1,6 +1,6 @@
 <?php
 
-    namespace Core;
+    namespace Core\Panda;
 
 use Core\Exceptions\RegistryException as Exception;
 

@@ -2,7 +2,7 @@
 
     namespace Models;
 
-    class Model extends \Core\Model
+    class Model extends \Core\Panda\Model
     {
         
     }

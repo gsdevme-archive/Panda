@@ -2,7 +2,7 @@
 
     namespace Controllers;
 
-    abstract class Controller extends \Core\Controller
+    abstract class Controller extends \Core\Panda\Controller
     {
         
     }

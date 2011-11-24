@@ -1,6 +1,6 @@
 <?php
 
-    namespace Core;
+    namespace Core\Panda;
 
 use \ReflectionClass as ReflectionClass;
 use \ReflectionMethod as ReflectionMethod;

@@ -2,7 +2,7 @@
 
     namespace Modules;
 
-use \Core\Panda as Panda;
+use \Core\Panda\Panda as Panda;
 
     class Session
     {
@@ -20,7 +20,7 @@ use \Core\Panda as Panda;
         private function __construct()
         {
             if (isset(Panda::getInstance()->sessionClass)) {
-                $sessionClass = '\Etc\Modules\\' . Panda::getInstance()->sessionClass;
+                $sessionClass = '\Modules\\' . Panda::getInstance()->sessionClass;
                 $sessionHandler = new $sessionClass;
 
                 session_set_save_handler(

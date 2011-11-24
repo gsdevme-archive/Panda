@@ -1,9 +1,9 @@
 <?php
 
-    namespace Core;
+    namespace Core\Panda;
 
 use \Exception as Exception;
-use \Core\Exceptions\ModuleException as ModuleException;
+use \Core\Panda\Exceptions\ModuleException as ModuleException;
 use \ReflectionClass as ReflectionClass;
 use \ReflectionMethod as ReflectionMethod;
 

@@ -3,15 +3,15 @@
     $root = realpath(dirname(__FILE__)) . '/';
     require_once $root . 'functions.php';
     require_once $root . 'Core/Config.php';
-    require_once $root . 'Core/Exceptions/ExceptionAbstract.php';
-    require_once $root . 'Core/Exceptions/AutoloaderException.php';
-    require_once $root . 'Core/Functions.php';
-    require_once $root . 'Core/RegistryAbstract.php';
-    require_once $root . 'Core/Panda.php';
+    require_once $root . 'Core/Panda/Exceptions/ExceptionAbstract.php';
+    require_once $root . 'Core/Panda/Exceptions/AutoloaderException.php';
+    require_once $root . 'Core/Panda/Functions.php';
+    require_once $root . 'Core/Panda/RegistryAbstract.php';
+    require_once $root . 'Core/Panda/Panda.php';
 
-    $panda = Core\Panda::getInstance()->import($config);
+    $panda = Core\Panda\Panda::getInstance()->import($config);
     $panda->root = $root;
-    $panda->thirdParty = $root . 'Core/ThirdParty/';
+    $panda->thirdParty = $root . 'Core/Panda/ThirdParty/';
 
     $panda->memoryUsage = memory_get_usage() / 1024;
     $panda->microtime = microtime(true);
@@ -41,10 +41,10 @@
                     return;
                 }
 
-                throw new \Core\Exceptions\AutoloaderException('Panda Autoloader could not find ' . $class . ' Class. Check the Spelling of the Class and the Filename');
+                throw new \Core\Panda\Exceptions\AutoloaderException('Panda Autoloader could not find ' . $class . ' Class. Check the Spelling of the Class and the Filename');
             }, true, true);
 
-        new Core\Router(new \Core\Request());
+        new Core\Panda\Router(new \Core\Panda\Request());
     } catch (Exception $e) {
         if (ob_get_status() != false) {
             // Remove anything from the buffer
@@ -53,7 +53,7 @@
             }
         }
 
-        $errorReport = new \Core\ErrorReport($e);
+        $errorReport = new \Core\Panda\ErrorReport($e);
         echo $errorReport->getOutput();
         exit;
     }

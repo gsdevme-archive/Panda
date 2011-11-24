@@ -1,6 +1,6 @@
 <?php
 
-    namespace Core;
+    namespace Core\Panda;
 
 use Core\Exceptions\RouterException as RouterException;
 use \ReflectionException as ReflectionException;

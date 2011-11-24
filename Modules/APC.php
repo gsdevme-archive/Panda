@@ -2,7 +2,7 @@
 
     namespace Modules;
 
-use \Core\Exceptions\ModuleException as ModuleException;
+use \Core\Panda\Exceptions\ModuleException as ModuleException;
 
     class APC implements iCache
     {

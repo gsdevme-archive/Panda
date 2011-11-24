@@ -1,6 +1,6 @@
 <?php
 
-    namespace Core\Exceptions;
+    namespace Core\Panda\Exceptions;
 
     class RegistryException extends ExceptionAbstract
     {

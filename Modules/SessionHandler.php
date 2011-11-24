@@ -7,7 +7,7 @@ use \SplFileObject as SplFileObject;
 use \SplFileInfo as SplFileInfo;
 use \RuntimeException as RuntimeException;
 use \Exception as Exception;
-use \Core\Panda as Panda;
+use \Core\Panda\Panda as Panda;
 
     class SessionHandler
     {

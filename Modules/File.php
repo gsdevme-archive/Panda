@@ -3,7 +3,7 @@
     namespace Modules;
 
 use \RuntimeException as RuntimeException;
-use \Core\Panda as Panda;
+use \Core\Panda\Panda as Panda;
 use \ErrorException as ErrorException;
 use \Core\Exceptions\ModuleException as ModuleException;
 use \GlobIterator as GlobIterator;
