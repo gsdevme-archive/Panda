@@ -2,7 +2,7 @@
 
     namespace Core\Panda;
 
-use Core\Exceptions\RouterException as RouterException;
+use Core\Panda\Exceptions\RouterException as RouterException;
 use \ReflectionException as ReflectionException;
 use \Exception as Exception;
 use \ReflectionClass as ReflectionClass;
