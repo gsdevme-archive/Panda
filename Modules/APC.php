@@ -18,7 +18,7 @@ use \Core\Panda\Exceptions\ModuleException as ModuleException;
 
         public static function getInstance()
         {
-            if (self::$_instance instanceof self) {
+            if (!self::$_instance instanceof self) {
                 self::$_instance = new self;
             }
 
