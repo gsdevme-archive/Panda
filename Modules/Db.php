@@ -5,7 +5,7 @@
 use \PDOException as PDOException;
 use \PDO as PDO;
 use \Core\Panda\Panda as Panda;
-use \Core\Exceptions\ModuleException as ModuleException;
+use \Core\Panda\Exceptions\ModuleException as ModuleException;
 use \SplFixedArray as SplFixedArray;
 
     class Db implements iDb
