@@ -38,11 +38,11 @@ use \SplFixedArray as SplFixedArray;
 
         public static function getInstance()
         {
-            if (!self::$_instance instanceof self) {
-                self::$_instance = new self;
+            if (!static::$_instance instanceof static) {
+                static::$_instance = new static;
             }
 
-            return self::$_instance;
+            return static::$_instance;
         }
 
         /**
