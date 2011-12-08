@@ -2,7 +2,7 @@
 
     namespace Core\Panda;
 
-use Core\Exceptions\RegistryException as Exception;
+use Core\Panda\Exceptions\RegistryException as Exception;
 
     class Panda extends RegistryAbstract
     {
