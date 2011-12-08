@@ -2,12 +2,12 @@
 
     namespace Modules;
 
-use \GlobIterator as GlobIterator;
-use \SplFileObject as SplFileObject;
-use \SplFileInfo as SplFileInfo;
-use \RuntimeException as RuntimeException;
-use \Exception as Exception;
-use \Core\Panda\Panda as Panda;
+use \GlobIterator;
+use \SplFileObject;
+use \SplFileInfo;
+use \RuntimeException;
+use \Exception;
+use \Core\Panda\Panda;
 
     class SessionHandler
     {

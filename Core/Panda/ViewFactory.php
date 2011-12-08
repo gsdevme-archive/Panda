@@ -104,7 +104,7 @@ use \SplFileObject;
 
                 // Load each view
                 foreach ($this->_views as $view) {
-                    new View($view->file, $view->args, $xssfilter);
+                    new Core\View($view->file, $view->args, $xssfilter);
                 }
 
                 return true;

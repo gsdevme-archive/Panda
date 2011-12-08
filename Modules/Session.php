@@ -2,7 +2,7 @@
 
     namespace Modules;
 
-use \Core\Panda\Panda as Panda;
+use \Core\Panda\Panda;
 
     class Session
     {

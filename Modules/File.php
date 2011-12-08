@@ -2,12 +2,12 @@
 
     namespace Modules;
 
-use \RuntimeException as RuntimeException;
-use \Core\Panda\Panda as Panda;
-use \ErrorException as ErrorException;
-use \Core\Exceptions\ModuleException as ModuleException;
-use \GlobIterator as GlobIterator;
-use \FilesystemIterator as FilesystemIterator;
+use \RuntimeException;
+use \Core\Panda\Panda;
+use \ErrorException;
+use \Core\Exceptions\ModuleException;
+use \GlobIterator;
+use \FilesystemIterator;
 
     class File implements iCache
     {

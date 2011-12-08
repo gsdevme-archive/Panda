@@ -47,7 +47,7 @@
          */
         protected function view($name, array $args = null, $shared = false)
         {
-            return ViewFactory::getInstance()->addView($name, $args, $shared);
+            return \Core\ViewFactory::getInstance()->addView($name, $args, $shared);
         }
 
         /**
@@ -58,7 +58,7 @@
          */
         protected function render($cache=false, $xssfilter=true)
         {
-            return ViewFactory::getInstance()->render($cache, $xssfilter);
+            return \Core\ViewFactory::getInstance()->render($cache, $xssfilter);
         }
 
         /**
