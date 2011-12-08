@@ -48,13 +48,13 @@ use \SplFileObject;
             if (!isset($this->_views[$this->_currentView])) {
                 if (is_readable($file)) {
                     $this->_views[$this->_currentView] = ( object ) array('file' => $file, 'args' => $args, 'name' => $name);
-                    return self::$_instance;
+                    return static::$_instance;
                 }
 
                 throw new ViewException('Failed to load view, could not find ' . $name, 404, null);
             }
 
-            return self::$_instance;
+            return static::$_instance;
         }
 
         /**
