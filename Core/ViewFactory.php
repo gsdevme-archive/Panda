@@ -8,4 +8,6 @@
     class ViewFactory extends Panda\ViewFactory
     {
 
+        protected static $_instance;
+
     }

@@ -7,8 +7,6 @@ use \SplFileObject;
 
     class ViewFactory
     {
-
-        private static $_instance;
         private $_views;
         private $_currentView;
 
@@ -104,7 +102,7 @@ use \SplFileObject;
 
                 // Load each view
                 foreach ($this->_views as $view) {
-                    new Core\View($view->file, $view->args, $xssfilter);
+                    new \Core\View($view->file, $view->args, $xssfilter);
                 }
 
                 return true;
