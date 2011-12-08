@@ -2,10 +2,10 @@
 
     namespace Core\Panda;
 
-use \Exception as Exception;
-use \Core\Panda\Exceptions\ModuleException as ModuleException;
-use \ReflectionClass as ReflectionClass;
-use \ReflectionMethod as ReflectionMethod;
+use \Exception;
+use \Core\Panda\Exceptions\ModuleException;
+use \ReflectionClass;
+use \ReflectionMethod;
 
     abstract class Model
     {

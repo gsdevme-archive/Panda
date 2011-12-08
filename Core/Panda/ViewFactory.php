@@ -2,8 +2,8 @@
 
     namespace Core\Panda;
 
-use Core\Panda\Exceptions\ViewException as ViewException;
-use \SplFileObject as SplFileObject;
+use Core\Panda\Exceptions\ViewException;
+use \SplFileObject;
 
     class ViewFactory
     {

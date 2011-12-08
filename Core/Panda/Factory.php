@@ -2,9 +2,9 @@
 
     namespace Core\Panda;
 
-use Core\Panda\Exceptions\FactoryException as FactoryException;
-use \ReflectionClass as ReflectionClass;
-use \ReflectionException as ReflectionException;
+use Core\Panda\Exceptions\FactoryException;
+use \ReflectionClass;
+use \ReflectionException;
 
     /**
      * Static factory

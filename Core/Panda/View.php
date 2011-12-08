@@ -2,7 +2,7 @@
 
     namespace Core\Panda;
     
-    use \Exception as Exception;
+    use \Exception;
 
     class View
     {

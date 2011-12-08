@@ -2,10 +2,10 @@
 
     namespace Core\Panda;
 
-use \ReflectionClass as ReflectionClass;
-use \ReflectionMethod as ReflectionMethod;
-use \ReflectionException as ReflectionException;
-use Core\Panda\Exceptions\RouterException as RouterException;
+use \ReflectionClass;
+use \ReflectionMethod;
+use \ReflectionException;
+use Core\Panda\Exceptions\RouterException;
 
     class ControllerFactory
     {

@@ -2,11 +2,11 @@
 
     namespace Core\Panda;
 
-use Core\Panda\Exceptions\RouterException as RouterException;
-use \ReflectionException as ReflectionException;
-use \Exception as Exception;
-use \ReflectionClass as ReflectionClass;
-use \ReflectionMethod as ReflectionMethod;
+use Core\Panda\Exceptions\RouterException;
+use \ReflectionException;
+use \Exception;
+use \ReflectionClass;
+use \ReflectionMethod;
 
     class Router
     {
