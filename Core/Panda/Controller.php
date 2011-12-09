@@ -56,9 +56,9 @@
          * @param bool $xssfilter
          * @return bool 
          */
-        protected function render($cache=false, $xssfilter=true)
+        protected function render($cache=false, $xssfilter=true, $contentType=false)
         {
-            return \Core\ViewFactory::getInstance()->render($cache, $xssfilter);
+            return \Core\ViewFactory::getInstance()->render($cache, $xssfilter, $contentType);
         }
 
         /**

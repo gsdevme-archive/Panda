@@ -7,6 +7,7 @@ use \SplFileObject;
 
     class ViewFactory
     {
+
         private $_views;
         private $_currentView;
 
@@ -61,9 +62,13 @@ use \SplFileObject;
          * Render all views 
          * @return type 
          */
-        public function render($cache=false, $xssfilter=true)
+        public function render($cache=false, $xssfilter=true, $contentType=false)
         {
             if (!empty($this->_views)) {
+                if ($contentType !== false) {
+                    header('Content-type: ' . $contentType);
+                }
+
                 // Try and load a cache file and check the etag
                 if ($cache === true) {
                     $checksum = sprintf('%u', crc32(serialize($this->_views)));
@@ -79,7 +84,7 @@ use \SplFileObject;
                     if (is_readable($cacheFile)) {
                         // We still need a ob_start
                         ob_start();
-                        
+
                         require $cacheFile;
                         return;
                     }
@@ -94,7 +99,7 @@ use \SplFileObject;
                             $file->fwrite($minify->process());
                             return $buffer;
                         }, 0, true);
-                }else{
+                } else {
                     // even if we are not creating a cache file lets start 
                     ob_start();
                 }
