@@ -62,11 +62,13 @@ use \SplFileObject;
          * Render all views 
          * @return type 
          */
-        public function render($cache=false, $xssfilter=true, $contentType=false)
+        public function render($cache=false, $xssfilter=true, array $headers=null)
         {
             if (!empty($this->_views)) {
-                if ($contentType !== false) {
-                    header('Content-type: ' . $contentType);
+                if ($headers !== null) {
+                    foreach($headers as $header){
+                        header($header);
+                    }
                 }
 
                 // Try and load a cache file and check the etag
