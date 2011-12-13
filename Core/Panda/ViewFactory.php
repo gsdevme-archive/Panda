@@ -66,7 +66,7 @@ use \SplFileObject;
         {
             if (!empty($this->_views)) {
                 if ($headers !== null) {
-                    foreach($headers as $header){
+                    foreach ($headers as $header) {
                         header($header);
                     }
                 }
@@ -76,14 +76,17 @@ use \SplFileObject;
                     $checksum = sprintf('%u', crc32(serialize($this->_views)));
                     header('ETag: ' . $checksum);
 
-                    if ((isset($_SERVER['HTTP_IF_NONE_MATCH'])) && ($_SERVER['HTTP_IF_NONE_MATCH'] == $checksum)) {
+                    $cacheFile = Panda::getInstance()->appRoot . 'ViewCache/' . $checksum . '.html';
+                    $readable = ( bool ) is_readable($cacheFile);
+
+                    // Check if the user already has it
+                    if (($readable) && (isset($_SERVER['HTTP_IF_NONE_MATCH'])) && ($_SERVER['HTTP_IF_NONE_MATCH'] == $checksum)) {
                         header("HTTP/1.1 304 Not Modified");
                         return;
                     }
 
-                    $cacheFile = Panda::getInstance()->appRoot . 'ViewCache/' . $checksum . '.html';
-
-                    if (is_readable($cacheFile)) {
+                    // Check if we have a cached HTML
+                    if ($readable) {
                         // We still need a ob_start
                         ob_start();
 
@@ -91,21 +94,27 @@ use \SplFileObject;
                         return;
                     }
 
-                    // Lets create a cache and etag them
                     $appRoot = Panda::getInstance()->appRoot;
 
                     ob_start(function($buffer) use ($appRoot, $checksum, $cacheFile) {
-                            $file = new SplFileObject($cacheFile, 'w');
-                            $minify = new Minify($buffer);
+                            // Check can we create a cached HTML
+                            if (is_writable($cacheFile)) {
+                                throw new ViewException('ViewCache folder is not writeable, either disable viewCache or make it writeable..');
+                            }
 
-                            $file->fwrite($minify->process());
+                            // Minify
+                            $minify = new Minify($buffer);
+                            $buffer = $minify->process();
+
+                            //Write File
+                            $file = new SplFileObject($cacheFile, 'w');
+                            $file->fwrite($buffer);
                             return $buffer;
                         }, 0, true);
                 } else {
                     // even if we are not creating a cache file lets start 
                     ob_start();
                 }
-
 
                 // Load each view
                 foreach ($this->_views as $view) {
