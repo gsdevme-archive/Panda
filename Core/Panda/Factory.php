@@ -105,7 +105,7 @@ use \ReflectionException;
                         $class = $class->name;
                         $object = $class::getInstance();
                     }
-
+                    
                     if ($registryStore) {
                         return self::_registryStore($regMethod, $instance, $object);
                     }
