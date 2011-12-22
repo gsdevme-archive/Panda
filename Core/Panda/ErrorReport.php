@@ -16,7 +16,7 @@ use \Exception;
             if (Panda::getInstance()->debug === false) {                
                 switch ($e->getCode()) {
                     case 404:
-                        header('HTTP/1.1 404 Not Found'):
+                        header('HTTP/1.1 404 Not Found');
                         include Panda::getInstance()->appRoot . 'Errors/404.html';
                         exit;
                     default:
