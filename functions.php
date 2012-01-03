@@ -5,7 +5,7 @@
      * Its main purpose is to provide global functions across all your applications
      * one useful one might be ifsetor() as written below.
      * 
-     * It should not be used for a quick fix for adding helping functions !
+     * It should not be used for a quick fix for adding helpers !
      * write classes you lazy bastards !
      */
     
