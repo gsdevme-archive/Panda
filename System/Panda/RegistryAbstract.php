@@ -2,8 +2,6 @@
 
     namespace System\Panda;
 
-    use Exceptions\RegistryException as Exception;
-
     /**
      * Each deriving class needs:
      * protected static $_instance;

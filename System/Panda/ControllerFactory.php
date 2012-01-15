@@ -5,7 +5,7 @@
     use \ReflectionClass;
     use \ReflectionMethod;
     use \ReflectionException;
-    use Exceptions\RouterException;
+    use \System\Panda\Exceptions\RouterException;
 
     class ControllerFactory
     {

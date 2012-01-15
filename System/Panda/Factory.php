@@ -2,7 +2,7 @@
 
     namespace System\Panda;
 
-    use Exceptions\FactoryException;
+    use \System\Panda\Exceptions\FactoryException;
     use \ReflectionClass;
     use \ReflectionException;
 

@@ -2,7 +2,7 @@
 
     namespace System\Panda;
 
-    use Exceptions\ViewException;
+    use \System\Panda\Exceptions\ViewException;
     use \SplFileObject;
 
     class ViewFactory

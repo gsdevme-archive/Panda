@@ -2,7 +2,7 @@
 
     namespace System\Panda;
 
-    use Exceptions\RouterException;
+    use \System\Panda\Exceptions\RouterException;
     use \ReflectionException;
     use \Exception;
     use \ReflectionClass;
