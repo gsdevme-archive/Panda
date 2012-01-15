@@ -2,7 +2,9 @@
 
     namespace Core\Panda\Exceptions;
 
-    class ExceptionAbstract extends \Exception
+    use \Exception;
+
+    class ExceptionAbstract extends Exception
     {
 
         public function __construct($message, $code=null, \Exception $previous=null)

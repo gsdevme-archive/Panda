@@ -2,7 +2,7 @@
 
     namespace Core\Panda;
 
-use \Exception;
+    use \Exception;
 
     class ErrorReport
     {
