@@ -25,7 +25,6 @@
         return (isset($value)) ? $value : $or;
     }
 
-
     /**
      * Similar to ifsetor although with empty()
      * 
