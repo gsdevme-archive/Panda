@@ -60,6 +60,9 @@
 
         /**
          * Render all views 
+         * @param bool true/false if we want to cache the view buffer
+         * @param bool true/false if you want all data to be filtered to XSS
+         * @param array An array of headers to pass to header()
          * @return type 
          */
         public function render($cache=false, $xssfilter=true, array $headers=null)
