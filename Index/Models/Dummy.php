@@ -15,7 +15,7 @@
 
         public function testDbConnection()
         {
-            try {
+            //try {
                 $data = $this->db->query('show databases');
 
                 if (is_array($data)) {
@@ -27,9 +27,9 @@
 
                     return 'Databases: ' . $databaseString;
                 }
-            } catch (\Exception $e) {
+            //} catch (\Exception $e) {
                 
-            }
+            //}
 
             return null;
         }

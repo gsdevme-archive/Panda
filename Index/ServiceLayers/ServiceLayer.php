@@ -2,7 +2,7 @@
 
     namespace ServiceLayers;
     
-    abstract class ServiceLayer extends \Core\Panda\ServiceLayer
+    abstract class ServiceLayer extends \System\Panda\ServiceLayer
     {
         
     }
