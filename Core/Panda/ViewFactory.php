@@ -2,18 +2,18 @@
 
     namespace Core\Panda;
 
-use Core\Panda\Exceptions\ViewException;
-use \SplFileObject;
+    use Core\Panda\Exceptions\ViewException;
+    use \SplFileObject;
 
     class ViewFactory
     {
 
-        private $_views;
-        private $_currentView;
+        protected $views, $currentView, $panda;
 
         private function __construct()
         {
-            $this->_views = array();
+            $this->views = array();
+            $this->panda = Panda::getInstance();
         }
 
         /**
@@ -38,17 +38,17 @@ use \SplFileObject;
         public function addView($name, array $args=null, $shared=false)
         {
             if ($shared === true) {
-                $file = Panda::getInstance()->root . '/Shared/Views/' . $name . '.php';
+                $file = $this->panda->root . '/Shared/Views/' . $name . '.php';
             } else {
-                $file = Panda::getInstance()->appRoot . 'Views/' . $name . '.php';
+                $file = $this->panda->appRoot . 'Views/' . $name . '.php';
             }
 
             // Checksum
             $this->_currentView = sprintf('%u', crc32($file));
 
-            if (!isset($this->_views[$this->_currentView])) {
+            if (!isset($this->views[$this->_currentView])) {
                 if (is_readable($file)) {
-                    $this->_views[$this->_currentView] = ( object ) array('file' => $file, 'args' => $args, 'name' => $name);
+                    $this->views[$this->_currentView] = ( object ) array('file' => $file, 'args' => $args, 'name' => $name);
                     return static::$_instance;
                 }
 
@@ -64,19 +64,19 @@ use \SplFileObject;
          */
         public function render($cache=false, $xssfilter=true, array $headers=null)
         {
-            if (!empty($this->_views)) {
+            if (!empty($this->views)) {
                 if ($headers !== null) {
-                    foreach ($headers as $header) {
+                    foreach ((array)$headers as $header) {
                         header($header);
                     }
                 }
 
                 // Try and load a cache file and check the etag
                 if ($cache === true) {
-                    $checksum = sprintf('%u', crc32(serialize($this->_views)));
+                    $checksum = sprintf('%u', crc32(serialize($this->views)));
                     header('ETag: ' . $checksum);
 
-                    $cacheFile = Panda::getInstance()->appRoot . 'ViewCache/' . $checksum . '.html';
+                    $cacheFile = $this->panda->appRoot . 'ViewCache/' . $checksum . '.html';
                     $readable = ( bool ) is_readable($cacheFile);
 
                     // Check if the user already has it
@@ -87,19 +87,23 @@ use \SplFileObject;
 
                     // Check if we have a cached HTML
                     if ($readable) {
-                        // We still need a ob_start
+                        // Start buffer output, just incase we need to capture any errors
                         ob_start();
 
                         require $cacheFile;
                         return;
                     }
 
-                    $appRoot = Panda::getInstance()->appRoot;
+                    $appRoot = $this->panda->appRoot;
 
                     ob_start(function($buffer) use ($appRoot, $checksum, $cacheFile) {
                             // Check can we create a cached HTML
-                            if (is_writable($cacheFile)) {
-                                throw new ViewException('ViewCache folder is not writeable, either disable viewCache or make it writeable..');
+                            if (!is_writable($appRoot . 'ViewCache')) {
+                                // Change the ETag so the user isn't stuck with a broken page
+                                header('ETag: ' . 'error');
+                                
+                                // Since we cant throw within an ob_start, its best to just return a simple error
+                                return 'ViewCache folder is not writeable, either disable viewCache or make it writeable..';
                             }
 
                             // Minify
@@ -112,12 +116,12 @@ use \SplFileObject;
                             return $buffer;
                         }, 0, true);
                 } else {
-                    // even if we are not creating a cache file lets start 
+                    // Start buffer output, just incase we need to capture any errors
                     ob_start();
                 }
 
                 // Load each view
-                foreach ($this->_views as $view) {
+                foreach ($this->views as $view) {
                     new \Core\View($view->file, $view->args, $xssfilter);
                 }
 
@@ -134,7 +138,7 @@ use \SplFileObject;
          */
         private function _args($property, $value)
         {
-            return $this->_views[$this->_currentView]->args[$property] = $value;
+            return $this->views[$this->_currentView]->args[$property] = $value;
         }
 
         /**
@@ -144,7 +148,7 @@ use \SplFileObject;
          */
         private function _argsArray(array $args)
         {
-            return $this->_views[$this->_currentView]->args = array_merge($this->_views[$this->_currentView]->args, $args);
+            return $this->views[$this->_currentView]->args = array_merge($this->views[$this->_currentView]->args, $args);
         }
 
         /**
@@ -173,7 +177,7 @@ use \SplFileObject;
          */
         public function __isset($name)
         {
-            return ( bool ) isset($this->_views[$this->_currentView]->args[$name]);
+            return ( bool ) isset($this->views[$this->_currentView]->args[$name]);
         }
 
     }
