@@ -36,6 +36,8 @@
             // Lets call a method from our shared dummy library
             $this->view('index')->args('libraryShared', $this->library('Share', true)->doSomething());
 
+            $this->library('DummyArgument', false, array(1,2,3,4,5))->test();
+
             $this->render();
         }
 
