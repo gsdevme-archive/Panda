@@ -34,11 +34,12 @@
          * Load a library
          * @param string $name name of the library
          * @param bool $shared is this a shared library?
+         * @param array arguments for the library
          * @return object
          */
-        public static function library($name, $shared = false)
+        public static function library($name, $shared = false, array $arguments = null)
         {
-            return self::_loader(ucfirst($name), 'Libraries', $shared);
+            return self::_loader(ucfirst($name), 'Libraries', $shared, $arguments);
         }
 
         /**
@@ -78,7 +79,7 @@
          * @param type $exception
          * @return type 
          */
-        private static function _loader($name, $namespace, $shared = false)
+        private static function _loader($name, $namespace, $shared = false, array $arguments = null)
         {
             $registryStore = ( bool ) ((isset(Panda::getInstance()->appRegistry)) && (Panda::getInstance()->appRegistry !== true));
             $regMethod = $namespace;
@@ -99,11 +100,11 @@
                 try {
                     $class = new ReflectionClass($class);
 
-                    if ($class->isInstantiable()) {
-                        $object = $class->newInstance();
+                    if ($class->isInstantiable()) {                        
+                        $object = ($arguments === null) ? $class->newInstance() : $class->newInstanceArgs($arguments);
                     } else {
                         $class = $class->name;
-                        $object = $class::getInstance();
+                        $object = ($arguments === null) ? $class::getInstance() : $class->newInstanceArgs($arguments);
                     }
                     
                     if ($registryStore) {

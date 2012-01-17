@@ -22,11 +22,12 @@
          * Loads/gets a library
          * @param string $name
          * @param bool $shared
+         * @param array arguments for the library
          * @return object 
          */
-        protected function library($name, $shared = false)
+        protected function library($name, $shared = false, array $arguments=null)
         {
-            return Factory::library($name, $shared);
+            return Factory::library($name, $shared, $arguments);
         }
 
         /**
