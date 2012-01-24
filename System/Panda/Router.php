@@ -89,7 +89,7 @@
                     return ucfirst($this->_controller->name);
                 }
             } catch (Exception $e) {
-                if (is_dir($this->_panda->appRoot . 'Controllers/' . str_replace('\\', '/', $folder) . $this->_request->current())) {
+                if (is_dir($this->_panda->appRoot . 'Controllers/' . str_replace('\\', '/', $folder) . ucfirst($this->_request->current()))) {
                     $folder .= ucfirst($this->_request->current()) . '\\';
 
                     $this->_request->next();
