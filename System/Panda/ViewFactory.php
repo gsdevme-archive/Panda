@@ -44,11 +44,11 @@
             }
 
             // Checksum
-            $this->_currentView = sprintf('%u', crc32($file));
+            $this->currentView = sprintf('%u', crc32($file));
 
-            if (!isset($this->views[$this->_currentView])) {
+            if (!isset($this->views[$this->currentView])) {
                 if (is_readable($file)) {
-                    $this->views[$this->_currentView] = ( object ) array('file' => $file, 'args' => $args, 'name' => $name);
+                    $this->views[$this->currentView] = ( object ) array('file' => $file, 'args' => $args, 'name' => $name);
                     return static::$_instance;
                 }
 
@@ -141,7 +141,7 @@
          */
         private function _args($property, $value)
         {
-            return $this->views[$this->_currentView]->args[$property] = $value;
+            return $this->views[$this->currentView]->args[$property] = $value;
         }
 
         /**
@@ -151,7 +151,7 @@
          */
         private function _argsArray(array $args)
         {
-            return $this->views[$this->_currentView]->args = array_merge($this->views[$this->_currentView]->args, $args);
+            return $this->views[$this->currentView]->args = array_merge($this->views[$this->currentView]->args, $args);
         }
 
         /**
@@ -180,7 +180,7 @@
          */
         public function __isset($name)
         {
-            return ( bool ) isset($this->views[$this->_currentView]->args[$name]);
+            return ( bool ) isset($this->views[$this->currentView]->args[$name]);
         }
 
     }

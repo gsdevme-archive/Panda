@@ -11,7 +11,7 @@
 
     $panda = System\Panda\Panda::getInstance()->import($config);
     $panda->root = $root;
-    $panda->thirdParty = $root . 'Core/Panda/ThirdParty/';
+    $panda->thirdParty = $root . 'System/Panda/ThirdParty/';
 
     $panda->memoryUsage = memory_get_usage() / 1024;
     $panda->microtime = microtime(true);
