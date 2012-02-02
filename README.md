@@ -1,29 +1,6 @@
 Panda MVC Framework, PHP 5.3.3+
 =============
 
-Using Panda
----------------------
-    /*
-    * Classes in Panda are CamelCase for the name & folder
-    * Methods are camelCase
-    */
-
-    /* Using ViewCache & Minify
-    * This will checksum all the data sent to the view then create a cache file 
-    * within ViewCache which is minified
-    */
-    $this->render(true);
- 
-    // Using a model.
-    $this->model('ModelName')->modelMethod();
-    // if its a shared model you want to do
-    $this->model('ModelName', true)->modelMethod();
-
-    // Using a library.
-    $this->library('LibraryName')->libraryMethod();
-    // if its a shared library you want to do
-    $this->library('LibraryName', true)->libraryMethod();
-
 Configurations
 ---------------------
     $config = new stdClass;
