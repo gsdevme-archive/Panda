@@ -1,5 +1,9 @@
 <?php
 
+    /**
+    * Twitter: @gsphpdev
+    */
+
     $root = realpath(dirname(__FILE__)) . '/';
     require_once $root . 'functions.php';
     require_once $root . 'System/Config.php';
