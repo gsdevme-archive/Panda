@@ -1,4 +1,4 @@
-IM NOT REWRITING THIS FRAMEWORK HERE => https://github.com/gsdevme/GiantPanda
+IM NOW REWRITING THIS FRAMEWORK HERE => https://github.com/gsdevme/GiantPanda
 =============
 
 Panda MVC Framework, PHP 5.3.3+
